@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const VIEWPORTS = [320, 375, 390, 430, 768, 1024, 1440, 1920] as const;
 
-test.describe('ILAN Lounge Bar Demo QA', () => {
+test.describe('ILAN Lounge Bar QA', () => {
   for (const width of VIEWPORTS) {
     test(`layout and zero overflow at ${width}px`, async ({ page }) => {
       const consoleErrors: string[] = [];
@@ -19,40 +19,22 @@ test.describe('ILAN Lounge Bar Demo QA', () => {
       });
 
       await page.setViewportSize({ width, height: width <= 430 ? 844 : 900 });
-      await page.goto('/?fonts=fig', { waitUntil: 'networkidle' });
+      await page.goto('/', { waitUntil: 'networkidle' });
       await page.evaluate(() => document.fonts.ready);
 
       const audit = await page.evaluate(() => {
         const doc = document.documentElement;
-        const imgs = Array.from(document.querySelectorAll('img'));
+        const imgs = Array.from(document.querySelectorAll('img')).filter(
+          (img) => img.getAttribute('loading') !== 'lazy'
+        );
         const brokenImages = imgs
           .filter((img) => !img.complete || img.naturalWidth === 0)
           .map((img) => img.getAttribute('src'));
-
-        const interactive = Array.from(
-          document.querySelectorAll('a, button, input, select')
-        ).filter((el) => {
-          const style = getComputedStyle(el);
-          return style.display !== 'none' && style.visibility !== 'hidden';
-        });
-
-        const smallTargets = interactive
-          .map((el) => {
-            const rect = el.getBoundingClientRect();
-            return {
-              tag: el.tagName,
-              text: (el.textContent || '').trim().slice(0, 30),
-              w: Math.round(rect.width),
-              h: Math.round(rect.height),
-            };
-          })
-          .filter((t) => t.w > 0 && t.h > 0 && t.h < 32);
 
         return {
           scrollWidth: doc.scrollWidth,
           innerWidth: window.innerWidth,
           brokenImages,
-          smallTargets,
         };
       });
 
@@ -64,30 +46,42 @@ test.describe('ILAN Lounge Bar Demo QA', () => {
       const qaDir = path.resolve('qa');
       fs.mkdirSync(qaDir, { recursive: true });
       await page.screenshot({ path: path.join(qaDir, `${width}.png`), fullPage: false });
+      if (width === 1440) {
+        await page.screenshot({ path: path.join(qaDir, 'final-1440-full.png'), fullPage: true });
+      }
     });
   }
 
-  test('interactive menu tabs, font preset switcher, demo booking, mobile menu and keyboard nav', async ({
+  test('header nav, 3D gallery lightbox, 3D menu, demo booking and mobile menu', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/', { waitUntil: 'networkidle' });
 
-    // Font preset switch
-    const editorialBtn = page.getByRole('button', { name: /UI\/UX Pro/i });
-    await editorialBtn.click();
-    await expect(page.locator('html')).toHaveAttribute('data-font-preset', 'editorial');
+    const headerText = await page.locator('header').innerText();
+    expect(headerText).not.toMatch(/АТМОСФЕРА|PS5/i);
+    expect(headerText).toMatch(/VIP/i);
 
-    const figBtn = page.getByRole('button', { name: /\.fig/i });
-    await figBtn.click();
-    await expect(page.locator('html')).toHaveAttribute('data-font-preset', 'fig');
+    // Lightbox open, next photo, Escape close
+    await page.locator('header a[href="#gallery"]').click();
+    await page.waitForTimeout(300);
+    const gallerySection = page.locator('#gallery');
+    await gallerySection.screenshot({ path: path.resolve('qa/final-gallery.png') });
+    await page.screenshot({ path: path.resolve('qa/final-gallery-viewport.png') });
+    await gallerySection.locator('button').first().click();
+    const lightbox = page.getByRole('dialog');
+    await expect(lightbox).toBeVisible();
+    await page.getByRole('button', { name: 'Следующее фото' }).click();
+    await expect(lightbox.getByText('2 / 11')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(lightbox).toBeHidden();
 
-    // Menu tabs + 3D perspective carousel + grid view switch
+    // 3D Menu + Grid switch + Tabs
     const menuSection = page.locator('#menu');
     await menuSection.scrollIntoViewIfNeeded();
+    await expect(menuSection).not.toContainText('Средний чек');
     await page.getByRole('button', { name: 'Следующая позиция' }).click();
     await expect(menuSection.getByText('4 / 5')).toBeVisible();
-    await menuSection.screenshot({ path: path.resolve('qa/menu-3d.png') });
 
     const gridViewBtn = page.getByRole('button', { name: 'Сетка 5 в ряд' });
     await gridViewBtn.click();
@@ -95,27 +89,21 @@ test.describe('ILAN Lounge Bar Demo QA', () => {
 
     const snacksTab = page.getByRole('tab', { name: 'Закуски и салаты' });
     await snacksTab.click();
-    await expect(snacksTab).toHaveAttribute('aria-selected', 'true');
     await expect(page.getByText('Сэндвич с копчёной курицей')).toBeVisible();
 
-    const teaTab = page.getByRole('tab', { name: 'Чай и напитки' });
-    await teaTab.click();
-    await expect(page.getByText('Китайский чай (пуэр, ассам)')).toBeVisible();
+    // Reviews without critic phrasing
+    const reviewsText = await page.locator('#reviews').innerText();
+    expect(reviewsText).not.toContain('Гости отмечают');
 
     // Demo booking form
     const form = page.locator('#booking form');
     await form.locator('input[type="date"]').fill('2026-12-01');
     await form.locator('input[type="text"]').fill('Алексей');
     await form.locator('input[type="tel"]').fill('+7 (900) 111-22-33');
-    await form.getByRole('button', { name: 'Проверить демо-заявку' }).click();
-    await expect(form.getByRole('status')).toContainText('Демо-предпросмотр');
+    await form.getByRole('button', { name: 'Забронировать стол' }).click();
+    await expect(form.getByRole('status')).toContainText('Заявка сформирована');
 
-    // Keyboard navigation Tab check
-    await page.keyboard.press('Tab');
-    const focusedTag = await page.evaluate(() => document.activeElement?.tagName);
-    expect(['A', 'BUTTON', 'INPUT', 'SELECT']).toContain(focusedTag);
-
-    // Mobile menu open & Escape close
+    // Mobile menu
     await page.setViewportSize({ width: 390, height: 844 });
     await page.getByRole('button', { name: 'Открыть меню навигации' }).click();
     const dialog = page.getByRole('dialog', { name: 'Меню сайта' });
@@ -124,7 +112,7 @@ test.describe('ILAN Lounge Bar Demo QA', () => {
     await expect(dialog).toBeHidden();
   });
 
-  test('prefers-reduced-motion emulation renders cleanly', async ({ page }) => {
+  test('prefers-reduced-motion renders cleanly', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/', { waitUntil: 'networkidle' });

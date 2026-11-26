@@ -34,7 +34,7 @@ export function PerspectiveMenuStrip({ items, categoryLabel }: PerspectiveMenuSt
       const reduced = media.matches;
       posRef.current += (targetRef.current - posRef.current) * (reduced ? 1 : 0.12);
       const stageWidth = stageRef.current?.clientWidth ?? 960;
-      const spread = Math.min(205, stageWidth * 0.21);
+      const spread = Math.min(210, stageWidth * 0.21);
 
       cardsRef.current.forEach((el, i) => {
         if (!el) return;
@@ -43,7 +43,7 @@ export function PerspectiveMenuStrip({ items, categoryLabel }: PerspectiveMenuSt
         const rotateY = reduced
           ? 0
           : Math.max(-1, Math.min(1, -d)) * Math.min(absD, 1.4) * 30;
-        const z = reduced ? 0 : -absD * 90;
+        const z = reduced ? 0 : -absD * 95;
         const scale = 1 - absD * 0.05;
         el.style.transform = `translate3d(${d * spread}px, 0, ${z}px) rotateY(${rotateY}deg) scale(${scale})`;
         el.style.opacity = String(Math.max(0.28, 1 - absD * 0.22));
@@ -104,6 +104,13 @@ export function PerspectiveMenuStrip({ items, categoryLabel }: PerspectiveMenuSt
                 aria-label={`${item.name} — ${item.price}`}
                 onClick={() => setActive(i)}
               >
+                {item.image && (
+                  <>
+                    <img src={item.image} alt={item.alt ?? item.name} className={styles.cardBgImg} />
+                    <span className={styles.cardBgScrim} aria-hidden="true" />
+                  </>
+                )}
+
                 <div className={styles.cardTop}>
                   <span className={`${styles.cardIndex} tabular-nums`}>
                     {String(i + 1).padStart(2, '0')}
@@ -115,7 +122,7 @@ export function PerspectiveMenuStrip({ items, categoryLabel }: PerspectiveMenuSt
 
                 <div className={styles.cardBody}>
                   <h3 className={styles.cardTitle}>{item.name}</h3>
-                  {item.note && <p className={styles.cardNote}>{item.note}</p>}
+                  <p className={styles.cardNote}>{item.note}</p>
                 </div>
 
                 <div className={styles.cardFooter}>

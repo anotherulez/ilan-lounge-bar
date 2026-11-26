@@ -7,28 +7,26 @@
   margin: 0 auto;
 }
 
-/* Matches Group 30 (New Arrivals 64px Light + inline subtitle) */
 .headerRow {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: center;
-  gap: 24px 36px;
+  gap: 20px 36px;
 }
 
 .heading {
   font-family: var(--font-display);
   font-size: clamp(40px, 4.4vw, 64px);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.04em;
   color: var(--color-text-light);
 }
 
 .subtitle {
   max-width: 280px;
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--color-accent-brass);
 }
 
@@ -86,8 +84,8 @@
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -110,7 +108,6 @@
   color: var(--color-text-muted);
 }
 
-/* Matches 5-column New Arrivals grid in Bakery.fig */
 .grid {
   margin-top: 34px;
   display: grid;
@@ -125,9 +122,9 @@
   min-width: 0;
 }
 
-/* Editorial typographic plate (no invented stock food photos per ASSETS.md) */
 .plate {
   position: relative;
+  overflow: hidden;
   aspect-ratio: 259 / 201;
   background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border-subtle);
@@ -137,10 +134,32 @@
   justify-content: space-between;
 }
 
+.plateImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.56;
+}
+
+.plateScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(18, 14, 14, 0.7) 0%, rgba(18, 14, 14, 0.36) 45%, rgba(18, 14, 14, 0.92) 100%);
+}
+
+.plateIndex,
+.plateWeight,
+.plateNote {
+  position: relative;
+  z-index: 2;
+}
+
 .plateIndex {
   font-family: var(--font-display);
   font-size: 28px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   color: var(--color-accent-brass);
 }
@@ -154,9 +173,9 @@
 }
 
 .plateNote {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.45;
-  color: rgba(247, 242, 236, 0.82);
+  color: rgba(247, 242, 236, 0.88);
 }
 
 .metaRow {
@@ -168,8 +187,8 @@
 }
 
 .itemName {
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
   line-height: 1.35;
   color: var(--color-text-light);
 }
@@ -203,7 +222,6 @@
   }
 
   .tabs {
-    justify-content: flex-start;
     gap: 8px 18px;
   }
 

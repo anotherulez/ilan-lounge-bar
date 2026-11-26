@@ -1,23 +1,14 @@
-# HANDOFF.md — Точка передачи контекста другому агенту
+# HANDOFF.md — Точка передачи контекста
 
 - **Дата последнего обновления:** `2026-11-26`
-- **Текущий этап:** `Этап 09 — Проект собран и проверен (Definition of Done выполнен)`
-- **Последний завершённый этап:** `Этап 09 — Production build, документация и финальный коммит`
-- **Идентификатор последнего Git-коммита:** `см. git log -n 5`
+- **Статус:** `Готово к показу владельцу ILAN`
 
-## Выполненные изменения (Этапы 07–09)
-- Установлен `motion` (`motion/react`), добавлен `<MotionConfig reducedMotion="user">` и деликатный `<Reveal>` на контентных секциях (Hero рендерится без задержки).
-- Реализована 3D-витрина меню `PerspectiveMenuStrip` (адаптирована из `21st.dev` `Perspective Gallery` без Tailwind/градиентного шума, с поддержкой клавиатуры и `prefers-reduced-motion`) и переключатель `3D-витрина / Сетка 5 в ряд`.
-- Очищены текстовые данные от AI-штампов и длинных тире в прозе по `unslop`.
-- Пройдены финальные проверки после последней правки кода: `npx.cmd tsc --noEmit`, `npm.cmd run build`, `npx.cmd playwright test` (`10 passed`).
-- Заполнен `QA_REPORT.md` по 8 разрешениям (`320..1920 px`).
+## Итоговое состояние проекта
+- **Шрифты:** `Cormorant` + `Montserrat` (`lining-nums tabular-nums`).
+- **Секции:** `Header` (`О баре`, `Меню`, `VIP`, `Галерея`, `Отзывы`, `Бронь`) → `HeroSection` (полноэкранный мозаичный фонарь `hero-lantern.jpg` с 3D parallax + 2 кнопки + бордовая 4-колоночная планка) → `StorySection` (`#about`) → `GallerySection` (`#gallery`, 3D изометрическая стена фото + `TiltedCard` + лайтбокс) → `FeatureHighlightSection` (`#vip`) → `MenuSection` (`#menu`, 3D-витрина + 3D-сетка с фото и точными ценами без «среднего чека») → `ReviewsSection` (`#reviews`) → `ChronicleSection` → `BookingSection` (`#booking`) → `Footer`.
+- **Проверки:** `npx.cmd tsc --noEmit` (0 ошибок), `npm.cmd run build` (успешно), `npx.cmd playwright test` (`10 passed` по `320..1920px`).
 
-## Известные ограничения
-- Фото из `public/images/` допускаются только для локального демо-превью (см. `ASSETS.md`).
-- Демо-форма бронирования не отправляет данные на сервер.
-- Политика PowerShell на машине требует `npm.cmd` / `npx.cmd` вместо `npm` / `npx`.
-
-## Команды запуска и проверки
+## Команды запуска
 ```powershell
 npm.cmd install
 npm.cmd run dev

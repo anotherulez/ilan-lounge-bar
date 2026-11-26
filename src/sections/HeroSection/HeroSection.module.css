@@ -5,234 +5,175 @@
 .heroCanvas {
   position: relative;
   min-height: 875px;
-  padding: 230px var(--page-pad) 240px;
+  padding: 170px var(--page-pad) 235px;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
+  perspective: 1200px;
+}
+
+.bgStage {
+  position: absolute;
+  inset: -28px;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .bgImage {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 45%;
+  object-position: center center;
 }
 
 .scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(18, 14, 14, 0.72) 0%, rgba(18, 14, 14, 0.28) 28%, rgba(18, 14, 14, 0.78) 100%),
-    linear-gradient(90deg, rgba(18, 14, 14, 0.88) 0%, rgba(18, 14, 14, 0.56) 46%, rgba(18, 14, 14, 0.25) 100%);
+    radial-gradient(circle at 50% 44%, rgba(18, 14, 14, 0.34) 0%, rgba(18, 14, 14, 0.78) 80%),
+    linear-gradient(180deg, rgba(18, 14, 14, 0.72) 0%, rgba(18, 14, 14, 0.25) 36%, rgba(18, 14, 14, 0.85) 100%);
 }
 
-.inner {
+.centerStage {
   position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--container-outer);
+  z-index: 3;
+  max-width: 780px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 480px) 1fr;
-  align-items: center;
-  gap: 48px;
-}
-
-.copyCol {
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.eyebrowLine {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent-brass);
 }
 
 .title {
+  margin-top: 18px;
   font-family: var(--font-display);
-  font-size: clamp(54px, 6vw, 96px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.01em;
+  font-size: clamp(56px, 7.2vw, 108px);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
   color: var(--color-text-light);
+  text-shadow: 0 6px 32px rgba(10, 6, 8, 0.7);
 }
 
-.meta {
-  margin-top: 20px;
-  font-size: 16px;
-  line-height: 1.5;
-  color: rgba(247, 242, 236, 0.88);
+.lead {
+  margin-top: 22px;
+  max-width: 540px;
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.6;
+  color: rgba(247, 242, 236, 0.9);
 }
 
-.cta {
-  margin-top: 28px;
+.actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.ctaPrimary,
+.ctaSecondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 52px;
-  padding: 16px 40px;
-  background-color: var(--color-accent-brass);
-  color: #120e0e;
-  font-family: var(--font-body);
-  font-size: 14px;
+  padding: 15px 38px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   border-radius: var(--radius-sharp);
-  transition: background-color 0.18s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.cta:hover {
-  background-color: #e2b56c;
+.ctaPrimary {
+  background-color: var(--color-accent-brass);
+  color: #120e0e;
+  border: 1px solid var(--color-accent-brass);
 }
 
-/* 3 horizontal cards matching Frame 3758 in Bakery.fig (270x270, gap 30px) */
-.cardsRail {
-  display: grid;
-  grid-template-columns: repeat(3, 270px);
-  gap: 30px;
-  justify-self: end;
-  margin-right: -110px;
+.ctaPrimary:hover {
+  background-color: #e4b86e;
+  transform: translateY(-2px);
 }
 
-.miniCard {
-  display: flex;
-  flex-direction: column;
-  width: 270px;
-  height: 270px;
-  background-color: var(--color-bg-elevated);
-  transition: transform 0.2s ease;
-}
-
-.miniCard:hover {
-  transform: translateY(-3px);
-}
-
-.miniPhoto {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.miniStrip {
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 14px;
-  font-size: 16px;
-  font-weight: 400;
+.ctaSecondary {
+  background-color: rgba(18, 14, 14, 0.56);
   color: var(--color-text-light);
-  text-align: center;
+  border: 1px solid rgba(247, 242, 236, 0.58);
 }
 
-.tone_terracotta {
-  background-color: var(--color-accent-terracotta);
+.ctaSecondary:hover {
+  border-color: var(--color-accent-brass);
+  color: var(--color-accent-brass);
+  transform: translateY(-2px);
 }
 
-.tone_burgundy {
-  background-color: var(--color-accent-burgundy);
-}
-
-.tone_brass {
-  background-color: var(--color-accent-brass-muted);
-}
-
-/* 4-column overlapping burgundy bar (features 3 in Bakery.fig: 1343x227, overlap -183px) */
+/* 4-column overlapping burgundy bar from Bakery.fig */
 .featuresBar {
   position: relative;
   z-index: 4;
   max-width: var(--container-outer);
-  margin: -183px auto 0;
-  min-height: 227px;
+  margin: -165px auto 0;
+  min-height: 220px;
   background-color: var(--color-accent-burgundy);
-  padding: 40px clamp(24px, 3.8vw, 52px);
+  padding: 38px clamp(24px, 3.8vw, 52px);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 36px;
+  gap: 34px;
 }
 
 .featureItem {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .featureTitle {
   font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.15;
   color: var(--color-text-light);
 }
 
 .featureDesc {
-  font-size: 15px;
-  line-height: 1.75;
-  letter-spacing: 0.015em;
+  font-size: 14px;
+  line-height: 1.65;
   color: rgba(247, 242, 236, 0.88);
 }
 
-@media (max-width: 1380px) {
-  .cardsRail {
-    grid-template-columns: repeat(3, minmax(180px, 230px));
-    gap: 20px;
-    margin-right: 0;
-  }
-
-  .miniCard {
-    width: 100%;
-    height: auto;
-  }
-
-  .miniPhoto {
-    height: 175px;
-  }
-}
-
-@media (max-width: 1100px) {
-  .inner {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-
-  .cardsRail {
-    justify-self: start;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: 100%;
-  }
-
+@media (max-width: 1024px) {
   .featuresBar {
-    margin-top: -120px;
+    margin-top: -110px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 680px) {
   .heroCanvas {
-    min-height: 0;
-    padding: 124px var(--page-pad) 64px;
+    min-height: 620px;
+    padding: 132px var(--page-pad) 72px;
   }
 
-  .cardsRail {
-    grid-template-columns: 1fr;
-    gap: 14px;
+  .actions {
+    width: 100%;
+    flex-direction: column;
   }
 
-  .miniCard {
-    flex-direction: row;
-    height: 92px;
-  }
-
-  .miniPhoto {
-    width: 112px;
-    height: 92px;
-    flex-shrink: 0;
-  }
-
-  .miniStrip {
-    height: 100%;
-    flex: 1;
-    justify-content: flex-start;
-    text-align: left;
+  .ctaPrimary,
+  .ctaSecondary {
+    width: 100%;
   }
 
   .featuresBar {

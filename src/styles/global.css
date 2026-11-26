@@ -101,6 +101,10 @@ ol {
   list-style: none;
 }
 
+section[id] {
+  scroll-margin-top: 96px;
+}
+
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }

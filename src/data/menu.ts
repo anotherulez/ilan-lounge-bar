@@ -6,7 +6,9 @@ export interface MenuItem {
   weight?: string;
   price: string;
   isPriceConfirmed: boolean;
-  note?: string;
+  note: string;
+  image?: string;
+  alt?: string;
 }
 
 export interface MenuCategory {
@@ -20,7 +22,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
   {
     id: 'hot',
     label: 'Горячее',
-    subtitle: 'Позиции и цены подтверждены по меню ILAN на Яндекс Картах',
+    subtitle: 'Плотно поужинать можно и в восемь вечера, и в три ночи.',
     items: [
       {
         id: 'plov',
@@ -28,7 +30,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         weight: '350 г',
         price: '550 ₽',
         isPriceConfirmed: true,
-        note: 'Горячая подача в том числе в ночное время',
+        note: 'Горячая порция, которая спасает любой затянувшийся вечер.',
       },
       {
         id: 'borscht',
@@ -36,7 +38,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         weight: '350 г',
         price: '550 ₽',
         isPriceConfirmed: true,
-        note: 'Подаётся со сметаной',
+        note: 'Тот случай, когда после полуночи хочется настоящего супа.',
       },
       {
         id: 'fettuccine',
@@ -44,28 +46,30 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         weight: '350 г',
         price: '690 ₽',
         isPriceConfirmed: true,
-        note: 'Сливочный соус, горячее блюдо кухни',
+        note: 'Нежная паста в сливочном соусе, готовим сразу под заказ.',
+      },
+      {
+        id: 'burgers',
+        name: 'Фирменные бургеры',
+        price: 'По меню в баре',
+        isPriceConfirmed: false,
+        note: 'Подаём с хрустящим картофелем фри и соусом.',
+        image: '/images/burger-fries.jpg',
+        alt: 'Бургер с картофелем фри в баре ILAN',
       },
       {
         id: 'khinkali',
         name: 'Хинкали и пельмени',
-        price: 'По меню в заведении',
+        price: 'По меню в баре',
         isPriceConfirmed: false,
-        note: 'Указаны в карточках 2ГИС и Restoclub',
-      },
-      {
-        id: 'burgers',
-        name: 'Бургеры',
-        price: 'По меню в заведении',
-        isPriceConfirmed: false,
-        note: 'Доступны к заказу в зале',
+        note: 'Сочные, горячие, хороши и по одному, и на компанию.',
       },
     ],
   },
   {
     id: 'snacks',
     label: 'Закуски и салаты',
-    subtitle: '5 позиций с подтверждёнными ценами + блюда к столу для компаний',
+    subtitle: 'Когда хочется перекусить за разговором или взять тарелку в центр стола.',
     items: [
       {
         id: 'sandwich',
@@ -73,6 +77,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         weight: '280 г',
         price: '400 ₽',
         isPriceConfirmed: true,
+        note: 'Быстро, сытно и удобно, даже если в руках джойстик.',
       },
       {
         id: 'veg-plate',
@@ -80,6 +85,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         weight: '350 г',
         price: '600 ₽',
         isPriceConfirmed: true,
+        note: 'Свежая нарезка к горячему и на компанию.',
       },
       {
         id: 'caesar-chicken',
@@ -87,6 +93,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         weight: '250 г',
         price: '700 ₽',
         isPriceConfirmed: true,
+        note: 'Классика, которая никогда не подводит.',
       },
       {
         id: 'caesar-shrimp',
@@ -94,6 +101,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         weight: '250 г',
         price: '750 ₽',
         isPriceConfirmed: true,
+        note: 'Лёгкий и сытный вариант на ужин.',
       },
       {
         id: 'meat-plate',
@@ -101,87 +109,99 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         weight: '550 г',
         price: '1200 ₽',
         isPriceConfirmed: true,
+        note: 'Большая тарелка для компании, чтобы хватило на всех.',
       },
     ],
   },
   {
     id: 'tea',
-    label: 'Чай и напитки',
-    subtitle: 'Чайная карта и безалкогольные напитки по данным площадок',
+    label: 'Чай и сладкое',
+    subtitle: 'Завариваем листовой чай на подогреве, мешаем лимонады и варим кофе.',
     items: [
       {
         id: 'puerh',
-        name: 'Китайский чай (пуэр, ассам)',
-        price: 'По меню в заведении',
+        name: 'Китайский чай: пуэр и ассам',
+        price: 'По карте в зале',
         isPriceConfirmed: false,
-        note: 'Заваривается в чайнике к столу',
+        note: 'Подаём в чайнике на свече, чтобы не остыл за разговором.',
+        image: '/images/tea-kettle.jpg',
+        alt: 'Чайник на свече в зале ILAN',
       },
       {
         id: 'lemonades',
-        name: 'Лимонады и морсы',
-        price: 'По меню в заведении',
+        name: 'Домашние лимонады и морсы',
+        price: 'По карте в зале',
         isPriceConfirmed: false,
+        note: 'Освежающие миксы на весь вечер.',
+        image: '/images/interior-wide.webp',
+        alt: 'Подача напитков за барной стойкой ILAN',
       },
       {
         id: 'smoothie',
-        name: 'Смузи',
-        price: 'По меню в заведении',
+        name: 'Ягодные и фруктовые смузи',
+        price: 'По карте в зале',
         isPriceConfirmed: false,
+        note: 'Густые и без лишней приторности.',
       },
       {
         id: 'coffee',
         name: 'Кофе',
-        price: 'По меню в заведении',
+        price: 'По карте в зале',
         isPriceConfirmed: false,
+        note: 'Чтобы взбодриться после полуночи.',
       },
       {
         id: 'baklava',
         name: 'Пахлава и мороженое',
-        price: 'По меню в заведении',
+        price: 'По карте в зале',
         isPriceConfirmed: false,
-        note: 'Десертные позиции к чаю',
+        note: 'Сладкий финал к горячему пуэру.',
       },
     ],
   },
   {
     id: 'lounge',
-    label: 'Лаундж-карта',
-    subtitle: 'Информационный раздел без онлайн-продажи (18+)',
+    label: 'VIP и бар',
+    subtitle: 'Для тех, кто собирает друзей и не хочет спешить домой.',
     items: [
       {
-        id: 'vip-ps5',
-        name: 'Бронь VIP-зала с PlayStation 5',
-        price: 'Уточнить по телефону',
+        id: 'vip-room',
+        name: 'Отдельный VIP-зал',
+        price: 'Бронь по телефону',
         isPriceConfirmed: false,
-        note: 'Отдельная комната для компании, настольные игры',
+        note: 'Приватная комната с PlayStation 5 и настольными играми.',
+        image: '/images/lounge-candles.webp',
+        alt: 'Уютная зона отдыха со свечами',
       },
       {
-        id: 'bar-card',
-        name: 'Позиции барной карты',
-        price: 'По меню в заведении',
+        id: 'bar-cocktails',
+        name: 'Авторская барная карта',
+        price: 'По карте в зале',
         isPriceConfirmed: false,
-        note: 'Актуальный перечень и цены у администратора',
-      },
-      {
-        id: 'steam-card',
-        name: 'Лаундж-карта зала',
-        price: 'По меню в заведении',
-        isPriceConfirmed: false,
-        note: 'Только для совершеннолетних гостей (18+)',
+        note: 'Спросите у бармена за стойкой, подберём под настроение.',
+        image: '/images/bar-craft.webp',
+        alt: 'Работа бармена за стойкой ILAN',
       },
       {
         id: 'screens',
         name: 'Трансляции на 3 экранах',
-        price: 'По расписанию',
+        price: 'Включено в вечер',
         isPriceConfirmed: false,
-        note: 'Уточняйте свободные столы заранее',
+        note: 'Большие матчи и важные события смотрим вместе.',
+      },
+      {
+        id: 'board-games',
+        name: 'Настольные игры для компании',
+        price: 'Бесплатно для гостей',
+        isPriceConfirmed: false,
+        note: 'Достаточно попросить официанта принести коробку к столу.',
       },
       {
         id: 'payment',
-        name: 'Оплата картой, наличными или по QR',
-        price: 'Доступно',
+        name: 'Карта, наличные или QR',
+        price: 'Без сложностей',
         isPriceConfirmed: false,
-        note: 'Средний чек на площадках: 500–1000 ₽',
+        note: 'Принимаем любой удобный способ оплаты.',
       },
     ],
   },

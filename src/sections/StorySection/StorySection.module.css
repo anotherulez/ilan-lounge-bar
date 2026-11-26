@@ -2,7 +2,6 @@
   padding: var(--section-gap) var(--page-pad) 0;
 }
 
-/* CSS Grid overlapping tracks matching Bakery.fig (727x667 left photo + 663px right card) */
 .container {
   position: relative;
   max-width: var(--container-outer);
@@ -25,10 +24,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 40%;
 }
 
-/* Matches Exceptional Quality (128px Light, right-aligned overlap) */
 .displayHeading {
   grid-column: 3 / 5;
   grid-row: 1;
@@ -38,54 +36,57 @@
   margin-top: 8px;
   text-align: right;
   font-family: var(--font-display);
-  font-size: clamp(50px, 7.6vw, 118px);
-  font-weight: 300;
+  font-size: clamp(48px, 7.2vw, 112px);
+  font-weight: 400;
   line-height: 0.96;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
   color: var(--color-text-light);
-  text-shadow: 0 2px 24px rgba(18, 14, 14, 0.72);
+  text-shadow: 0 4px 28px rgba(18, 14, 14, 0.8);
 }
 
-/* Overlapping burgundy card (Group 31 in Bakery.fig: 662.7 x 517.5) */
-.burgundyCard {
+.cardWrap {
   grid-column: 3 / 5;
   grid-row: 2;
   align-self: start;
   position: relative;
   z-index: 4;
   margin-top: 32px;
+}
+
+.burgundyCard {
   background-color: var(--color-accent-burgundy);
-  padding: clamp(32px, 4.6vw, 68px) clamp(28px, 4.4vw, 72px);
+  padding: clamp(30px, 4.6vw, 66px) clamp(26px, 4.4vw, 70px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: 18px;
+  border: 1px solid rgba(212, 163, 89, 0.18);
 }
 
 .lead {
-  font-size: clamp(19px, 1.75vw, 25px);
+  font-size: clamp(19px, 1.65vw, 24px);
   font-weight: 400;
-  line-height: 1.62;
+  line-height: 1.6;
   color: var(--color-text-light);
 }
 
-.stats {
+.subCopy {
   font-size: 15px;
-  line-height: 1.6;
-  color: var(--color-accent-brass);
+  line-height: 1.65;
+  color: rgba(247, 242, 236, 0.84);
 }
 
 .btn {
-  margin-top: 8px;
+  margin-top: 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 52px;
-  padding: 16px 46px;
-  background-color: var(--color-accent-brass-muted);
-  color: var(--color-text-light);
-  font-size: 14px;
-  font-weight: 500;
+  padding: 15px 44px;
+  background-color: var(--color-accent-brass);
+  color: #120e0e;
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: var(--radius-sharp);
@@ -93,8 +94,7 @@
 }
 
 .btn:hover {
-  background-color: var(--color-accent-brass);
-  color: #120e0e;
+  background-color: #e4b86e;
 }
 
 @media (max-width: 1024px) {
@@ -113,7 +113,7 @@
     text-shadow: none;
   }
 
-  .burgundyCard {
+  .cardWrap {
     margin-top: 24px;
   }
 }

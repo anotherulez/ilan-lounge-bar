@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PerspectiveMenuStrip } from '../../components/PerspectiveMenuStrip/PerspectiveMenuStrip';
+import { TiltedCard } from '../../components/TiltedCard/TiltedCard';
 import { MENU_CATEGORIES, type MenuCategoryId } from '../../data/menu';
 import { VENUE } from '../../data/venue';
 import styles from './MenuSection.module.css';
@@ -15,14 +16,14 @@ export function MenuSection() {
         <div className={styles.headerRow}>
           <h2 className={styles.heading}>Меню и карта</h2>
           <p className={styles.subtitle}>
-            Средний чек по данным площадок: <span className="tabular-nums">500–1000 ₽</span>.{' '}
+            Готовим до последнего гостя.{' '}
             <a
               href={VENUE.links.yandexMenu}
               target="_blank"
               rel="noreferrer"
               className={styles.sourceLink}
             >
-              Меню на Яндекс Картах
+              Полный список на Яндекс Картах
             </a>
           </p>
         </div>
@@ -74,28 +75,40 @@ export function MenuSection() {
           ) : (
             <div className={styles.grid}>
               {current.items.map((item, idx) => (
-                <article key={item.id} className={styles.card}>
-                  <div className={styles.plate}>
-                    <span className={`${styles.plateIndex} tabular-nums`}>
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    {item.weight && (
-                      <span className={`${styles.plateWeight} tabular-nums`}>{item.weight}</span>
-                    )}
-                    {item.note && <p className={styles.plateNote}>{item.note}</p>}
-                  </div>
+                <TiltedCard key={item.id} maxTilt={6}>
+                  <article className={styles.card}>
+                    <div className={styles.plate}>
+                      {item.image && (
+                        <>
+                          <img
+                            src={item.image}
+                            alt={item.alt ?? item.name}
+                            className={styles.plateImg}
+                          />
+                          <span className={styles.plateScrim} aria-hidden="true" />
+                        </>
+                      )}
+                      <span className={`${styles.plateIndex} tabular-nums`}>
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                      {item.weight && (
+                        <span className={`${styles.plateWeight} tabular-nums`}>{item.weight}</span>
+                      )}
+                      <p className={styles.plateNote}>{item.note}</p>
+                    </div>
 
-                  <div className={styles.metaRow}>
-                    <h3 className={styles.itemName}>{item.name}</h3>
-                    <span
-                      className={`${styles.itemPrice} tabular-nums ${
-                        item.isPriceConfirmed ? styles.priceConfirmed : styles.pricePending
-                      }`}
-                    >
-                      {item.price}
-                    </span>
-                  </div>
-                </article>
+                    <div className={styles.metaRow}>
+                      <h3 className={styles.itemName}>{item.name}</h3>
+                      <span
+                        className={`${styles.itemPrice} tabular-nums ${
+                          item.isPriceConfirmed ? styles.priceConfirmed : styles.pricePending
+                        }`}
+                      >
+                        {item.price}
+                      </span>
+                    </div>
+                  </article>
+                </TiltedCard>
               ))}
             </div>
           )}

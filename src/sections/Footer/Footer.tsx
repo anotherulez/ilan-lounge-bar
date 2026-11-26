@@ -49,19 +49,19 @@ export function Footer() {
           </div>
 
           <div className={styles.col}>
-            <h3 className={styles.colTitle}>Разделы</h3>
+            <h3 className={styles.colTitle}>Навигация</h3>
             <ul className={styles.list}>
-              <li>
-                <a href="#top">Начало</a>
-              </li>
               <li>
                 <a href="#about">О баре</a>
               </li>
               <li>
-                <a href="#menu">Меню и карта</a>
+                <a href="#gallery">Галерея</a>
               </li>
               <li>
-                <a href="#reviews">Отзывы</a>
+                <a href="#vip">VIP-комната</a>
+              </li>
+              <li>
+                <a href="#menu">Меню и карта</a>
               </li>
               <li>
                 <a href="#booking">Бронирование</a>
@@ -70,29 +70,29 @@ export function Footer() {
           </div>
 
           <div className={styles.col}>
-            <h3 className={styles.colTitle}>О заведении</h3>
+            <h3 className={styles.colTitle}>Как найти</h3>
             <ul className={styles.list}>
-              <li>{VENUE.addressNote}</li>
+              <li>{VENUE.address}, 1 этаж</li>
               <li>{VENUE.landmarks}</li>
-              <li>VIP-зал с PlayStation 5</li>
+              <li>Оплата картой, наличными, QR</li>
               <li>Instagram: {VENUE.links.instagramHandle}</li>
             </ul>
           </div>
 
           <div className={styles.col}>
-            <h3 className={styles.colTitle}>Режим и оплата</h3>
+            <h3 className={styles.colTitle}>Когда заходить</h3>
             <ul className={styles.list}>
               <li>{VENUE.hours}</li>
-              <li>{VENUE.hoursDisclaimer}</li>
-              <li>Карта, наличные, QR-код</li>
-              <li>Средний чек: 500–1000 ₽</li>
+              <li>Кухня работает до закрытия</li>
+              <li>PlayStation 5 и настолки</li>
+              <li>Рейтинг 4.9 на картах</li>
             </ul>
           </div>
         </div>
 
         <div className={styles.bottomBar}>
-          <span>ILAN Lounge Bar · Демонстрационная веб-витрина</span>
-          <span>18+ · Только для совершеннолетних гостей · Без онлайн-продажи</span>
+          <span>ILAN Lounge Bar · Екатеринбург</span>
+          <span>18+ · Ждём в гости каждый вечер</span>
         </div>
       </div>
     </footer>

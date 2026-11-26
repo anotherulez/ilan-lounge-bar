@@ -1,0 +1,246 @@
+.section {
+  padding: var(--section-gap) var(--page-pad) 0;
+}
+
+.container {
+  max-width: var(--container-outer);
+  margin: 0 auto;
+}
+
+.headerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.4vw, 64px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-text-light);
+}
+
+.sub {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--color-text-muted);
+}
+
+.countTag {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-brass);
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: 6px;
+}
+
+/* Isometric 3D Photo Marquee (adapted from 21st.dev ThreeDMarquee) */
+.marqueeShell {
+  position: relative;
+  margin-top: 34px;
+  height: 430px;
+  overflow: hidden;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  perspective: 1400px;
+}
+
+.marqueePlane {
+  position: absolute;
+  inset: -140px -120px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  transform: rotateX(34deg) rotateY(-6deg) rotateZ(24deg) scale(1.06);
+  transform-style: preserve-3d;
+}
+
+.marqueeCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  will-change: transform;
+}
+
+.marqueeTile {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(212, 163, 89, 0.22);
+  background-color: var(--color-bg-primary);
+}
+
+.marqueeImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marqueeVignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(18, 14, 14, 0.85) 0%, transparent 25%, transparent 72%, rgba(18, 14, 14, 0.92) 100%),
+    linear-gradient(90deg, rgba(18, 14, 14, 0.72) 0%, transparent 18%, transparent 82%, rgba(18, 14, 14, 0.72) 100%);
+}
+
+/* Clickable 3D Tilted Photo Grid */
+.photoGrid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.gridTilt {
+  min-width: 0;
+}
+
+.photoBtn {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-elevated);
+  overflow: hidden;
+  text-align: left;
+}
+
+.gridImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.photoBtn:hover .gridImg {
+  transform: scale(1.05);
+}
+
+.photoCaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 14px 12px;
+  background: linear-gradient(180deg, transparent 0%, rgba(18, 14, 14, 0.92) 100%);
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--color-text-light);
+}
+
+/* Lightbox Modal */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background-color: rgba(12, 8, 9, 0.92);
+  padding: 24px var(--page-pad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightboxInner {
+  position: relative;
+  max-width: 960px;
+  width: 100%;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  padding: 18px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-accent-brass);
+  color: var(--color-text-light);
+}
+
+.lightboxImg {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  background-color: #0b0809;
+}
+
+.lightboxBar {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lightboxText {
+  font-size: 15px;
+  color: var(--color-text-light);
+}
+
+.lightboxNav {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navIconBtn {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-light);
+}
+
+.navIconBtn:hover {
+  border-color: var(--color-accent-brass);
+}
+
+.navCounter {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  min-width: 48px;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .photoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .marqueeShell {
+    height: 320px;
+  }
+}
+
+@media (max-width: 560px) {
+  .marqueeShell {
+    height: 240px;
+  }
+
+  .marqueePlane {
+    inset: -80px -60px;
+    gap: 12px;
+  }
+
+  .photoGrid {
+    grid-template-columns: 1fr;
+  }
+}

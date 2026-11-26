@@ -6,7 +6,7 @@
 
 .stage {
   position: relative;
-  height: 310px;
+  height: 330px;
   width: 100%;
   max-width: var(--container-outer);
   margin: 0 auto;
@@ -18,13 +18,15 @@
   position: absolute;
   left: 50%;
   top: 12px;
-  width: min(268px, 72vw);
-  height: 282px;
-  margin-left: calc(min(268px, 72vw) / -2);
+  width: min(276px, 72vw);
+  height: 300px;
+  margin-left: calc(min(276px, 72vw) / -2);
   will-change: transform;
 }
 
 .cardBtn {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   padding: 22px;
@@ -35,13 +37,41 @@
   justify-content: space-between;
   text-align: left;
   color: var(--color-text-light);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.5);
   transition: background-color 0.22s ease, border-color 0.22s ease;
 }
 
 .cardActive {
   background-color: var(--color-accent-burgundy);
   border-color: var(--color-accent-brass);
+}
+
+.cardBgImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.48;
+  transition: opacity 0.25s ease, transform 0.35s ease;
+}
+
+.cardActive .cardBgImg {
+  opacity: 0.62;
+  transform: scale(1.04);
+}
+
+.cardBgScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(18, 14, 14, 0.72) 0%, rgba(18, 14, 14, 0.45) 45%, rgba(18, 14, 14, 0.92) 100%);
+}
+
+.cardTop,
+.cardBody,
+.cardFooter {
+  position: relative;
+  z-index: 2;
 }
 
 .cardTop {
@@ -54,7 +84,7 @@
 .cardIndex {
   font-family: var(--font-display);
   font-size: 30px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   color: var(--color-accent-brass);
 }
@@ -72,21 +102,21 @@
 
 .cardTitle {
   font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.18;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.15;
   color: var(--color-text-light);
 }
 
 .cardNote {
   font-size: 13px;
   line-height: 1.45;
-  color: rgba(247, 242, 236, 0.8);
+  color: rgba(247, 242, 236, 0.86);
 }
 
 .cardFooter {
   padding-top: 12px;
-  border-top: 1px solid rgba(247, 242, 236, 0.16);
+  border-top: 1px solid rgba(247, 242, 236, 0.18);
 }
 
 .cardPrice {
@@ -99,9 +129,9 @@
 }
 
 .pricePending {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(247, 242, 236, 0.85);
 }
 
 .controls {

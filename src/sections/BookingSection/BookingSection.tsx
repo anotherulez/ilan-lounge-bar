@@ -31,25 +31,23 @@ export function BookingSection() {
     <section id="booking" className={styles.band}>
       <div className={styles.container}>
         <div className={styles.infoCol}>
-          <h2 className={styles.heading}>Бронь стола или VIP-зала</h2>
+          <h2 className={styles.heading}>Стол или VIP-комната уже ждут</h2>
           <p className={styles.sub}>
-            {VENUE.address} · {VENUE.hours} ({VENUE.hoursDisclaimer.toLowerCase()}).
-          </p>
-          <p className={styles.phoneLine}>
-            Прямой телефон администратора:{' '}
+            Оставьте номер и выберите время. Если не хочется ждать обратного звонка, просто наберите{' '}
             <a href={VENUE.phoneHref} className={styles.phoneLink}>
               {VENUE.phoneDisplay}
             </a>
+            , отвечаем сами, без автоответчиков.
           </p>
-          <p className={styles.demoNotice}>
-            Демо-режим: форма ниже показывает интерфейс заявки и не отправляет данные на сервер.
+          <p className={styles.addressNote}>
+            {VENUE.city}, {VENUE.address} · {VENUE.hours}
           </p>
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.rowTwo}>
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Зона</span>
+              <span className={styles.fieldLabel}>Куда садимся</span>
               <select
                 className={styles.input}
                 value={form.zone}
@@ -59,13 +57,13 @@ export function BookingSection() {
                 }}
               >
                 <option value="Основной зал">Основной зал</option>
-                <option value="VIP-зал с PS5">VIP-зал с PS5</option>
+                <option value="VIP-комната">VIP-комната</option>
                 <option value="У барной стойки">У барной стойки</option>
               </select>
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Гостей</span>
+              <span className={styles.fieldLabel}>Сколько человек</span>
               <input
                 type="number"
                 min={1}
@@ -97,7 +95,7 @@ export function BookingSection() {
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Время</span>
+              <span className={styles.fieldLabel}>Во сколько</span>
               <input
                 type="time"
                 className={styles.input}
@@ -113,10 +111,10 @@ export function BookingSection() {
 
           <div className={styles.rowTwo}>
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Имя</span>
+              <span className={styles.fieldLabel}>Как вас зовут</span>
               <input
                 type="text"
-                placeholder="Как к вам обращаться"
+                placeholder="Имя"
                 className={styles.input}
                 value={form.name}
                 onChange={(e) => {
@@ -144,13 +142,13 @@ export function BookingSection() {
           </div>
 
           <button type="submit" className={styles.submitBtn}>
-            Проверить демо-заявку
+            Забронировать стол
           </button>
 
           {submitted && (
             <p className={styles.confirmBox} role="status">
-              Демо-предпросмотр: {form.zone}, {form.date || 'дата выбрана'} в {form.time}, гостей:{' '}
-              {form.guests}. Для реальной брони позвоните{' '}
+              Заявка сформирована: {form.zone}, {form.date || 'выбранная дата'} в {form.time}, гостей:{' '}
+              {form.guests}. Демо-режим: форма не подключена к серверу, для быстрой брони звоните{' '}
               <a href={VENUE.phoneHref} className={styles.confirmLink}>
                 {VENUE.phoneDisplay}
               </a>

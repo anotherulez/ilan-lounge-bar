@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { useCart } from '../../context/CartContext';
 import { VENUE } from '../../data/venue';
 import styles from './BookingSection.module.css';
 
@@ -9,9 +10,11 @@ interface FormState {
   guests: string;
   name: string;
   phone: string;
+  comment: string;
 }
 
 export function BookingSection() {
+  const { totalCount, bookingSummary, confirmedTotal, setDrawerOpen } = useCart();
   const [form, setForm] = useState<FormState>({
     zone: 'Основной зал',
     date: '',
@@ -19,6 +22,7 @@ export function BookingSection() {
     guests: '4',
     name: '',
     phone: '',
+    comment: '',
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -31,13 +35,15 @@ export function BookingSection() {
     <section id="booking" className={styles.band}>
       <div className={styles.container}>
         <div className={styles.infoCol}>
-          <h2 className={styles.heading}>Стол или VIP-комната уже ждут</h2>
+          <h2 className={styles.heading}>
+            ЗАБРАТЬ <span className="serif-italic">СТОЛ</span>
+          </h2>
           <p className={styles.sub}>
-            Оставьте номер и выберите время. Если не хочется ждать обратного звонка, просто наберите{' '}
+            Без анкет на три листа. Оставьте номер, перезвоним сами. Если нужно срочно, наберите{' '}
             <a href={VENUE.phoneHref} className={styles.phoneLink}>
               {VENUE.phoneDisplay}
             </a>
-            , отвечаем сами, без автоответчиков.
+            .
           </p>
           <p className={styles.addressNote}>
             {VENUE.city}, {VENUE.address} · {VENUE.hours}
@@ -45,6 +51,27 @@ export function BookingSection() {
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
+          {totalCount > 0 && (
+            <div className={styles.cartSummary}>
+              <div className={styles.cartSummaryHead}>
+                <span className={styles.cartSummaryLabel}>К столу ({totalCount})</span>
+                <button
+                  type="button"
+                  className={styles.cartEditBtn}
+                  onClick={() => setDrawerOpen(true)}
+                >
+                  Изменить
+                </button>
+              </div>
+              <p className={styles.cartSummaryItems}>{bookingSummary}</p>
+              {confirmedTotal > 0 && (
+                <p className={`${styles.cartSummaryTotal} tabular-nums`}>
+                  Позиции с ценой: {confirmedTotal} ₽
+                </p>
+              )}
+            </div>
+          )}
+
           <div className={styles.rowTwo}>
             <label className={styles.field}>
               <span className={styles.fieldLabel}>Куда садимся</span>
@@ -141,6 +168,20 @@ export function BookingSection() {
             </label>
           </div>
 
+          <label className={styles.field}>
+            <span className={styles.fieldLabel}>Комментарий (если нужно)</span>
+            <input
+              type="text"
+              placeholder="Диван подальше от колонок, FIFA или настолки"
+              className={styles.input}
+              value={form.comment}
+              onChange={(e) => {
+                setSubmitted(false);
+                setForm({ ...form, comment: e.target.value });
+              }}
+            />
+          </label>
+
           <button type="submit" className={styles.submitBtn}>
             Забронировать стол
           </button>
@@ -148,7 +189,9 @@ export function BookingSection() {
           {submitted && (
             <p className={styles.confirmBox} role="status">
               Заявка сформирована: {form.zone}, {form.date || 'выбранная дата'} в {form.time}, гостей:{' '}
-              {form.guests}. Демо-режим: форма не подключена к серверу, для быстрой брони звоните{' '}
+              {form.guests}
+              {bookingSummary ? `. Предзаказ к столу: ${bookingSummary}` : ''}
+              {form.comment ? `. Комментарий: ${form.comment}` : ''}. Демо-режим: форма не подключена к серверу, для быстрой брони звоните{' '}
               <a href={VENUE.phoneHref} className={styles.confirmLink}>
                 {VENUE.phoneDisplay}
               </a>

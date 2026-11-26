@@ -10,7 +10,6 @@ export function GallerySection() {
   const prefersReduced = useReducedMotion();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  // Split 11+ photos across 3 columns for isometric 3D marquee (adapted from 21st.dev ThreeDMarquee)
   const col1 = [GALLERY_PHOTOS[0], GALLERY_PHOTOS[3], GALLERY_PHOTOS[6], GALLERY_PHOTOS[9]];
   const col2 = [GALLERY_PHOTOS[1], GALLERY_PHOTOS[4], GALLERY_PHOTOS[7], GALLERY_PHOTOS[10]];
   const col3 = [GALLERY_PHOTOS[2], GALLERY_PHOTOS[5], GALLERY_PHOTOS[8], GALLERY_PHOTOS[0]];
@@ -41,19 +40,9 @@ export function GallerySection() {
     <section id="gallery" className={styles.section}>
       <Reveal>
         <div className={styles.container}>
-          <div className={styles.headerRow}>
-            <div>
-              <h2 className={styles.heading}>Живые кадры бара</h2>
-              <p className={styles.sub}>
-                Нажмите на любой снимок, чтобы рассмотреть зал, свет и кухню поближе.
-              </p>
-            </div>
-            <span className={`${styles.countTag} tabular-nums`}>
-              {GALLERY_PHOTOS.length} фото из зала
-            </span>
-          </div>
+          <h2 className={styles.heading}>ВНУТРИ БАРА</h2>
 
-          {/* 3D Isometric Photo Wall (adapted from 21st.dev ThreeDMarquee) */}
+          {/* 3D Isometric Photo Wall */}
           <div className={styles.marqueeShell} aria-hidden="true">
             <div className={styles.marqueePlane}>
               {columns.map((col, colIdx) => (
@@ -63,7 +52,7 @@ export function GallerySection() {
                   animate={
                     prefersReduced
                       ? undefined
-                      : { y: colIdx % 2 === 0 ? [-24, 24] : [24, -24] }
+                      : { y: colIdx % 2 === 0 ? [-28, 28] : [28, -28] }
                   }
                   transition={
                     prefersReduced
@@ -87,18 +76,21 @@ export function GallerySection() {
             <div className={styles.marqueeVignette} />
           </div>
 
-          {/* Interactive 3D Tilted Photo Grid (clickable to open Lightbox) */}
-          <div className={styles.photoGrid}>
+          {/* Uncaptioned scattered asymmetric 3D photo mosaic */}
+          <div className={styles.scatterGrid}>
             {GALLERY_PHOTOS.slice(0, 8).map((photo, idx) => (
-              <TiltedCard key={photo.id} maxTilt={7} className={styles.gridTilt}>
+              <TiltedCard
+                key={photo.id}
+                maxTilt={8}
+                className={`${styles.scatterItem} ${styles[`slot_${idx % 4}`]}`}
+              >
                 <button
                   type="button"
                   className={styles.photoBtn}
                   onClick={() => setLightboxIndex(idx)}
-                  aria-label={`Открыть фото: ${photo.caption}`}
+                  aria-label={`Увеличить фото: ${photo.alt}`}
                 >
                   <img src={photo.src} alt={photo.alt} className={styles.gridImg} />
-                  <span className={styles.photoCaption}>{photo.caption}</span>
                 </button>
               </TiltedCard>
             ))}
@@ -111,7 +103,7 @@ export function GallerySection() {
           className={styles.lightbox}
           role="dialog"
           aria-modal="true"
-          aria-label={activePhoto.caption}
+          aria-label={activePhoto.alt}
           onClick={() => setLightboxIndex(null)}
         >
           <div className={styles.lightboxInner} onClick={(e) => e.stopPropagation()}>
@@ -127,7 +119,6 @@ export function GallerySection() {
             <img src={activePhoto.src} alt={activePhoto.alt} className={styles.lightboxImg} />
 
             <div className={styles.lightboxBar}>
-              <p className={styles.lightboxText}>{activePhoto.caption}</p>
               <div className={styles.lightboxNav}>
                 <button
                   type="button"

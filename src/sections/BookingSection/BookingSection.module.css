@@ -1,42 +1,45 @@
-/* Matches sign up band in Bakery.fig */
 .band {
   margin-top: clamp(72px, 7vw, 120px);
-  background-color: var(--color-accent-burgundy);
-  padding: clamp(48px, 5vw, 72px) var(--page-pad);
+  background: linear-gradient(180deg, var(--color-bg-elevated) 0%, #101015 100%);
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-graphite);
+  padding: clamp(56px, 6vw, 92px) var(--page-pad);
 }
 
 .container {
-  max-width: var(--container-footer);
+  max-width: var(--container-inner);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 524px);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+  align-items: start;
   gap: clamp(32px, 5vw, 80px);
 }
 
 .infoCol {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(34px, 3.6vw, 48px);
-  font-weight: 400;
-  line-height: 1.15;
+  font-size: clamp(34px, 4.4vw, 60px);
+  font-weight: 900;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
   color: var(--color-text-light);
 }
 
 .sub {
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.65;
-  color: rgba(247, 242, 236, 0.9);
+  color: var(--color-text-muted);
 }
 
 .phoneLink {
   color: var(--color-accent-brass);
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -44,8 +47,8 @@
 .addressNote {
   font-size: 14px;
   line-height: 1.5;
-  color: rgba(247, 242, 236, 0.78);
-  border-top: 1px solid rgba(247, 242, 236, 0.2);
+  color: var(--color-text-light);
+  border-top: 1px solid var(--color-border-graphite);
   padding-top: 14px;
 }
 
@@ -53,6 +56,60 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+  padding: clamp(20px, 3vw, 32px);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-soft);
+}
+
+.cartSummary {
+  padding: 14px 16px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-accent-brass);
+  border-radius: var(--radius-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cartSummaryHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cartSummaryLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-brass);
+}
+
+.cartEditBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.cartSummaryItems {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-light);
+}
+
+.cartSummaryTotal {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent-amber);
 }
 
 .rowTwo {
@@ -69,48 +126,55 @@
 
 .fieldLabel {
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(247, 242, 236, 0.85);
+  color: var(--color-text-muted);
 }
 
 .input {
   width: 100%;
   min-height: 50px;
   padding: 10px 14px;
-  background-color: var(--color-surface-light);
-  color: var(--color-text-dark);
-  border: 1px solid rgba(28, 20, 21, 0.25);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-soft);
   font-size: 15px;
+  transition: border-color var(--dur-micro) ease;
+}
+
+.input:focus {
+  border-color: var(--color-accent-brass);
+  outline: none;
 }
 
 .input::placeholder {
-  color: var(--color-text-dark-muted);
+  color: var(--color-text-muted);
 }
 
 .submitBtn {
   margin-top: 6px;
   width: 100%;
   min-height: 58px;
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-light);
+  background-color: var(--color-accent-brass);
+  color: var(--color-text-dark);
   border: 1px solid var(--color-accent-brass);
   border-radius: var(--radius-soft);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: background-color 0.18s ease, color 0.18s ease;
+  cursor: pointer;
+  transition: background-color 0.18s ease, transform 0.18s ease;
 }
 
 .submitBtn:hover {
-  background-color: var(--color-accent-brass);
-  color: #120e0e;
+  background-color: var(--color-accent-amber);
 }
 
 .confirmBox {
+  margin: 4px 0 0;
   padding: 14px 16px;
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-accent-brass);

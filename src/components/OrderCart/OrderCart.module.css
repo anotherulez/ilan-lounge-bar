@@ -1,0 +1,213 @@
+.fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 70;
+  min-height: 52px;
+  padding: 10px 18px;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-accent-brass);
+  color: var(--color-text-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+  transition: transform 0.2s var(--ease-expo), background-color 0.2s ease;
+}
+
+.fab:hover {
+  background-color: var(--color-bg-contrast);
+  transform: translateY(-2px);
+}
+
+.fabLabel {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fabCount {
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-brass);
+  color: var(--color-text-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 85;
+  background-color: rgba(5, 5, 7, 0.72);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.drawer {
+  width: min(420px, 100vw);
+  height: 100%;
+  background-color: var(--color-bg-elevated);
+  border-left: 1px solid var(--color-border-subtle);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--color-border-graphite);
+  padding-bottom: 16px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+
+.subtitle {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.closeBtn {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-graphite);
+  color: var(--color-text-light);
+}
+
+.empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.row {
+  padding: 14px;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-graphite);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rowInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.rowName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.rowPrice {
+  font-size: 13px;
+  color: var(--color-accent-brass);
+}
+
+.qtyBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qtyBtn {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-light);
+}
+
+.qtyVal {
+  min-width: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.footer {
+  border-top: 1px solid var(--color-border-graphite);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.totalRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.totalRow strong {
+  font-size: 20px;
+  color: var(--color-accent-brass);
+}
+
+.footerActions {
+  display: flex;
+  gap: 10px;
+}
+
+.clearBtn {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-graphite);
+  color: var(--color-text-muted);
+}
+
+.applyBtn {
+  flex: 1;
+  min-height: 48px;
+  background-color: var(--color-accent-brass);
+  border: 0;
+  color: var(--color-text-dark);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

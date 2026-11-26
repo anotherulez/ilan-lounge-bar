@@ -7,45 +7,23 @@
   margin: 0 auto;
 }
 
-.headerRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 18px;
-}
-
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(38px, 4.4vw, 64px);
-  font-weight: 400;
-  line-height: 1;
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
   color: var(--color-text-light);
 }
 
-.sub {
-  margin-top: 10px;
-  font-size: 15px;
-  color: var(--color-text-muted);
-}
-
-.countTag {
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent-brass);
-  border-bottom: 1px solid var(--color-border-subtle);
-  padding-bottom: 6px;
-}
-
-/* Isometric 3D Photo Marquee (adapted from 21st.dev ThreeDMarquee) */
 .marqueeShell {
   position: relative;
-  margin-top: 34px;
-  height: 430px;
+  margin-top: 32px;
+  height: 410px;
   overflow: hidden;
   background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-border-graphite);
   perspective: 1400px;
 }
 
@@ -69,7 +47,7 @@
 .marqueeTile {
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border: 1px solid rgba(212, 163, 89, 0.22);
+  border: 1px solid var(--color-border-subtle);
   background-color: var(--color-bg-primary);
 }
 
@@ -84,63 +62,63 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(18, 14, 14, 0.85) 0%, transparent 25%, transparent 72%, rgba(18, 14, 14, 0.92) 100%),
-    linear-gradient(90deg, rgba(18, 14, 14, 0.72) 0%, transparent 18%, transparent 82%, rgba(18, 14, 14, 0.72) 100%);
+    linear-gradient(180deg, rgba(9, 9, 11, 0.85) 0%, transparent 25%, transparent 72%, rgba(9, 9, 11, 0.94) 100%),
+    linear-gradient(90deg, rgba(9, 9, 11, 0.72) 0%, transparent 18%, transparent 82%, rgba(9, 9, 11, 0.72) 100%);
 }
 
-/* Clickable 3D Tilted Photo Grid */
-.photoGrid {
-  margin-top: 28px;
+/* Scattered uncaptioned asymmetric photo grid */
+.scatterGrid {
+  margin-top: 36px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  gap: 22px;
+  align-items: start;
 }
 
-.gridTilt {
+.scatterItem {
   min-width: 0;
 }
 
+.slot_1 {
+  margin-top: 28px;
+}
+
+.slot_3 {
+  margin-top: 18px;
+}
+
 .photoBtn {
-  position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   padding: 0;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-border-graphite);
   background-color: var(--color-bg-elevated);
   overflow: hidden;
-  text-align: left;
+}
+
+.slot_1 .photoBtn,
+.slot_2 .photoBtn {
+  aspect-ratio: 4 / 3;
 }
 
 .gridImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.35s ease;
+  transition: transform 0.35s var(--ease-expo);
 }
 
 .photoBtn:hover .gridImg {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
-.photoCaption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 28px 14px 12px;
-  background: linear-gradient(180deg, transparent 0%, rgba(18, 14, 14, 0.92) 100%);
-  font-size: 13px;
-  line-height: 1.35;
-  color: var(--color-text-light);
-}
-
-/* Lightbox Modal */
+/* Lightbox */
 .lightbox {
   position: fixed;
   inset: 0;
   z-index: 90;
-  background-color: rgba(12, 8, 9, 0.92);
+  background-color: rgba(7, 7, 9, 0.94);
   padding: 24px var(--page-pad);
   display: flex;
   align-items: center;
@@ -173,29 +151,21 @@
 
 .lightboxImg {
   width: 100%;
-  max-height: 70vh;
+  max-height: 74vh;
   object-fit: contain;
-  background-color: #0b0809;
+  background-color: #050507;
 }
 
 .lightboxBar {
   margin-top: 14px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.lightboxText {
-  font-size: 15px;
-  color: var(--color-text-light);
+  justify-content: center;
 }
 
 .lightboxNav {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .navIconBtn {
@@ -205,7 +175,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-border-graphite);
   color: var(--color-text-light);
 }
 
@@ -221,18 +191,23 @@
 }
 
 @media (max-width: 1024px) {
-  .photoGrid {
+  .scatterGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .slot_1,
+  .slot_3 {
+    margin-top: 0;
+  }
+
   .marqueeShell {
-    height: 320px;
+    height: 300px;
   }
 }
 
 @media (max-width: 560px) {
   .marqueeShell {
-    height: 240px;
+    height: 220px;
   }
 
   .marqueePlane {
@@ -240,7 +215,13 @@
     gap: 12px;
   }
 
-  .photoGrid {
+  .scatterGrid {
     grid-template-columns: 1fr;
+  }
+
+  .photoBtn,
+  .slot_1 .photoBtn,
+  .slot_2 .photoBtn {
+    aspect-ratio: 16 / 10;
   }
 }

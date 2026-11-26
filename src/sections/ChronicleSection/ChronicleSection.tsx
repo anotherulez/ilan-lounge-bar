@@ -10,7 +10,9 @@ export function ChronicleSection() {
       <Reveal>
         <div className={styles.container}>
           <div className={styles.headerRow}>
-            <h2 className={styles.heading}>Вечера в ILAN</h2>
+            <h2 className={styles.heading}>
+              ВЕЧЕРА В <span className="serif-italic">ILAN</span>
+            </h2>
             <a
               href={VENUE.links.vk}
               target="_blank"

@@ -1,39 +1,43 @@
-/* Design tokens for ILAN Lounge Bar — Cormorant + Montserrat (UI/UX Pro Max) */
+/* Obsidian + Smoked Graphite + Warm Brass-Amber palette (zero red) */
 
 :root {
-  --color-bg-primary: #120e0e;
-  --color-bg-elevated: #1c1415;
-  --color-bg-card: #221718;
+  --color-bg-primary: #09090b;
+  --color-bg-elevated: #121216;
+  --color-bg-card: #18181e;
+  --color-bg-contrast: #1e1e26;
 
-  --color-accent-burgundy: #4a141e;
-  --color-accent-burgundy-deep: #2b0b11;
-  --color-accent-burgundy-hover: #631b28;
   --color-accent-brass: #d4a359;
-  --color-accent-brass-muted: #925e3b;
-  --color-accent-terracotta: #8f3d29;
+  --color-accent-amber: #e2b56c;
+  --color-accent-bronze: #8b6a3b;
 
-  --color-surface-light: #f3ece4;
-  --color-surface-sand: #e8d8cc;
+  --color-surface-light: #f2eee6;
 
-  --color-text-light: #f7f2ec;
-  --color-text-muted: #b8a9a1;
-  --color-text-dark: #1c1415;
-  --color-text-dark-muted: #5c4a47;
+  --color-text-light: #f5f2eb;
+  --color-text-muted: #a6a4ae;
+  --color-text-dark: #0e0e12;
 
-  --color-border-subtle: rgba(212, 163, 89, 0.24);
-  --color-border-strong: rgba(247, 242, 236, 0.35);
+  --color-border-subtle: rgba(212, 163, 89, 0.22);
+  --color-border-strong: rgba(245, 242, 235, 0.34);
+  --color-border-graphite: rgba(255, 255, 255, 0.1);
 
-  --container-outer: 1343px;
+  --container-outer: 1360px;
   --container-inner: 1280px;
-  --container-footer: 1170px;
-  --page-pad: clamp(16px, 4vw, 60px);
+  --page-pad: clamp(16px, 4vw, 56px);
 
-  --font-display: 'Cormorant', Georgia, serif;
+  /* Aggressive display Montserrat 800-900 + Cormorant 700 accents */
+  --font-display: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cormorant', Georgia, serif;
   --font-body: 'Montserrat', system-ui, -apple-system, sans-serif;
 
+  /* Motion tokens (animation-systems skill) */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro: 160ms;
+  --dur-ui: 240ms;
+  --dur-reveal: 620ms;
+
   --radius-sharp: 0px;
-  --radius-soft: 10px;
+  --radius-soft: 8px;
   --radius-round: 9999px;
 
-  --section-gap: clamp(68px, 7.5vw, 128px);
+  --section-gap: clamp(72px, 8vw, 136px);
 }

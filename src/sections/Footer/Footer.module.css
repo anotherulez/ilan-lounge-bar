@@ -1,10 +1,11 @@
 .footer {
-  background-color: var(--color-accent-burgundy-deep);
-  padding: clamp(56px, 5.5vw, 84px) var(--page-pad) 40px;
+  background-color: #060608;
+  border-top: 1px solid var(--color-border-graphite);
+  padding: clamp(56px, 5.5vw, 84px) var(--page-pad) 92px;
 }
 
 .container {
-  max-width: var(--container-footer);
+  max-width: var(--container-inner);
   margin: 0 auto;
 }
 

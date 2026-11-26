@@ -17,3 +17,8 @@
 | `interior-velvet` | Велюровые диваны и люстры (`546×820`) | `public/images/interior-velvet.webp` | Restoclub ILAN |
 | `facade-night` | Вечерний вход ул. 8 Марта, 31 (`1200×800`) | `public/images/facade-night.jpg` | HookahRussia ILAN |
 | `guest-vibe` | Неоновая надпись «Как же здесь офигенно» (`640×853`) | `public/images/guest-vibe.jpg` | 2ГИС ILAN |
+| `dish-plov` | Плов (`GENERATED_DEMO_ONLY`, студийная съёмка в тёмной палитре) | `public/images/dish-plov.jpg` | Сгенерировано для демо (нет живого фото блюда) |
+| `dish-borscht` | Борщ (`GENERATED_DEMO_ONLY`, студийная съёмка в тёмной палитре) | `public/images/dish-borscht.jpg` | Сгенерировано для демо (нет живого фото блюда) |
+| `dish-pasta` | Феттучини в сливочном соусе (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-pasta.jpg` | Сгенерировано для демо (нет живого фото блюда) |
+| `dish-caesar` | Салат Цезарь и закуски (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-caesar.jpg` | Сгенерировано для демо (нет живого фото блюда) |
+| `dish-meat` | Мясное ассорти на доске (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-meat.jpg` | Сгенерировано для демо (нет живого фото блюда) |

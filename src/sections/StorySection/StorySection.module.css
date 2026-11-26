@@ -3,77 +3,59 @@
 }
 
 .container {
-  position: relative;
   max-width: var(--container-outer);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 60fr 460fr 110fr 520fr 60fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
 }
 
-.photoBox {
-  grid-column: 2 / 4;
-  grid-row: 1 / 3;
-  width: 100%;
-  aspect-ratio: 727 / 667;
-  overflow: hidden;
-  background-color: var(--color-bg-elevated);
+.copyCol {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
-.photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 40%;
-}
-
-.displayHeading {
-  grid-column: 3 / 5;
-  grid-row: 1;
-  align-self: start;
-  position: relative;
-  z-index: 3;
-  margin-top: 8px;
-  text-align: right;
+.heading {
   font-family: var(--font-display);
-  font-size: clamp(48px, 7.2vw, 112px);
-  font-weight: 400;
+  font-size: clamp(34px, 4.6vw, 68px);
+  font-weight: 900;
   line-height: 0.96;
   letter-spacing: -0.03em;
+  text-transform: uppercase;
   color: var(--color-text-light);
-  text-shadow: 0 4px 28px rgba(18, 14, 14, 0.8);
 }
 
-.cardWrap {
-  grid-column: 3 / 5;
-  grid-row: 2;
-  align-self: start;
-  position: relative;
-  z-index: 4;
-  margin-top: 32px;
+.heading :global(.serif-italic) {
+  color: var(--color-accent-brass);
+  font-weight: 700;
+  font-size: 1.08em;
+  text-transform: lowercase;
 }
 
-.burgundyCard {
-  background-color: var(--color-accent-burgundy);
-  padding: clamp(30px, 4.6vw, 66px) clamp(26px, 4.4vw, 70px);
+.textBlock {
+  padding: 28px;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-graphite);
+  border-left: 3px solid var(--color-accent-brass);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 18px;
-  border: 1px solid rgba(212, 163, 89, 0.18);
+  gap: 16px;
 }
 
 .lead {
-  font-size: clamp(19px, 1.65vw, 24px);
-  font-weight: 400;
+  font-size: clamp(16px, 1.3vw, 19px);
+  font-weight: 500;
   line-height: 1.6;
   color: var(--color-text-light);
 }
 
-.subCopy {
+.sub {
   font-size: 15px;
   line-height: 1.65;
-  color: rgba(247, 242, 236, 0.84);
+  color: var(--color-text-muted);
 }
 
 .btn {
@@ -81,39 +63,92 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 15px 44px;
+  min-height: 48px;
+  padding: 14px 34px;
   background-color: var(--color-accent-brass);
-  color: #120e0e;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  color: var(--color-text-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-radius: var(--radius-sharp);
-  transition: background-color 0.18s ease;
 }
 
 .btn:hover {
-  background-color: #e4b86e;
+  background-color: var(--color-accent-amber);
+}
+
+/* Scattered uncaptioned photo cluster */
+.scatterCol {
+  position: relative;
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 42px);
+}
+
+.photoMain {
+  grid-column: 3 / 11;
+  grid-row: 2 / 12;
+  z-index: 2;
+  overflow: hidden;
+  border: 1px solid var(--color-border-subtle);
+}
+
+.photoFloatTop {
+  grid-column: 1 / 6;
+  grid-row: 1 / 6;
+  z-index: 3;
+  overflow: hidden;
+  border: 1px solid var(--color-border-graphite);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.72);
+}
+
+.photoFloatBottom {
+  grid-column: 8 / 13;
+  grid-row: 7 / 13;
+  z-index: 3;
+  overflow: hidden;
+  border: 1px solid var(--color-border-graphite);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.72);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 1024px) {
   .container {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
-  .photoBox {
-    aspect-ratio: 16 / 11;
+  .scatterCol {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: 12px;
   }
 
-  .displayHeading {
-    margin-top: 28px;
-    text-align: left;
-    text-shadow: none;
+  .photoMain,
+  .photoFloatTop,
+  .photoFloatBottom {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 3 / 4;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .scatterCol {
+    grid-template-columns: 1fr;
   }
 
-  .cardWrap {
-    margin-top: 24px;
+  .photoMain,
+  .photoFloatTop,
+  .photoFloatBottom {
+    aspect-ratio: 16 / 10;
   }
 }

@@ -1,0 +1,53 @@
+/* Design tokens for ILAN Lounge Bar (based on Bakery.fig + ILAN interior palette) */
+
+:root {
+  /* Core palette (ILAN interior: burgundy velvet, dark wood, warm brass, light parchment) */
+  --color-bg-primary: #120e0e;
+  --color-bg-elevated: #1c1415;
+  --color-bg-card: #221718;
+
+  --color-accent-burgundy: #4a141e;
+  --color-accent-burgundy-deep: #2b0b11;
+  --color-accent-burgundy-hover: #631b28;
+  --color-accent-brass: #d4a359;
+  --color-accent-brass-muted: #925e3b;
+  --color-accent-terracotta: #8f3d29;
+
+  --color-surface-light: #f3ece4;
+  --color-surface-sand: #e8d8cc;
+
+  --color-text-light: #f7f2ec;
+  --color-text-muted: #b8a9a1;
+  --color-text-dark: #1c1415;
+  --color-text-dark-muted: #5c4a47;
+
+  --color-border-subtle: rgba(212, 163, 89, 0.22);
+  --color-border-strong: rgba(247, 242, 236, 0.35);
+  --color-border-dark: rgba(28, 20, 21, 0.16);
+
+  /* Layout metrics from Bakery.fig (1600px frame, 1343px outer, 1280px inner) */
+  --container-outer: 1343px;
+  --container-inner: 1280px;
+  --container-footer: 1170px;
+  --gutter-desktop: 30px;
+  --gutter-categories: 20px;
+  --page-pad: clamp(16px, 4vw, 60px);
+
+  /* Typography — Default Preset A (.fig): Roboto Condensed + Roboto */
+  --font-display: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Roboto', system-ui, -apple-system, sans-serif;
+
+  /* Radii from Bakery.fig */
+  --radius-sharp: 0px;
+  --radius-soft: 10px;
+  --radius-round: 9999px;
+
+  /* Spacing rhythm */
+  --section-gap: clamp(64px, 7.5vw, 128px);
+}
+
+/* Preset B (UI/UX Pro Max): Cormorant + Montserrat */
+html[data-font-preset='editorial'] {
+  --font-display: 'Cormorant', Georgia, serif;
+  --font-body: 'Montserrat', system-ui, -apple-system, sans-serif;
+}

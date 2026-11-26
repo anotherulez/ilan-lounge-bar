@@ -1,5 +1,5 @@
-import { ArrowRight } from 'lucide-react';
-import { GUEST_REVIEWS } from '../../data/reviews';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { REVIEW_SUMMARIES } from '../../data/reviews';
 import { VENUE } from '../../data/venue';
 import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import styles from './ReviewsSection.module.css';
@@ -22,20 +22,30 @@ export function ReviewsSection() {
             <span className={`${styles.score} tabular-nums`}>4.9</span>
             <div className={styles.ratingMeta}>
               <span>Яндекс Карты · 2ГИС</span>
-              <span>На основе оценок гостей</span>
+              <span>Свыше 900 реальных оценок гостей</span>
             </div>
           </div>
         </div>
 
         <div className={styles.grid}>
-          {GUEST_REVIEWS.map((review) => (
-            <article key={review.id} className={styles.card}>
-              <p className={styles.quote}>«{review.quote}»</p>
-              <div className={styles.meta}>
-                <span>{review.author}</span>
-                <span aria-hidden="true">·</span>
-                <span>{review.source}</span>
+          {REVIEW_SUMMARIES.map((item) => (
+            <article key={item.id} className={styles.card}>
+              <div className={styles.cardTop}>
+                <span className={styles.platform}>{item.platform}</span>
+                <span className={`${styles.cardScore} tabular-nums`}>
+                  {item.rating} · {item.countLabel}
+                </span>
               </div>
+              <p className={styles.summary}>{item.summary}</p>
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.cardLink}
+              >
+                <span>Читать на {item.platform}</span>
+                <ArrowUpRight size={14} strokeWidth={1.6} aria-hidden="true" />
+              </a>
             </article>
           ))}
         </div>

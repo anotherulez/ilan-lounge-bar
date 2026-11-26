@@ -73,6 +73,7 @@
 }
 
 .mapFrame {
+  position: relative;
   width: 100%;
   height: 400px;
   border-radius: 20px;
@@ -81,12 +82,64 @@
   background-color: var(--surface);
 }
 
-.mapIframe {
+.mapCanvas {
   width: 100%;
   height: 100%;
-  border: 0;
-  display: block;
-  filter: grayscale(100%) invert(92%) contrast(90%) brightness(85%);
+  background-color: var(--surface);
+}
+
+.mapCanvas :global(.leaflet-control-zoom) {
+  border: 1px solid var(--hairline) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+.mapCanvas :global(.leaflet-control-zoom a) {
+  background-color: var(--surface) !important;
+  color: var(--ink) !important;
+  border-bottom: 1px solid var(--hairline) !important;
+}
+
+.mapCanvas :global(.leaflet-control-zoom a:hover) {
+  background-color: var(--surface-hover) !important;
+}
+
+.mapCanvas :global(.leaflet-control-attribution) {
+  background: rgba(5, 5, 5, 0.72) !important;
+  color: var(--strip) !important;
+  font-size: 10px !important;
+}
+
+.mapCanvas :global(.leaflet-control-attribution a) {
+  color: var(--muted) !important;
+}
+
+.pinWrap {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.pinDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background-color: var(--pill);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px rgba(250, 250, 250, 0.45);
+}
+
+.pinTag {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background-color: rgba(5, 5, 5, 0.9);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
 }
 
 @media (max-width: 960px) {

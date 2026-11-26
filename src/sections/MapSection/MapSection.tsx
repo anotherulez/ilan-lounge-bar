@@ -1,13 +1,47 @@
+import { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import { ArrowUpRight } from 'lucide-react';
 import { VENUE } from '../../data/venue';
 import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import styles from './MapSection.module.css';
 
-const YANDEX_MAP_EMBED_URL =
-  'https://yandex.ru/map-widget/v1/?ll=60.600300%2C56.832100&z=16&pt=60.600300%2C56.832100,pm2rdm';
+const ILAN_COORDS: [number, number] = [56.8321, 60.6003];
 
 export function MapSection() {
   const { ref, visible } = useRevealOnScroll<HTMLElement>();
+  const mapHostRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const host = mapHostRef.current;
+    if (!host) return;
+
+    const map = L.map(host, {
+      center: ILAN_COORDS,
+      zoom: 16,
+      scrollWheelZoom: false,
+      attributionControl: true,
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      subdomains: 'abcd',
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+    }).addTo(map);
+
+    const markerIcon = L.divIcon({
+      className: styles.pinWrap,
+      html: `<span class="${styles.pinDot}"></span><span class="${styles.pinTag}">ILAN · 8 Марта, 31</span>`,
+      iconSize: [140, 32],
+      iconAnchor: [12, 16],
+    });
+
+    L.marker(ILAN_COORDS, { icon: markerIcon }).addTo(map);
+
+    return () => {
+      map.remove();
+    };
+  }, []);
 
   return (
     <section
@@ -49,12 +83,10 @@ export function MapSection() {
         </div>
 
         <div className={styles.mapFrame}>
-          <iframe
-            src={YANDEX_MAP_EMBED_URL}
-            title="Карта проезда ILAN Lounge Bar — Екатеринбург, ул. 8 Марта, 31"
-            className={styles.mapIframe}
-            loading="lazy"
-            allowFullScreen
+          <div
+            ref={mapHostRef}
+            className={styles.mapCanvas}
+            aria-label="Интерактивная карта: Екатеринбург, ул. 8 Марта, 31"
           />
         </div>
       </div>

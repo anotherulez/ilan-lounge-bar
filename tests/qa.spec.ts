@@ -96,21 +96,22 @@ test.describe('ILAN Luxury Minimalist v3 Audit', () => {
     await page.waitForTimeout(200);
     expect(await news.locator('img').count()).toBe(6);
 
-    // Reviews section ("Отзывы" + 4.9)
+    // Reviews section ("Отзывы" + real platform counts, no fabricated quotes)
     const reviews = page.locator('#reviews');
     await reviews.scrollIntoViewIfNeeded();
     await page.waitForTimeout(250);
     await expect(reviews).toContainText('4.9');
-    await expect(reviews).toContainText('Яндекс Карты · 2ГИС');
+    await expect(reviews).toContainText('497 оценок');
+    await expect(reviews).toContainText('413 оценок');
     await expect(reviews.locator('article')).toHaveCount(3);
     await reviews.screenshot({ path: path.join(outDir, 'reviews-1440.png') });
 
-    // Dark Map section ("Как найти")
+    // Ad-free Dark Map section ("Как найти") via Leaflet
     const mapSection = page.locator('#location');
     await mapSection.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(600);
-    const mapIframe = mapSection.locator('iframe');
-    await expect(mapIframe).toBeVisible();
+    await page.waitForTimeout(1000);
+    await expect(mapSection.locator('iframe')).toHaveCount(0);
+    await expect(mapSection.locator('.leaflet-container')).toBeVisible();
     await mapSection.screenshot({ path: path.join(outDir, 'map-1440.png') });
 
     // Booking modal & form

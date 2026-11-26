@@ -61,23 +61,50 @@
   border-radius: var(--radius-soft);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
 }
 
-.quote {
+.cardTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.platform {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.cardScore {
+  font-size: 13px;
+  color: var(--strip);
+}
+
+.summary {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.65;
   color: var(--muted);
 }
 
-.meta {
-  display: flex;
+.cardLink {
+  margin-top: auto;
+  padding-top: 8px;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 13px;
-  color: var(--strip);
+  font-weight: 500;
+  color: var(--ink);
+  transition: opacity 0.2s var(--ease-lux);
+}
+
+.cardLink:hover {
+  opacity: 0.75;
 }
 
 .allLink {

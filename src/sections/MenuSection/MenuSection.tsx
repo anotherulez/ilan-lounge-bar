@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
 import { PerspectiveMenuStrip } from '../../components/PerspectiveMenuStrip/PerspectiveMenuStrip';
+import { SectionKicker } from '../../components/SectionKicker/SectionKicker';
 import { TiltedCard } from '../../components/TiltedCard/TiltedCard';
 import { useCart } from '../../context/CartContext';
 import { MENU_CATEGORIES, type MenuCategoryId } from '../../data/menu';
@@ -16,8 +17,11 @@ export function MenuSection() {
   return (
     <section id="menu" className={styles.section}>
       <div className={styles.container}>
+        <SectionKicker index="04" label="КУХНЯ И БАР" ghostWord="КУХНЯ" />
         <div className={styles.headerRow}>
-          <h2 className={styles.heading}>МЕНЮ</h2>
+          <h2 className={styles.heading}>
+            МЕНЮ <span className="serif-italic">к столу</span>
+          </h2>
           <p className={styles.subtitle}>
             Готовим до последнего гостя.{' '}
             <a

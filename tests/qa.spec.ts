@@ -64,8 +64,13 @@ test.describe('ILAN Lounge Bar QA', () => {
     expect(headerText).not.toMatch(/АТМОСФЕРА|PS5|ОТЗЫВЫ/i);
     expect(headerText).toMatch(/VIP/i);
 
-    // Reviews section removed
+    // Reviews section removed and pure black background on Booking
     await expect(page.locator('#reviews')).toHaveCount(0);
+    await expect(page.locator('main')).not.toContainText(/без пафоса/i);
+    const bookingBg = await page
+      .locator('#booking')
+      .evaluate((el) => getComputedStyle(el).backgroundColor);
+    expect(bookingBg).toBe('rgb(5, 5, 5)');
 
     // Lightbox open, next photo, Escape close
     await page.locator('header a[href="#gallery"]').click();

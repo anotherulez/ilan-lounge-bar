@@ -44,7 +44,7 @@
   position: fixed;
   inset: 0;
   z-index: 85;
-  background-color: rgba(5, 5, 7, 0.72);
+  background-color: rgba(5, 5, 5, 0.78);
   display: flex;
   justify-content: flex-end;
 }

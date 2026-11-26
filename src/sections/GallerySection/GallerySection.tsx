@@ -3,8 +3,11 @@ import { motion, useReducedMotion } from 'motion/react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { GALLERY_PHOTOS } from '../../data/venue';
 import { Reveal } from '../../components/Reveal/Reveal';
+import { SectionKicker } from '../../components/SectionKicker/SectionKicker';
 import { TiltedCard } from '../../components/TiltedCard/TiltedCard';
 import styles from './GallerySection.module.css';
+
+const SCATTER_TILTS = [-2.2, 1.8, -1.4, 2.5, 1.5, -2.4, 1.9, -1.6];
 
 export function GallerySection() {
   const prefersReduced = useReducedMotion();
@@ -40,7 +43,10 @@ export function GallerySection() {
     <section id="gallery" className={styles.section}>
       <Reveal>
         <div className={styles.container}>
-          <h2 className={styles.heading}>ВНУТРИ БАРА</h2>
+          <SectionKicker index="02" label="ЗАЛ И СВЕТ" ghostWord="ВНУТРИ" />
+          <h2 className={styles.heading}>
+            ВНУТРИ <span className="serif-italic">живого</span> ILAN.
+          </h2>
 
           {/* 3D Isometric Photo Wall */}
           <div className={styles.marqueeShell} aria-hidden="true">
@@ -76,23 +82,25 @@ export function GallerySection() {
             <div className={styles.marqueeVignette} />
           </div>
 
-          {/* Uncaptioned scattered asymmetric 3D photo mosaic */}
+          {/* Uncaptioned scattered asymmetric 3D photo constellation */}
           <div className={styles.scatterGrid}>
             {GALLERY_PHOTOS.slice(0, 8).map((photo, idx) => (
-              <TiltedCard
+              <motion.div
                 key={photo.id}
-                maxTilt={8}
                 className={`${styles.scatterItem} ${styles[`slot_${idx % 4}`]}`}
+                style={{ rotate: SCATTER_TILTS[idx % SCATTER_TILTS.length] }}
               >
-                <button
-                  type="button"
-                  className={styles.photoBtn}
-                  onClick={() => setLightboxIndex(idx)}
-                  aria-label={`Увеличить фото: ${photo.alt}`}
-                >
-                  <img src={photo.src} alt={photo.alt} className={styles.gridImg} />
-                </button>
-              </TiltedCard>
+                <TiltedCard maxTilt={8}>
+                  <button
+                    type="button"
+                    className={styles.photoBtn}
+                    onClick={() => setLightboxIndex(idx)}
+                    aria-label={`Увеличить фото: ${photo.alt}`}
+                  >
+                    <img src={photo.src} alt={photo.alt} className={styles.gridImg} />
+                  </button>
+                </TiltedCard>
+              </motion.div>
             ))}
           </div>
         </div>

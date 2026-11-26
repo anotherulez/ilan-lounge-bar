@@ -1,25 +1,26 @@
 .section {
   padding: var(--section-gap) var(--page-pad) 0;
+  overflow: hidden;
 }
 
 .container {
   max-width: var(--container-outer);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  align-items: center;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+  align-items: start;
   gap: clamp(32px, 5vw, 72px);
 }
 
 .copyCol {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
 }
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(34px, 4.6vw, 68px);
+  font-size: clamp(34px, 4.5vw, 66px);
   font-weight: 900;
   line-height: 0.96;
   letter-spacing: -0.03em;
@@ -30,7 +31,7 @@
 .heading :global(.serif-italic) {
   color: var(--color-accent-brass);
   font-weight: 700;
-  font-size: 1.08em;
+  font-size: 1.12em;
   text-transform: lowercase;
 }
 
@@ -46,7 +47,7 @@
 }
 
 .lead {
-  font-size: clamp(16px, 1.3vw, 19px);
+  font-size: clamp(16px, 1.3vw, 18px);
   font-weight: 500;
   line-height: 1.6;
   color: var(--color-text-light);
@@ -77,45 +78,37 @@
   background-color: var(--color-accent-amber);
 }
 
-/* Scattered uncaptioned photo cluster */
-.scatterCol {
-  position: relative;
-  min-height: 560px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 42px);
+.photoUnderText {
+  width: min(290px, 75%);
+  aspect-ratio: 4 / 3;
+  align-self: flex-end;
+  margin-top: 10px;
 }
 
-.photoMain {
+.scatterField {
+  position: relative;
+  min-height: 640px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(14, 42px);
+}
+
+.photoPrimary {
   grid-column: 3 / 11;
   grid-row: 2 / 12;
   z-index: 2;
-  overflow: hidden;
-  border: 1px solid var(--color-border-subtle);
 }
 
-.photoFloatTop {
+.photoTopLeft {
   grid-column: 1 / 6;
   grid-row: 1 / 6;
   z-index: 3;
-  overflow: hidden;
-  border: 1px solid var(--color-border-graphite);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.72);
 }
 
-.photoFloatBottom {
+.photoBottomRight {
   grid-column: 8 / 13;
-  grid-row: 7 / 13;
+  grid-row: 9 / 15;
   z-index: 3;
-  overflow: hidden;
-  border: 1px solid var(--color-border-graphite);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.72);
-}
-
-.img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 @media (max-width: 1024px) {
@@ -123,32 +116,40 @@
     grid-template-columns: 1fr;
   }
 
-  .scatterCol {
-    min-height: 0;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: none;
-    gap: 12px;
+  .photoUnderText {
+    width: min(280px, 85%);
+    align-self: flex-start;
   }
 
-  .photoMain,
-  .photoFloatTop,
-  .photoFloatBottom {
+  .scatterField {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: 16px;
+  }
+
+  .photoPrimary,
+  .photoTopLeft,
+  .photoBottomRight {
     grid-column: auto;
     grid-row: auto;
-    aspect-ratio: 3 / 4;
-    box-shadow: none;
+    aspect-ratio: 4 / 3;
+  }
+
+  .photoBottomRight {
+    grid-column: span 2;
+    aspect-ratio: 16 / 9;
   }
 }
 
 @media (max-width: 560px) {
-  .scatterCol {
-    grid-template-columns: 1fr;
+  .photoUnderText {
+    width: 100%;
+    aspect-ratio: 16 / 10;
   }
 
-  .photoMain,
-  .photoFloatTop,
-  .photoFloatBottom {
-    aspect-ratio: 16 / 10;
+  .scatterField {
+    gap: 12px;
   }
 }

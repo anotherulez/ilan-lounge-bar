@@ -1,10 +1,10 @@
-/* Obsidian + Smoked Graphite + Warm Brass-Amber palette (zero red) */
+/* Pure Obsidian Black + Neutral Charcoal + Warm Brass palette (zero red, zero blue tint) */
 
 :root {
-  --color-bg-primary: #09090b;
-  --color-bg-elevated: #121216;
-  --color-bg-card: #18181e;
-  --color-bg-contrast: #1e1e26;
+  --color-bg-primary: #050505;
+  --color-bg-elevated: #0c0c0c;
+  --color-bg-card: #131313;
+  --color-bg-contrast: #1a1a1a;
 
   --color-accent-brass: #d4a359;
   --color-accent-amber: #e2b56c;
@@ -13,31 +13,29 @@
   --color-surface-light: #f2eee6;
 
   --color-text-light: #f5f2eb;
-  --color-text-muted: #a6a4ae;
-  --color-text-dark: #0e0e12;
+  --color-text-muted: #a8a399;
+  --color-text-dark: #0d0d0d;
 
-  --color-border-subtle: rgba(212, 163, 89, 0.22);
-  --color-border-strong: rgba(245, 242, 235, 0.34);
-  --color-border-graphite: rgba(255, 255, 255, 0.1);
+  --color-border-subtle: rgba(212, 163, 89, 0.24);
+  --color-border-strong: rgba(245, 242, 235, 0.3);
+  --color-border-graphite: rgba(255, 255, 255, 0.11);
 
   --container-outer: 1360px;
   --container-inner: 1280px;
   --page-pad: clamp(16px, 4vw, 56px);
 
-  /* Aggressive display Montserrat 800-900 + Cormorant 700 accents */
   --font-display: 'Montserrat', system-ui, -apple-system, sans-serif;
   --font-serif: 'Cormorant', Georgia, serif;
   --font-body: 'Montserrat', system-ui, -apple-system, sans-serif;
 
-  /* Motion tokens (animation-systems skill) */
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-micro: 160ms;
   --dur-ui: 240ms;
   --dur-reveal: 620ms;
 
   --radius-sharp: 0px;
-  --radius-soft: 8px;
+  --radius-soft: 6px;
   --radius-round: 9999px;
 
-  --section-gap: clamp(72px, 8vw, 136px);
+  --section-gap: clamp(78px, 8.5vw, 144px);
 }

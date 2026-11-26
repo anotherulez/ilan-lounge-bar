@@ -1,6 +1,6 @@
 .band {
   margin-top: clamp(72px, 7vw, 120px);
-  background: linear-gradient(180deg, var(--color-bg-elevated) 0%, #101015 100%);
+  background-color: var(--color-bg-primary);
   border-top: 1px solid var(--color-border-subtle);
   border-bottom: 1px solid var(--color-border-graphite);
   padding: clamp(56px, 6vw, 92px) var(--page-pad);
@@ -29,6 +29,28 @@
   letter-spacing: -0.025em;
   text-transform: uppercase;
   color: var(--color-text-light);
+}
+
+.heading :global(.serif-italic) {
+  color: var(--color-accent-brass);
+  font-size: 1.08em;
+  text-transform: lowercase;
+}
+
+.bookingPhotos {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 18px;
+  align-items: end;
+}
+
+.photoLeft {
+  aspect-ratio: 4 / 3;
+}
+
+.photoRight {
+  aspect-ratio: 3 / 4;
 }
 
 .sub {

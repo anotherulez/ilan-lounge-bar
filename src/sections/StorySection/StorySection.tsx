@@ -1,85 +1,67 @@
-import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { Magnet } from '../../components/Magnet/Magnet';
 import { Reveal } from '../../components/Reveal/Reveal';
-import { TiltedCard } from '../../components/TiltedCard/TiltedCard';
+import { ScatteredPhoto } from '../../components/ScatteredPhoto/ScatteredPhoto';
+import { SectionKicker } from '../../components/SectionKicker/SectionKicker';
 import styles from './StorySection.module.css';
 
 export function StorySection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const prefersReduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const ySlow = useTransform(scrollYProgress, [0, 1], [34, -34]);
-  const yFast = useTransform(scrollYProgress, [0, 1], [-24, 38]);
-
   return (
-    <section id="about" className={styles.section} ref={sectionRef}>
+    <section id="about" className={styles.section}>
       <Reveal>
         <div className={styles.container}>
           <div className={styles.copyCol}>
+            <SectionKicker index="01" label="ПОСЛЕ РАБОТЫ" ghostWord="8 МАРТА 31" />
             <h2 className={styles.heading}>
-              СЮДА ПРИХОДЯТ НЕ НА{' '}
-              <span className="serif-italic">экскурсию</span> ПО ИНТЕРЬЕРУ.
+              ЗАЕХАТЬ ПОЗДНО. <span className="serif-italic">остаться</span> ДО УТРА.
             </h2>
 
             <div className={styles.textBlock}>
               <p className={styles.lead}>
-                Выдохнуть после работы, съесть тарелку горячего борща в три ночи и поспорить с
-                друзьями за геймпадом. Без показной важности и лишних правил.
+                Сюда заходят съесть тарелку горячего борща в три ночи, разлить чай на свече в
+                армуды или засесть компанией за приставкой.
               </p>
               <p className={styles.sub}>
-                Нас легко найти на 8 Марта, 31 в пяти минутах от метро, а дальше вы сами решите,
-                уйти через час или остаться до утра.
+                Кухня готовит до закрытия дверей, а до метро «Геологическая» и «Площадь 1905 года»
+                пять минут пешком.
               </p>
-              <a href="#menu" className={styles.btn}>
-                Выбрать блюда
-              </a>
+              <Magnet>
+                <a href="#menu" className={styles.btn}>
+                  Смотреть меню
+                </a>
+              </Magnet>
             </div>
+
+            <ScatteredPhoto
+              src="/images/tea-kettle.jpg"
+              alt="Чайник на свече и армуды в зале ILAN"
+              className={styles.photoUnderText}
+              drift={24}
+              tiltDeg={-2.2}
+            />
           </div>
 
-          {/* Scattered uncaptioned real ILAN photos with scroll-linked 3D parallax */}
-          <div className={styles.scatterCol}>
-            <motion.div
-              className={styles.photoMain}
-              style={prefersReduced ? undefined : { y: ySlow }}
-            >
-              <TiltedCard maxTilt={6}>
-                <img
-                  src="/images/ilan-sign-lamp.jpg"
-                  alt="Вывеска ILAN и лампа"
-                  className={styles.img}
-                />
-              </TiltedCard>
-            </motion.div>
-
-            <motion.div
-              className={styles.photoFloatTop}
-              style={prefersReduced ? undefined : { y: yFast }}
-            >
-              <TiltedCard maxTilt={8}>
-                <img
-                  src="/images/lounge-candles.webp"
-                  alt="Вечерний столик со свечами"
-                  className={styles.img}
-                />
-              </TiltedCard>
-            </motion.div>
-
-            <motion.div
-              className={styles.photoFloatBottom}
-              style={prefersReduced ? undefined : { y: yFast }}
-            >
-              <TiltedCard maxTilt={7}>
-                <img
-                  src="/images/interior-velvet.webp"
-                  alt="Зал бара ILAN"
-                  className={styles.img}
-                />
-              </TiltedCard>
-            </motion.div>
+          <div className={styles.scatterField}>
+            <ScatteredPhoto
+              src="/images/ilan-sign-lamp.jpg"
+              alt="Вывеска ILAN и лампа"
+              className={styles.photoPrimary}
+              drift={36}
+              tiltDeg={1.4}
+            />
+            <ScatteredPhoto
+              src="/images/lounge-candles.webp"
+              alt="Вечерний столик со свечами"
+              className={styles.photoTopLeft}
+              drift={-22}
+              tiltDeg={-3.2}
+            />
+            <ScatteredPhoto
+              src="/images/interior-velvet.webp"
+              alt="Зал бара ILAN"
+              className={styles.photoBottomRight}
+              drift={-30}
+              tiltDeg={2.8}
+            />
           </div>
         </div>
       </Reveal>

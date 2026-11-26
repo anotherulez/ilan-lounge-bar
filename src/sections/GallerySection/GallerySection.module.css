@@ -1,5 +1,6 @@
 .section {
   padding: var(--section-gap) var(--page-pad) 0;
+  overflow: hidden;
 }
 
 .container {
@@ -9,12 +10,18 @@
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 72px);
+  font-size: clamp(36px, 4.9vw, 72px);
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--color-text-light);
+}
+
+.heading :global(.serif-italic) {
+  color: var(--color-accent-brass);
+  font-size: 1.12em;
+  text-transform: lowercase;
 }
 
 .marqueeShell {
@@ -62,16 +69,16 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(9, 9, 11, 0.85) 0%, transparent 25%, transparent 72%, rgba(9, 9, 11, 0.94) 100%),
-    linear-gradient(90deg, rgba(9, 9, 11, 0.72) 0%, transparent 18%, transparent 82%, rgba(9, 9, 11, 0.72) 100%);
+    linear-gradient(180deg, rgba(5, 5, 5, 0.88) 0%, transparent 25%, transparent 72%, rgba(5, 5, 5, 0.95) 100%),
+    linear-gradient(90deg, rgba(5, 5, 5, 0.75) 0%, transparent 18%, transparent 82%, rgba(5, 5, 5, 0.75) 100%);
 }
 
-/* Scattered uncaptioned asymmetric photo grid */
+/* Scattered uncaptioned asymmetric photo constellation */
 .scatterGrid {
-  margin-top: 36px;
+  margin-top: 44px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 22px;
+  gap: 28px;
   align-items: start;
 }
 
@@ -80,11 +87,15 @@
 }
 
 .slot_1 {
-  margin-top: 28px;
+  margin-top: 38px;
+}
+
+.slot_2 {
+  margin-top: -12px;
 }
 
 .slot_3 {
-  margin-top: 18px;
+  margin-top: 26px;
 }
 
 .photoBtn {
@@ -95,6 +106,7 @@
   border: 1px solid var(--color-border-graphite);
   background-color: var(--color-bg-elevated);
   overflow: hidden;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.78);
 }
 
 .slot_1 .photoBtn,
@@ -118,7 +130,7 @@
   position: fixed;
   inset: 0;
   z-index: 90;
-  background-color: rgba(7, 7, 9, 0.94);
+  background-color: rgba(5, 5, 5, 0.95);
   padding: 24px var(--page-pad);
   display: flex;
   align-items: center;
@@ -153,7 +165,7 @@
   width: 100%;
   max-height: 74vh;
   object-fit: contain;
-  background-color: #050507;
+  background-color: #050505;
 }
 
 .lightboxBar {
@@ -193,9 +205,11 @@
 @media (max-width: 1024px) {
   .scatterGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
   }
 
   .slot_1,
+  .slot_2,
   .slot_3 {
     margin-top: 0;
   }

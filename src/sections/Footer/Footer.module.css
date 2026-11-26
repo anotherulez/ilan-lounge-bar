@@ -1,5 +1,5 @@
 .footer {
-  background-color: #060608;
+  background-color: var(--color-bg-primary);
   border-top: 1px solid var(--color-border-graphite);
   padding: clamp(56px, 5.5vw, 84px) var(--page-pad) 92px;
 }

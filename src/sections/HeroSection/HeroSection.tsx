@@ -1,8 +1,17 @@
-import { motion, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
+import { useRef } from 'react';
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'motion/react';
 import { Magnet } from '../../components/Magnet/Magnet';
 import styles from './HeroSection.module.css';
 
 export function HeroSection() {
+  const heroRef = useRef<HTMLElement>(null);
   const prefersReduced = useReducedMotion();
   const shiftX = useMotionValue(0);
   const shiftY = useMotionValue(0);
@@ -13,6 +22,13 @@ export function HeroSection() {
   const springY = useSpring(shiftY, { stiffness: 80, damping: 24 });
   const springRotX = useSpring(rotX, { stiffness: 80, damping: 24 });
   const springRotY = useSpring(rotY, { stiffness: 80, damping: 24 });
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+  const lineTopDrift = useTransform(scrollYProgress, [0, 1], [0, -32]);
+  const lineBottomDrift = useTransform(scrollYProgress, [0, 1], [0, 32]);
 
   function handlePointerMove(e: React.PointerEvent<HTMLElement>) {
     if (prefersReduced || e.pointerType !== 'mouse') return;
@@ -35,6 +51,7 @@ export function HeroSection() {
   return (
     <section
       id="top"
+      ref={heroRef}
       className={styles.heroCanvas}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
@@ -62,30 +79,39 @@ export function HeroSection() {
 
       <div className={styles.centerStage}>
         <h1 className={styles.title}>
-          <span className={styles.maskLine}>
+          <motion.span
+            className={`${styles.maskLine} ${styles.lineTop}`}
+            style={prefersReduced ? undefined : { x: lineTopDrift }}
+          >
             <motion.span
               className={styles.lineInner}
               initial={prefersReduced ? false : { y: '100%' }}
               animate={{ y: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              ПОСЛЕ ШЕСТИ.
+              УЖИН <span className={styles.serifBridge}>после</span> ПОЛУНОЧИ
             </motion.span>
-          </span>
-          <span className={styles.maskLine}>
+          </motion.span>
+
+          <motion.span
+            className={`${styles.maskLine} ${styles.lineBottom}`}
+            style={prefersReduced ? undefined : { x: lineBottomDrift }}
+          >
             <motion.span
-              className={`${styles.lineInner} ${styles.accentLine}`}
+              className={styles.lineInner}
               initial={prefersReduced ? false : { y: '100%' }}
               animate={{ y: 0 }}
               transition={{ duration: 0.75, delay: 0.09, ease: [0.16, 1, 0.3, 1] }}
             >
-              БЕЗ ПАФОСА.
+              <span className={styles.strokeWord}>ILAN</span> ДО{' '}
+              <span className={`${styles.accentLine} tabular-nums`}>04:00</span>
             </motion.span>
-          </span>
+          </motion.span>
         </h1>
 
         <p className={styles.lead}>
-          Кормим пловом и бургерами до четырёх утра, наливаем за стойкой и не стоим над душой.
+          Подаём горячий плов и бургеры ночью, завариваем чай на свече и держим закрытый VIP на
+          8 Марта, 31.
         </p>
 
         <div className={styles.actions}>

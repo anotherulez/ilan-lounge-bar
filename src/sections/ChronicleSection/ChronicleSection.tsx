@@ -1,4 +1,5 @@
 import { Reveal } from '../../components/Reveal/Reveal';
+import { SectionKicker } from '../../components/SectionKicker/SectionKicker';
 import { TiltedCard } from '../../components/TiltedCard/TiltedCard';
 import { CHRONICLE_ITEMS } from '../../data/chronicle';
 import { VENUE } from '../../data/venue';
@@ -9,9 +10,10 @@ export function ChronicleSection() {
     <section id="chronicle" className={styles.section}>
       <Reveal>
         <div className={styles.container}>
+          <SectionKicker index="05" label="НОЧЬ" ghostWord="ПОСЛЕ 23" />
           <div className={styles.headerRow}>
             <h2 className={styles.heading}>
-              ВЕЧЕРА В <span className="serif-italic">ILAN</span>
+              ВЕЧЕРА <span className="serif-italic">внутри</span>
             </h2>
             <a
               href={VENUE.links.vk}

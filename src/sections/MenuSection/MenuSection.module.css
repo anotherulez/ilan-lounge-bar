@@ -25,6 +25,12 @@
   color: var(--color-text-light);
 }
 
+.heading :global(.serif-italic) {
+  color: var(--color-accent-brass);
+  font-size: 1.08em;
+  text-transform: lowercase;
+}
+
 .subtitle {
   max-width: 300px;
   font-size: 14px;
@@ -129,7 +135,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 10;
-  background-color: #0b0b0e;
+  background-color: var(--color-bg-primary);
 }
 
 .plateImg {
@@ -143,7 +149,7 @@
   top: 10px;
   right: 10px;
   padding: 4px 8px;
-  background-color: rgba(9, 9, 11, 0.85);
+  background-color: rgba(5, 5, 5, 0.88);
   border: 1px solid var(--color-border-graphite);
   font-size: 11px;
   font-weight: 600;

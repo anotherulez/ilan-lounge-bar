@@ -29,7 +29,7 @@ export function App() {
         <Header onOpenMobileMenu={() => setMobileMenuOpen(true)} />
         <main>
           <HeroSection />
-          <ScrollVelocityStrip text="8 МАРТА 31 • ДО 04:00 • КУХНЯ НОЧЬЮ • VIP С PS5 • БЕЗ ПАФОСА" />
+          <ScrollVelocityStrip text="8 МАРТА 31 • ДО 04:00 • ПЛОВ В ТРИ НОЧИ • ЗАКРЫТЫЙ VIP • ЕКАТЕРИНБУРГ" />
           <StorySection />
           <GallerySection />
           <FeatureHighlightSection />

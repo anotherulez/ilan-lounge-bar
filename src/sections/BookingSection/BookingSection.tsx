@@ -1,4 +1,6 @@
 import { useState, type FormEvent } from 'react';
+import { ScatteredPhoto } from '../../components/ScatteredPhoto/ScatteredPhoto';
+import { SectionKicker } from '../../components/SectionKicker/SectionKicker';
 import { useCart } from '../../context/CartContext';
 import { VENUE } from '../../data/venue';
 import styles from './BookingSection.module.css';
@@ -35,11 +37,13 @@ export function BookingSection() {
     <section id="booking" className={styles.band}>
       <div className={styles.container}>
         <div className={styles.infoCol}>
+          <SectionKicker index="06" label="РЕЗЕРВ" ghostWord="СТОЛ" />
           <h2 className={styles.heading}>
-            ЗАБРАТЬ <span className="serif-italic">СТОЛ</span>
+            ЗАБРАТЬ <span className="serif-italic">свой</span> СТОЛ.
           </h2>
           <p className={styles.sub}>
-            Без анкет на три листа. Оставьте номер, перезвоним сами. Если нужно срочно, наберите{' '}
+            Выберите время и количество гостей, перезвоним сами. Если заезжаете через полчаса,
+            звоните напрямую{' '}
             <a href={VENUE.phoneHref} className={styles.phoneLink}>
               {VENUE.phoneDisplay}
             </a>
@@ -48,6 +52,23 @@ export function BookingSection() {
           <p className={styles.addressNote}>
             {VENUE.city}, {VENUE.address} · {VENUE.hours}
           </p>
+
+          <div className={styles.bookingPhotos}>
+            <ScatteredPhoto
+              src="/images/facade-night.jpg"
+              alt="Вход в ILAN вечером на улице 8 Марта, 31"
+              className={styles.photoLeft}
+              drift={18}
+              tiltDeg={-2.2}
+            />
+            <ScatteredPhoto
+              src="/images/ilan-sign-dark.jpg"
+              alt="Вывеска ILAN в полумраке"
+              className={styles.photoRight}
+              drift={-16}
+              tiltDeg={2.4}
+            />
+          </div>
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>

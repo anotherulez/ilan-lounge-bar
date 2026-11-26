@@ -1,14 +1,14 @@
-/* Pure Obsidian Black + Neutral Charcoal + Warm Brass palette (zero red, zero blue tint) */
+/* Pure Obsidian Black + Neutral Charcoal + Warm Bronze-Brass palette */
 
 :root {
   --color-bg-primary: #050505;
   --color-bg-elevated: #0c0c0c;
-  --color-bg-card: #131313;
-  --color-bg-contrast: #1a1a1a;
+  --color-bg-card: #121212;
+  --color-bg-contrast: #191919;
 
-  --color-accent-brass: #d4a359;
-  --color-accent-amber: #e2b56c;
-  --color-accent-bronze: #8b6a3b;
+  --color-accent-brass: #c99a54;
+  --color-accent-amber: #dbad68;
+  --color-accent-bronze: #85663a;
 
   --color-surface-light: #f2eee6;
 
@@ -16,26 +16,33 @@
   --color-text-muted: #a8a399;
   --color-text-dark: #0d0d0d;
 
-  --color-border-subtle: rgba(212, 163, 89, 0.24);
-  --color-border-strong: rgba(245, 242, 235, 0.3);
-  --color-border-graphite: rgba(255, 255, 255, 0.11);
+  --color-border-subtle: rgba(201, 154, 84, 0.24);
+  --color-border-strong: rgba(245, 242, 235, 0.28);
+  --color-border-graphite: rgba(255, 255, 255, 0.1);
 
-  --container-outer: 1360px;
-  --container-inner: 1280px;
-  --page-pad: clamp(16px, 4vw, 56px);
+  /* 3-tier layout containers */
+  --container-standard: 1160px;
+  --container-wide: 1520px;
+  --container-outer: 1520px;
+  --container-inner: 1160px;
+  --page-pad: clamp(18px, 4.2vw, 64px);
 
+  /* Typography */
   --font-display: 'Montserrat', system-ui, -apple-system, sans-serif;
   --font-serif: 'Cormorant', Georgia, serif;
   --font-body: 'Montserrat', system-ui, -apple-system, sans-serif;
 
+  /* Differentiated vertical rhythm */
+  --gap-tight: clamp(48px, 5vw, 84px);
+  --gap-editorial: clamp(72px, 7.5vw, 120px);
+  --section-gap: clamp(64px, 6.5vw, 108px);
+
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-micro: 160ms;
-  --dur-ui: 240ms;
-  --dur-reveal: 620ms;
+  --dur-micro: 180ms;
+  --dur-ui: 360ms;
+  --dur-reveal: 750ms;
 
   --radius-sharp: 0px;
-  --radius-soft: 6px;
+  --radius-soft: 4px;
   --radius-round: 9999px;
-
-  --section-gap: clamp(78px, 8.5vw, 144px);
 }

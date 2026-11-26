@@ -1,22 +1,19 @@
 import { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { GALLERY_PHOTOS } from '../../data/venue';
-import { Reveal } from '../../components/Reveal/Reveal';
 import { SectionKicker } from '../../components/SectionKicker/SectionKicker';
-import { TiltedCard } from '../../components/TiltedCard/TiltedCard';
+import { GALLERY_PHOTOS } from '../../data/venue';
 import styles from './GallerySection.module.css';
 
-const SCATTER_TILTS = [-2.2, 1.8, -1.4, 2.5, 1.5, -2.4, 1.9, -1.6];
+const EDITORIAL_FRAMES = [
+  { photo: GALLERY_PHOTOS[0], role: 'spanWide', chapter: '01 — Свет' },
+  { photo: GALLERY_PHOTOS[2], role: 'tall', chapter: '02 — Зал' },
+  { photo: GALLERY_PHOTOS[7], role: 'standard', chapter: '03 — Подача' },
+  { photo: GALLERY_PHOTOS[10], role: 'standard', chapter: '04 — Фасад' },
+  { photo: GALLERY_PHOTOS[8], role: 'standard', chapter: '05 — Детали' },
+];
 
 export function GallerySection() {
-  const prefersReduced = useReducedMotion();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  const col1 = [GALLERY_PHOTOS[0], GALLERY_PHOTOS[3], GALLERY_PHOTOS[6], GALLERY_PHOTOS[9]];
-  const col2 = [GALLERY_PHOTOS[1], GALLERY_PHOTOS[4], GALLERY_PHOTOS[7], GALLERY_PHOTOS[10]];
-  const col3 = [GALLERY_PHOTOS[2], GALLERY_PHOTOS[5], GALLERY_PHOTOS[8], GALLERY_PHOTOS[0]];
-  const columns = [col1, col2, col3];
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -41,70 +38,36 @@ export function GallerySection() {
 
   return (
     <section id="gallery" className={styles.section}>
-      <Reveal>
-        <div className={styles.container}>
-          <SectionKicker index="02" label="ЗАЛ И СВЕТ" ghostWord="ВНУТРИ" />
-          <h2 className={styles.heading}>
-            ВНУТРИ <span className="serif-italic">живого</span> ILAN.
-          </h2>
-
-          {/* 3D Isometric Photo Wall */}
-          <div className={styles.marqueeShell} aria-hidden="true">
-            <div className={styles.marqueePlane}>
-              {columns.map((col, colIdx) => (
-                <motion.div
-                  key={colIdx}
-                  className={styles.marqueeCol}
-                  animate={
-                    prefersReduced
-                      ? undefined
-                      : { y: colIdx % 2 === 0 ? [-28, 28] : [28, -28] }
-                  }
-                  transition={
-                    prefersReduced
-                      ? undefined
-                      : {
-                          duration: colIdx === 1 ? 14 : 11,
-                          repeat: Infinity,
-                          repeatType: 'reverse',
-                          ease: 'easeInOut',
-                        }
-                  }
-                >
-                  {col.map((photo, idx) => (
-                    <div key={`${colIdx}-${idx}`} className={styles.marqueeTile}>
-                      <img src={photo.src} alt="" className={styles.marqueeImg} />
-                    </div>
-                  ))}
-                </motion.div>
-              ))}
-            </div>
-            <div className={styles.marqueeVignette} />
+      <div className={styles.container}>
+        <div className={styles.headerRow}>
+          <div>
+            <SectionKicker index="02" label="ПРОСТРАНСТВО" />
+            <h2 className={styles.heading}>ВНУТРИ БАРА</h2>
           </div>
-
-          {/* Uncaptioned scattered asymmetric 3D photo constellation */}
-          <div className={styles.scatterGrid}>
-            {GALLERY_PHOTOS.slice(0, 8).map((photo, idx) => (
-              <motion.div
-                key={photo.id}
-                className={`${styles.scatterItem} ${styles[`slot_${idx % 4}`]}`}
-                style={{ rotate: SCATTER_TILTS[idx % SCATTER_TILTS.length] }}
-              >
-                <TiltedCard maxTilt={8}>
-                  <button
-                    type="button"
-                    className={styles.photoBtn}
-                    onClick={() => setLightboxIndex(idx)}
-                    aria-label={`Увеличить фото: ${photo.alt}`}
-                  >
-                    <img src={photo.src} alt={photo.alt} className={styles.gridImg} />
-                  </button>
-                </TiltedCard>
-              </motion.div>
-            ))}
-          </div>
+          <p className={styles.lead}>
+            Живые кадры зала, освещения и вечерних деталей на 8 Марта, 31.
+          </p>
         </div>
-      </Reveal>
+
+        <div className={styles.editorialGrid}>
+          {EDITORIAL_FRAMES.map(({ photo, role, chapter }) => {
+            const galleryIdx = GALLERY_PHOTOS.findIndex((p) => p.id === photo.id);
+            return (
+              <figure key={photo.id} className={`${styles.frame} ${styles[role]}`}>
+                <button
+                  type="button"
+                  className={styles.photoBtn}
+                  onClick={() => setLightboxIndex(galleryIdx >= 0 ? galleryIdx : 0)}
+                  aria-label={`Увеличить фото: ${photo.alt}`}
+                >
+                  <img src={photo.src} alt={photo.alt} className={styles.gridImg} />
+                </button>
+                <figcaption className={styles.caption}>{chapter}</figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      </div>
 
       {activePhoto && (
         <div

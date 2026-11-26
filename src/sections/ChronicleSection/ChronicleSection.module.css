@@ -1,33 +1,26 @@
 .section {
-  padding: clamp(64px, 6vw, 96px) var(--page-pad) 0;
+  padding: var(--gap-tight) var(--page-pad) 0;
 }
 
 .container {
-  max-width: var(--container-inner);
+  max-width: var(--container-standard);
   margin: 0 auto;
 }
 
 .headerRow {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 20px;
 }
 
 .heading {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 56px);
-  font-weight: 900;
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 4.4vw, 60px);
+  font-weight: 600;
   line-height: 0.96;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
   color: var(--color-text-light);
-}
-
-.heading :global(.serif-italic) {
-  color: var(--color-accent-brass);
-  font-size: 1.08em;
-  text-transform: lowercase;
 }
 
 .allBtn {

@@ -1,9 +1,9 @@
 .section {
-  padding: var(--section-gap) var(--page-pad) 0;
+  padding: var(--gap-editorial) var(--page-pad) 0;
 }
 
 .container {
-  max-width: var(--container-outer);
+  max-width: var(--container-wide);
   margin: 0 auto;
 }
 
@@ -17,18 +17,12 @@
 
 .heading {
   font-family: var(--font-display);
-  font-size: clamp(40px, 5.2vw, 76px);
+  font-size: clamp(38px, 5vw, 74px);
   font-weight: 900;
-  line-height: 0.95;
+  line-height: 0.94;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--color-text-light);
-}
-
-.heading :global(.serif-italic) {
-  color: var(--color-accent-brass);
-  font-size: 1.08em;
-  text-transform: lowercase;
 }
 
 .subtitle {
@@ -45,7 +39,7 @@
 }
 
 .controlsBar {
-  margin-top: 32px;
+  margin-top: 28px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -57,32 +51,7 @@
 .tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 24px;
-}
-
-.viewSwitch {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding-bottom: 8px;
-}
-
-.viewBtn {
-  min-height: 36px;
-  padding: 6px 12px;
-  background: transparent;
-  border: 1px solid var(--color-border-graphite);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.viewBtnActive {
-  background-color: var(--color-accent-brass);
-  border-color: var(--color-accent-brass);
-  color: var(--color-text-dark);
+  gap: 8px 28px;
 }
 
 .tab {
@@ -98,6 +67,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-muted);
+  cursor: pointer;
   transition: color 0.18s ease, border-color 0.18s ease;
 }
 
@@ -116,39 +86,53 @@
   color: var(--color-text-muted);
 }
 
-.grid {
+/* Editorial wide gastronomy grid */
+.editorialGrid {
   margin-top: 28px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  gap: 24px;
 }
 
 .card {
-  height: 100%;
   background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border-graphite);
   display: flex;
   flex-direction: column;
 }
 
+.leadCard {
+  grid-column: span 2;
+}
+
 .plate {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   background-color: var(--color-bg-primary);
+}
+
+.leadCard .plate {
+  aspect-ratio: 16 / 9;
 }
 
 .plateImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  transition: transform 0.35s var(--ease-expo);
+}
+
+.card:hover .plateImg {
+  transform: scale(1.03);
 }
 
 .plateWeight {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 4px 8px;
+  top: 12px;
+  right: 12px;
+  padding: 4px 9px;
   background-color: rgba(5, 5, 5, 0.88);
   border: 1px solid var(--color-border-graphite);
   font-size: 11px;
@@ -158,7 +142,7 @@
 
 .cardBody {
   flex: 1;
-  padding: 18px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -166,22 +150,26 @@
 
 .itemName {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 800;
   line-height: 1.25;
   text-transform: uppercase;
   color: var(--color-text-light);
 }
 
+.leadCard .itemName {
+  font-size: 22px;
+}
+
 .plateNote {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--color-text-muted);
 }
 
 .metaRow {
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: 14px;
   border-top: 1px solid var(--color-border-graphite);
   display: flex;
   align-items: center;
@@ -206,10 +194,10 @@
 
 .gridAddBtn {
   min-height: 36px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   background-color: var(--color-accent-brass);
   border: 0;
   color: var(--color-text-dark);
@@ -217,16 +205,33 @@
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  cursor: pointer;
+}
+
+.gridAddBtn:hover {
+  background-color: var(--color-accent-amber);
 }
 
 @media (max-width: 1024px) {
-  .grid {
+  .editorialGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .leadCard {
+    grid-column: span 2;
   }
 }
 
-@media (max-width: 600px) {
-  .grid {
+@media (max-width: 640px) {
+  .editorialGrid {
     grid-template-columns: 1fr;
+  }
+
+  .leadCard {
+    grid-column: span 1;
+  }
+
+  .leadCard .plate {
+    aspect-ratio: 4 / 3;
   }
 }

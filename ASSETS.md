@@ -22,3 +22,9 @@
 | `dish-pasta` | Феттучини в сливочном соусе (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-pasta.jpg` | Сгенерировано для демо (нет живого фото блюда) |
 | `dish-caesar` | Салат Цезарь и закуски (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-caesar.jpg` | Сгенерировано для демо (нет живого фото блюда) |
 | `dish-meat` | Мясное ассорти на доске (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-meat.jpg` | Сгенерировано для демо (нет живого фото блюда) |
+| `dish-khinkali` | Хинкали с перцем и зеленью (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-khinkali.jpg` | Сгенерировано для демо (нет живого фото блюда) |
+| `dish-veg` | Овощное ассорти на сланце (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-veg.jpg` | Сгенерировано для демо (нет живого фото блюда) |
+| `dish-sandwich` | Сэндвич с копчёной курицей (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-sandwich.jpg` | Сгенерировано для демо (нет живого фото блюда) |
+| `dish-lemonade` | Домашние лимонады со льдом (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-lemonade.jpg` | Сгенерировано для демо (нет живого фото напитка) |
+| `dish-coffee` | Капучино и ягодный смузи (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-coffee.jpg` | Сгенерировано для демо (нет живого фото напитка) |
+| `dish-baklava` | Пахлава с мороженым (`GENERATED_DEMO_ONLY`, студийная съёмка) | `public/images/dish-baklava.jpg` | Сгенерировано для демо (нет живого фото десерта) |

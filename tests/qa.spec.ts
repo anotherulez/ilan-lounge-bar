@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const VIEWPORTS = [320, 375, 390, 430, 768, 1024, 1440, 1920] as const;
+const VIEWPORTS = [320, 375, 390, 430, 768, 1024, 1280, 1440, 1920] as const;
 
 test.describe('ILAN Lounge Bar QA', () => {
   for (const width of VIEWPORTS) {
@@ -52,7 +52,7 @@ test.describe('ILAN Lounge Bar QA', () => {
     });
   }
 
-  test('header meta, gallery lightbox, 3D menu, cart, booking, no reviews, mobile menu', async ({
+  test('header meta, gallery lightbox, editorial menu, cart, booking, mobile menu', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
@@ -64,7 +64,6 @@ test.describe('ILAN Lounge Bar QA', () => {
     expect(headerText).not.toMatch(/АТМОСФЕРА|PS5|ОТЗЫВЫ/i);
     expect(headerText).toMatch(/VIP/i);
 
-    // Reviews section removed and pure black background on Booking
     await expect(page.locator('#reviews')).toHaveCount(0);
     await expect(page.locator('main')).not.toContainText(/без пафоса/i);
     const bookingBg = await page
@@ -74,7 +73,7 @@ test.describe('ILAN Lounge Bar QA', () => {
 
     // Lightbox open, next photo, Escape close
     await page.locator('header a[href="#gallery"]').click();
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(250);
     const gallerySection = page.locator('#gallery');
     await gallerySection.locator('button').first().click();
     const lightbox = page.getByRole('dialog');
@@ -84,34 +83,24 @@ test.describe('ILAN Lounge Bar QA', () => {
     await page.keyboard.press('Escape');
     await expect(lightbox).toBeHidden();
 
-    // 3D Menu + Cart add + Grid switch + Tabs
+    // Editorial menu grid + Cart add + Tabs
     const menuSection = page.locator('#menu');
     await menuSection.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(250);
     await expect(menuSection).not.toContainText('Средний чек');
-    await menuSection.screenshot({ path: path.resolve('qa/final-menu-3d.png') });
+    await menuSection.screenshot({ path: path.resolve('qa/stage1-menu-editorial.png') });
 
-    await page.getByRole('button', { name: 'Следующая позиция' }).click();
-    await expect(menuSection.getByText('4 / 5')).toBeVisible();
-
-    // Navigate back to first card (Plov) and add it to the cart
-    const prevBtn = page.getByRole('button', { name: 'Предыдущая позиция' });
-    await prevBtn.click();
-    await prevBtn.click();
-    await prevBtn.click();
-    await expect(menuSection.getByText('1 / 5')).toBeVisible();
-    await page.waitForTimeout(350);
     await page.getByRole('button', { name: 'Добавить Плов с говядиной в корзину' }).click();
     const cartFab = page.getByRole('button', { name: /Корзина к столу: позиций 1/ });
     await expect(cartFab).toBeVisible();
 
-    const gridViewBtn = page.getByRole('button', { name: 'Сетка' });
-    await gridViewBtn.click();
-    await expect(gridViewBtn).toHaveAttribute('aria-pressed', 'true');
-
     const snacksTab = page.getByRole('tab', { name: 'Закуски и салаты' });
     await snacksTab.click();
     await expect(page.getByText('Мясное ассорти')).toBeVisible();
+
+    const teaTab = page.getByRole('tab', { name: 'Чай и напитки' });
+    await teaTab.click();
+    await expect(page.getByText('Домашние лимонады и морсы')).toBeVisible();
 
     // Cart drawer open, increment qty, transfer to booking
     await cartFab.click();

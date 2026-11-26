@@ -77,10 +77,20 @@ footer[id] {
 .reveal-section {
   opacity: 1;
   transform: translateY(14px);
-  transition: transform 0.8s var(--ease-lux);
+  transition: transform var(--dur-section) var(--ease-lux);
 }
 
 .reveal-section[data-visible='true'] {
+  transform: translateY(0);
+}
+
+.reveal-section .stagger-item {
+  opacity: 0.92;
+  transform: translateY(12px);
+}
+
+.reveal-section[data-visible='true'] .stagger-item {
+  opacity: 1;
   transform: translateY(0);
 }
 
@@ -89,7 +99,8 @@ footer[id] {
     scroll-behavior: auto;
   }
 
-  .reveal-section {
+  .reveal-section,
+  .reveal-section .stagger-item {
     opacity: 1;
     transform: none;
     transition: none;

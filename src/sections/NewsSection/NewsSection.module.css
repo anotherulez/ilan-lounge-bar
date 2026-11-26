@@ -78,6 +78,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px 24px;
+  animation: newsReveal var(--dur-ui) var(--ease-lux) both;
 }
 
 .card {
@@ -87,6 +88,26 @@
   background-color: var(--surface);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-soft);
+  transition:
+    transform var(--dur-ui) var(--ease-lux),
+    border-color var(--dur-micro) var(--ease-lux),
+    opacity var(--dur-section) var(--ease-lux);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--hairline-strong);
+}
+
+@keyframes newsReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .thumbBox {
@@ -175,18 +196,32 @@
 
 @media (max-width: 768px) {
   .section {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--page-pad);
+    padding-right: var(--page-pad);
+  }
+
+  .filterPill {
+    min-height: 44px;
+    padding: 10px 16px;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 18px;
+  }
+
+  .card:hover {
+    transform: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card:hover .thumb {
+  .grid {
+    animation: none;
+  }
+
+  .card:hover .thumb,
+  .card:hover {
     transform: none;
   }
 }

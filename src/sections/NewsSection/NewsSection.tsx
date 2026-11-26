@@ -54,9 +54,13 @@ export function NewsSection() {
           </div>
         </div>
 
-        <div className={styles.grid}>
-          {filteredItems.map((item) => (
-            <article key={item.id} className={styles.card}>
+        <div key={filter} className={styles.grid}>
+          {filteredItems.map((item, idx) => (
+            <article
+              key={item.id}
+              className={`${styles.card} stagger-item`}
+              style={{ transitionDelay: `${idx * 45}ms` }}
+            >
               <div className={styles.thumbBox}>
                 <img src={item.mediaUrl} alt={item.title} className={styles.thumb} />
                 {item.type === 'vlog' && (

@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const AUDIT_VIEWPORTS = [2560, 1440, 768, 390] as const;
+const AUDIT_VIEWPORTS = [2560, 1440, 768, 390, 320] as const;
 
 test.describe('ILAN Luxury Minimalist v3 Audit', () => {
   for (const width of AUDIT_VIEWPORTS) {
@@ -96,11 +96,13 @@ test.describe('ILAN Luxury Minimalist v3 Audit', () => {
     await page.waitForTimeout(200);
     expect(await news.locator('img').count()).toBe(6);
 
-    // Reviews section ("Отзывы" + real platform counts, no fabricated quotes)
+    // Reviews section ("Отзывы" + real Restoclub quote + Yandex/2GIS counts)
     const reviews = page.locator('#reviews');
     await reviews.scrollIntoViewIfNeeded();
     await page.waitForTimeout(250);
     await expect(reviews).toContainText('4.9');
+    await expect(reviews).toContainText('Dmitrievna Kristyusha');
+    await expect(reviews).toContainText('Хуго учел все предпочтения');
     await expect(reviews).toContainText('497 оценок');
     await expect(reviews).toContainText('413 оценок');
     await expect(reviews.locator('article')).toHaveCount(3);

@@ -1,4 +1,4 @@
-/* Ultra-Minimalist Dark Luxury Tokens v2 — ILAN Lounge Bar */
+/* Ultra-Minimalist Dark Luxury Tokens v3 + animation-systems motion tokens */
 
 :root {
   --bg: #050505;
@@ -19,8 +19,25 @@
 
   --container: min(90vw, 1520px);
   --page-pad: clamp(24px, 4vw, 64px);
-  --space-section: clamp(96px, 12vh, 160px);
+  --space-section: clamp(88px, 11vh, 148px);
 
+  /* animation-systems motion defaults */
+  --dur-micro: 160ms;
+  --dur-ui: 240ms;
+  --dur-section: 620ms;
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
   --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --page-pad: 20px;
+    --space-section: 64px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --page-pad: 16px;
+  }
 }

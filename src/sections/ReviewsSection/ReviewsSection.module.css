@@ -5,7 +5,7 @@
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding-top: clamp(48px, 6vh, 72px);
+  padding-top: clamp(40px, 6vh, 72px);
   border-top: 1px solid var(--hairline);
 }
 
@@ -18,7 +18,7 @@
 }
 
 .heading {
-  font-size: clamp(36px, 3.6vw, 44px);
+  font-size: clamp(32px, 3.6vw, 44px);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -32,7 +32,7 @@
 }
 
 .score {
-  font-size: clamp(44px, 4vw, 52px);
+  font-size: clamp(40px, 4vw, 52px);
   font-weight: 400;
   line-height: 1;
   color: var(--ink);
@@ -48,7 +48,7 @@
 }
 
 .grid {
-  margin-top: 40px;
+  margin-top: 36px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
@@ -62,6 +62,15 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  transition:
+    transform var(--dur-ui) var(--ease-lux),
+    border-color var(--dur-micro) var(--ease-lux),
+    opacity var(--dur-section) var(--ease-lux);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--hairline-strong);
 }
 
 .cardTop {
@@ -80,27 +89,45 @@
 }
 
 .cardScore {
-  font-size: 13px;
-  color: var(--strip);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
 }
 
-.summary {
+.text {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.65;
   color: var(--muted);
 }
 
-.cardLink {
+.quoteText {
+  color: var(--ink);
+}
+
+.cardFooter {
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.metaLabel {
+  font-size: 12px;
+  color: var(--strip);
+}
+
+.cardLink {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  min-height: 36px;
   font-size: 13px;
   font-weight: 500;
   color: var(--ink);
-  transition: opacity 0.2s var(--ease-lux);
+  transition: opacity var(--dur-micro) var(--ease-lux);
 }
 
 .cardLink:hover {
@@ -112,10 +139,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 44px;
   font-size: 14px;
   font-weight: 500;
   color: var(--ink);
-  transition: opacity 0.2s var(--ease-lux);
+  transition: opacity var(--dur-micro) var(--ease-lux);
 }
 
 .allLink:hover {
@@ -131,7 +159,15 @@
 
 @media (max-width: 768px) {
   .section {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--page-pad);
+    padding-right: var(--page-pad);
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .card:hover {
+    transform: none;
   }
 }

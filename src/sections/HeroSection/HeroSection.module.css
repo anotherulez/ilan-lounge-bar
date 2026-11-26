@@ -108,6 +108,10 @@
   filter: brightness(0.95);
 }
 
+.primaryPill:active {
+  transform: scale(0.98);
+}
+
 .ghostLink {
   margin-left: 28px;
   font-size: 15px;
@@ -150,16 +154,30 @@
 }
 
 @media (max-width: 768px) {
+  .plate::after {
+    background:
+      linear-gradient(90deg, rgba(5, 5, 5, 0.84) 0%, rgba(5, 5, 5, 0.64) 65%, rgba(5, 5, 5, 0.42) 100%),
+      linear-gradient(180deg, rgba(5, 5, 5, 0.42) 0%, rgba(5, 5, 5, 0) 30%, rgba(5, 5, 5, 0.15) 70%, #050505 100%);
+  }
+
   .contentWrap {
-    padding: 112px 20px 28px;
+    padding: 108px var(--page-pad) 28px;
   }
 
   .actions {
-    gap: 16px;
+    gap: 12px 16px;
+  }
+
+  .primaryPill {
+    min-height: 48px;
+    padding: 12px 26px;
   }
 
   .ghostLink {
-    margin-left: 20px;
+    margin-left: 18px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 

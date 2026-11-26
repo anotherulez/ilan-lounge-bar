@@ -176,8 +176,8 @@
   color: var(--ink);
   border: 1px solid var(--hairline);
   border-radius: 16px;
-  font-size: 15px;
-  transition: border-color 0.2s var(--ease-lux);
+  font-size: 16px;
+  transition: border-color var(--dur-micro) var(--ease-lux);
 }
 
 .input:focus {
@@ -207,6 +207,11 @@
 .submitPill:hover {
   transform: scale(1.01);
   filter: brightness(0.95);
+}
+
+.submitPill:active,
+.stepBtn:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 /* Confirmation Panel */

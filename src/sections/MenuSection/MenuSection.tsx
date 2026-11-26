@@ -47,7 +47,7 @@ export function MenuSection() {
           />
         </div>
 
-        <div role="tabpanel" aria-label={current.label} className={styles.grid}>
+        <div key={activeTab} role="tabpanel" aria-label={current.label} className={styles.grid}>
           {current.items.map((item) => (
             <div key={item.id} className={styles.item}>
               <div className={styles.topLine}>

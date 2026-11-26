@@ -1,5 +1,5 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { REVIEW_SUMMARIES } from '../../data/reviews';
+import { GUEST_REVIEWS } from '../../data/reviews';
 import { VENUE } from '../../data/venue';
 import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import styles from './ReviewsSection.module.css';
@@ -21,31 +21,41 @@ export function ReviewsSection() {
           <div className={styles.ratingAnchor}>
             <span className={`${styles.score} tabular-nums`}>4.9</span>
             <div className={styles.ratingMeta}>
-              <span>Яндекс Карты · 2ГИС</span>
+              <span>Яндекс Карты · 2ГИС · Restoclub</span>
               <span>Свыше 900 реальных оценок гостей</span>
             </div>
           </div>
         </div>
 
         <div className={styles.grid}>
-          {REVIEW_SUMMARIES.map((item) => (
-            <article key={item.id} className={styles.card}>
+          {GUEST_REVIEWS.map((item, idx) => (
+            <article
+              key={item.id}
+              className={`${styles.card} stagger-item`}
+              style={{ transitionDelay: `${idx * 60}ms` }}
+            >
               <div className={styles.cardTop}>
                 <span className={styles.platform}>{item.platform}</span>
-                <span className={`${styles.cardScore} tabular-nums`}>
-                  {item.rating} · {item.countLabel}
-                </span>
+                <span className={`${styles.cardScore} tabular-nums`}>{item.rating}</span>
               </div>
-              <p className={styles.summary}>{item.summary}</p>
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.cardLink}
-              >
-                <span>Читать на {item.platform}</span>
-                <ArrowUpRight size={14} strokeWidth={1.6} aria-hidden="true" />
-              </a>
+
+              <p className={`${styles.text} ${item.isDirectQuote ? styles.quoteText : ''}`}>
+                {item.text}
+              </p>
+
+              <div className={styles.cardFooter}>
+                <span className={styles.metaLabel}>{item.meta}</span>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.cardLink}
+                  aria-label={`Открыть отзыв на ${item.platform}`}
+                >
+                  <span>Источник</span>
+                  <ArrowUpRight size={14} strokeWidth={1.6} aria-hidden="true" />
+                </a>
+              </div>
             </article>
           ))}
         </div>

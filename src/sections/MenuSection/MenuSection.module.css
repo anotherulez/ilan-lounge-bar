@@ -61,6 +61,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0 56px;
+  animation: panelReveal var(--dur-ui) var(--ease-lux) both;
 }
 
 .item {
@@ -69,6 +70,11 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  transition: border-color var(--dur-micro) var(--ease-lux);
+}
+
+.item:hover {
+  border-bottom-color: var(--hairline-strong);
 }
 
 .topLine {
@@ -82,6 +88,22 @@
   font-size: 16px;
   font-weight: 500;
   color: var(--ink);
+  transition: transform var(--dur-micro) var(--ease-lux);
+}
+
+.item:hover .name {
+  transform: translateX(3px);
+}
+
+@keyframes panelReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .price {
@@ -100,12 +122,35 @@
 
 @media (max-width: 768px) {
   .section {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--page-pad);
+    padding-right: var(--page-pad);
+  }
+
+  .tabs {
+    gap: 8px 20px;
+  }
+
+  .tab {
+    min-height: 44px;
+    padding: 10px 2px;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    margin-top: 28px;
+    margin-top: 24px;
+  }
+
+  .item:hover .name {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid {
+    animation: none;
+  }
+
+  .item:hover .name {
+    transform: none;
   }
 }

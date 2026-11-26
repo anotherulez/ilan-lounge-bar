@@ -37,13 +37,45 @@
   text-underline-offset: 3px;
 }
 
-.tabs {
+.controlsBar {
   margin-top: 38px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 28px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
   border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+}
+
+.viewSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+}
+
+.viewBtn {
+  min-height: 36px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--color-border-subtle);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.viewBtnActive {
+  background-color: var(--color-accent-burgundy);
+  border-color: var(--color-accent-brass);
+  color: var(--color-text-light);
 }
 
 .tab {

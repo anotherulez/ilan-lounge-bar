@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { MotionConfig } from 'motion/react';
 import { FontPresetBar, type FontPreset } from './components/FontPresetBar/FontPresetBar';
 import { Header } from './components/Header/Header';
 import { MobileMenu } from './components/MobileMenu/MobileMenu';
@@ -26,7 +27,7 @@ export function App() {
   }, [fontPreset]);
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <Header onOpenMobileMenu={() => setMobileMenuOpen(true)} />
       <main>
         <HeroSection />
@@ -41,6 +42,6 @@ export function App() {
       <Footer />
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
       <FontPresetBar preset={fontPreset} onChange={setFontPreset} />
-    </>
+    </MotionConfig>
   );
 }

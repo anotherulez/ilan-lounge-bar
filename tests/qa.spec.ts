@@ -82,7 +82,17 @@ test.describe('ILAN Lounge Bar Demo QA', () => {
     await figBtn.click();
     await expect(page.locator('html')).toHaveAttribute('data-font-preset', 'fig');
 
-    // Menu tabs
+    // Menu tabs + 3D perspective carousel + grid view switch
+    const menuSection = page.locator('#menu');
+    await menuSection.scrollIntoViewIfNeeded();
+    await page.getByRole('button', { name: 'Следующая позиция' }).click();
+    await expect(menuSection.getByText('4 / 5')).toBeVisible();
+    await menuSection.screenshot({ path: path.resolve('qa/menu-3d.png') });
+
+    const gridViewBtn = page.getByRole('button', { name: 'Сетка 5 в ряд' });
+    await gridViewBtn.click();
+    await expect(gridViewBtn).toHaveAttribute('aria-pressed', 'true');
+
     const snacksTab = page.getByRole('tab', { name: 'Закуски и салаты' });
     await snacksTab.click();
     await expect(snacksTab).toHaveAttribute('aria-selected', 'true');

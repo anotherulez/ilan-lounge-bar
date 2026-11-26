@@ -149,7 +149,7 @@ export function BookingSection() {
 
           {submitted && (
             <p className={styles.confirmBox} role="status">
-              Демо-предпросмотр: {form.zone}, {form.date || 'дата выбрана'} в {form.time}, гостей —{' '}
+              Демо-предпросмотр: {form.zone}, {form.date || 'дата выбрана'} в {form.time}, гостей:{' '}
               {form.guests}. Для реальной брони позвоните{' '}
               <a href={VENUE.phoneHref} className={styles.confirmLink}>
                 {VENUE.phoneDisplay}

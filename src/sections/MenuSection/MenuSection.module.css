@@ -129,9 +129,10 @@
 
 .metaRow {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 10px;
+  gap: 4px 12px;
 }
 
 .itemName {
@@ -146,7 +147,6 @@
   font-size: 15px;
   font-weight: 700;
   line-height: 1.3;
-  text-align: right;
 }
 
 .priceConfirmed {

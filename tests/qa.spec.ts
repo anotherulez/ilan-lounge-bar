@@ -71,6 +71,38 @@ test.describe('ILAN Lounge Bar QA', () => {
       .evaluate((el) => getComputedStyle(el).backgroundColor);
     expect(bookingBg).toBe('rgb(5, 5, 5)');
 
+    // Kinetic Typography section
+    const kinetic = page.getByRole('region', {
+      name: 'Ужин после полуночи, Екатеринбург, 8 Марта 31, до 04:00',
+    });
+    await kinetic.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(200);
+    await kinetic.screenshot({ path: path.resolve('qa/stage2-kinetic.png') });
+
+    // Immersive Fullscreen 4 phases (Establishing -> Expansion -> Immersion -> Release)
+    const immersive = page.getByRole('region', {
+      name: /ГЛАВА — АТМОСФЕРА ЗАЛА/,
+    });
+    const box = await immersive.boundingBox();
+    expect(box).not.toBeNull();
+    if (box) {
+      await page.evaluate((y) => window.scrollTo(0, y), Math.max(0, box.y - 320));
+      await page.waitForTimeout(250);
+      await page.screenshot({ path: path.resolve('qa/stage2-immersive-a.png') });
+
+      await page.evaluate((y) => window.scrollTo(0, y), box.y + 320);
+      await page.waitForTimeout(250);
+      await page.screenshot({ path: path.resolve('qa/stage2-immersive-b.png') });
+
+      await page.evaluate((y) => window.scrollTo(0, y), box.y + 1150);
+      await page.waitForTimeout(250);
+      await page.screenshot({ path: path.resolve('qa/stage2-immersive-c.png') });
+
+      await page.evaluate((y) => window.scrollTo(0, y), box.y + 2250);
+      await page.waitForTimeout(250);
+      await page.screenshot({ path: path.resolve('qa/stage2-immersive-d.png') });
+    }
+
     // Lightbox open, next photo, Escape close
     await page.locator('header a[href="#gallery"]').click();
     await page.waitForTimeout(250);

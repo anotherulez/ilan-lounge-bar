@@ -1,15 +1,12 @@
 # HANDOFF.md — Точка передачи контекста
 
 - **Дата последнего обновления:** `2026-11-26`
-- **Статус:** `Контрольная точка №1 (Этап 1 завершён, ожидает утверждения перед Этапами 2–5)`
+- **Статус:** `Контрольная точка №2 (Этапы 2–4 завершены, ожидание утверждения перед Этапом 5 Horizontal Storytelling)`
 
-## Что выполнено на Этапе 1
-- **3 уровня контейнеров (`src/styles/tokens.css`):** `--container-standard` (`1160px`), `--container-wide` (`1520px`) и Full Bleed (`100%`), адаптивный вертикальный ритм (`--gap-tight`, `--gap-editorial`).
-- **Типографика:** разведены Display (`HeroSection`), Editorial (`StorySection`, `ChronicleSection` с `Cormorant + Montserrat` без золотого курсива), Outline (`FeatureHighlightSection` с контурным `ОТДЕЛЬНЫЙ`).
-- **Аудит и чистка фото:** удалены наклоны `TiltedCard`/`ScatteredPhoto`, убраны дубликаты фото и добавлены 6 недостающих гастрономических фото (`dish-khinkali.jpg`, `dish-veg.jpg`, `dish-sandwich.jpg`, `dish-lemonade.jpg`, `dish-coffee.jpg`, `dish-baklava.jpg`).
-- **Редакционная сетка меню:** удалена неудобная 3D-карусель `PerspectiveMenuStrip`, заменена на широкую асимметричную редакционную сетку.
-- **Проверки:** `tsc --noEmit` (0 ошибок), `vite build` (`1.96s`), Playwright (`11 passed (37.2s)` по `320..1920px`).
+## Что выполнено на Этапах 2–4
+- **Этап 2 (Motion System):** подключён `gsap` + `ScrollTrigger` + `gsap.matchMedia()` в `src/motion/motionSystem.ts` с едиными токенами (`micro: 0.18s`, `ui: 0.36s`, `reveal: 0.75s`, `cinematic: 1.1s`, `scrub: 0.8`) и полной поддержкой `prefers-reduced-motion: reduce`.
+- **Этап 3 (KineticTypography):** заменил `ScrollVelocityStrip` marquee на трёхстрочную скролл-синхронизированную композицию с реальными смыслами ILAN (`УЖИН ПОСЛЕ ПОЛУНОЧИ`, `ЕКАТЕРИНБУРГ · 8 МАРТА, 31 · ДО 04:00`, `КУХНЯ НОЧЬЮ / ЧАЙ НА СВЕЧЕ / ЗАКРЫТЫЙ VIP`).
+- **Этап 4 (ImmersiveFullscreen):** реализован 4-фазный полноэкранный скролл-переход (`Establishing Shot → Expansion → Immersion → Release`) на `clip-path` + `scale` с корректным `pinSpacing` и упрощённым поведением на мобильных (`< 768px`).
 
 ## Следующий шаг (после утверждения)
-- Этап 2: подключение GSAP + ScrollTrigger + `gsap.matchMedia()`.
-- Этапы 3–5: Kinetic Typography, Immersive Fullscreen, Horizontal Visual Storytelling.
+- **Этап 5:** Horizontal Visual Storytelling для `GallerySection` (5 глав: `01 Пространство`, `02 Свет`, `03 Материалы`, `04 Геометрия`, `05 Гастрономия`, GSAP pin + scrub на десктопе и CSS Scroll Snap на мобильных).

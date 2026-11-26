@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { MotionConfig } from 'motion/react';
 import { Header } from './components/Header/Header';
+import { ImmersiveFullscreen } from './components/ImmersiveFullscreen/ImmersiveFullscreen';
+import { KineticTypography } from './components/KineticTypography/KineticTypography';
 import { MobileMenu } from './components/MobileMenu/MobileMenu';
 import { OrderCart } from './components/OrderCart/OrderCart';
 import { ScrollProgress } from './components/ScrollProgress/ScrollProgress';
-import { ScrollVelocityStrip } from './components/ScrollVelocityStrip/ScrollVelocityStrip';
 import { CartProvider } from './context/CartContext';
 import { BookingSection } from './sections/BookingSection/BookingSection';
 import { ChronicleSection } from './sections/ChronicleSection/ChronicleSection';
@@ -29,8 +30,14 @@ export function App() {
         <Header onOpenMobileMenu={() => setMobileMenuOpen(true)} />
         <main>
           <HeroSection />
-          <ScrollVelocityStrip text="8 МАРТА 31 • ДО 04:00 • ПЛОВ В ТРИ НОЧИ • ЗАКРЫТЫЙ VIP • ЕКАТЕРИНБУРГ" />
+          <KineticTypography />
           <StorySection />
+          <ImmersiveFullscreen
+            src="/images/lounge-candles.webp"
+            alt="Вечерний зал ILAN при свечах"
+            chapter="ГЛАВА — АТМОСФЕРА ЗАЛА"
+            caption="Ул. 8 Марта, 31 · Вечерний свет и столы до четырёх утра"
+          />
           <GallerySection />
           <FeatureHighlightSection />
           <MenuSection />

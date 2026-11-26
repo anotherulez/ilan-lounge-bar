@@ -5,8 +5,10 @@ import { MobileMenu } from './components/MobileMenu/MobileMenu';
 import { BookingSection, type BookingZone } from './sections/BookingSection/BookingSection';
 import { Footer } from './sections/Footer/Footer';
 import { HeroSection } from './sections/HeroSection/HeroSection';
+import { MapSection } from './sections/MapSection/MapSection';
 import { MenuSection } from './sections/MenuSection/MenuSection';
 import { NewsSection } from './sections/NewsSection/NewsSection';
+import { ReviewsSection } from './sections/ReviewsSection/ReviewsSection';
 import { SpaceSection } from './sections/SpaceSection/SpaceSection';
 
 export function App() {
@@ -41,6 +43,8 @@ export function App() {
         <SpaceSection onReserveVip={() => openBookingModal('Закрытый VIP')} />
         <MenuSection />
         <NewsSection />
+        <ReviewsSection />
+        <MapSection />
         <BookingSection
           selectedZone={selectedZone}
           onZoneChange={setSelectedZone}

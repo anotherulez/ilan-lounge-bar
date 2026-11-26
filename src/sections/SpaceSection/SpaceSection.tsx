@@ -12,7 +12,7 @@ export function SpaceSection({ onReserveVip }: SpaceSectionProps) {
 
   return (
     <section
-      id="space"
+      id="hall"
       ref={ref}
       className={`${styles.section} reveal-section`}
       data-visible={visible}
@@ -20,7 +20,6 @@ export function SpaceSection({ onReserveVip }: SpaceSectionProps) {
       <div className={styles.container}>
         <div className={styles.block}>
           <div className={styles.headerBlock}>
-            <span className={styles.label}>Пространство</span>
             <h2 className={styles.heading}>Основной зал</h2>
             <p className={styles.desc}>
               Приглушённый свет, горячая кухня до закрытия, чай на свече и диджей-сеты по
@@ -37,7 +36,6 @@ export function SpaceSection({ onReserveVip }: SpaceSectionProps) {
         <div id="vip" className={styles.block}>
           <div className={styles.headerRow}>
             <div className={styles.headerBlock}>
-              <span className={styles.label}>Приватная зона</span>
               <h2 className={styles.heading}>Закрытый VIP</h2>
               <p className={styles.desc}>
                 Отдельная комната, три экрана, PlayStation 5 и подача блюд прямо к дивану.

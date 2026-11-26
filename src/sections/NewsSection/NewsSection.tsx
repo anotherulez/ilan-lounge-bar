@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { SeamlessImageMarquee } from '../../components/SeamlessImageMarquee/SeamlessImageMarquee';
-import { MARQUEE_GALLERY } from '../../data/gallery';
 import { NEWS_ITEMS, NEWS_SOURCE_LABELS } from '../../data/news';
 import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import type { NewsSource } from '../../types/news';
@@ -54,14 +52,6 @@ export function NewsSection() {
               );
             })}
           </div>
-        </div>
-
-        <div className={styles.marqueeWrap}>
-          <SeamlessImageMarquee
-            items={MARQUEE_GALLERY.news}
-            label="Вечерняя афиша и кадры событий ILAN"
-            durationSec={40}
-          />
         </div>
 
         <div className={styles.grid}>

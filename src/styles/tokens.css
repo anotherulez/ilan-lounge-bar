@@ -17,8 +17,8 @@
   --radius-soft: 18px;
   --radius-media: 12px;
 
-  --container: 1240px;
-  --page-pad: clamp(20px, 5vw, 75px);
+  --container: min(90vw, 1520px);
+  --page-pad: clamp(24px, 4vw, 64px);
   --space-section: clamp(96px, 12vh, 160px);
 
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);

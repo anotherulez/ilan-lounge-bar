@@ -61,6 +61,12 @@
   }
 }
 
+@media (min-width: 1600px) {
+  .card {
+    height: 270px;
+  }
+}
+
 @media (max-width: 768px) {
   .card {
     height: 170px;

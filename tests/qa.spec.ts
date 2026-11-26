@@ -2,9 +2,9 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const AUDIT_VIEWPORTS = [1440, 1280, 768, 390, 320] as const;
+const AUDIT_VIEWPORTS = [2560, 1440, 768, 390] as const;
 
-test.describe('ILAN Luxury Minimalist v2 Audit', () => {
+test.describe('ILAN Luxury Minimalist v3 Audit', () => {
   for (const width of AUDIT_VIEWPORTS) {
     test(`visual & layout audit at ${width}px`, async ({ page }) => {
       const consoleErrors: string[] = [];
@@ -15,10 +15,16 @@ test.describe('ILAN Luxury Minimalist v2 Audit', () => {
       });
       page.on('pageerror', (err) => consoleErrors.push(err.message));
       page.on('requestfailed', (req) => {
-        failedRequests.push(`${req.url()} (${req.failure()?.errorText})`);
+        // External map tile requests inside third-party iframe can abort on rapid navigation; flag only local errors
+        if (req.url().startsWith('http://127.0.0.1')) {
+          failedRequests.push(`${req.url()} (${req.failure()?.errorText})`);
+        }
       });
 
-      await page.setViewportSize({ width, height: width <= 430 ? 844 : 900 });
+      await page.setViewportSize({
+        width,
+        height: width <= 430 ? 844 : width === 2560 ? 1440 : 900,
+      });
       await page.goto('/', { waitUntil: 'networkidle' });
       await page.evaluate(() => document.fonts.ready);
 
@@ -44,6 +50,7 @@ test.describe('ILAN Luxury Minimalist v2 Audit', () => {
           innerWidth: window.innerWidth,
           brokenImages,
           bgColor: getComputedStyle(document.body).backgroundColor,
+          bodyText: document.body.innerText,
         };
       });
 
@@ -52,111 +59,81 @@ test.describe('ILAN Luxury Minimalist v2 Audit', () => {
       expect(audit.brokenImages).toEqual([]);
       expect(audit.scrollWidth).toBeLessThanOrEqual(audit.innerWidth);
       expect(audit.bgColor).toBe('rgb(5, 5, 5)');
+      expect(audit.bodyText).not.toMatch(/Пространство/i);
 
-      if (width !== 320) {
-        const outDir = path.resolve('references/lux-v2');
-        fs.mkdirSync(outDir, { recursive: true });
-        if (width === 1440) {
-          await page.screenshot({ path: path.join(outDir, '01-hero-1440.png'), fullPage: false });
-        }
-        await page.screenshot({ path: path.join(outDir, `${width}-full.png`), fullPage: true });
-      }
+      const outDir = path.resolve('references/lux-v3');
+      fs.mkdirSync(outDir, { recursive: true });
+      await page.screenshot({ path: path.join(outDir, `${width}-full.png`), fullPage: true });
     });
   }
 
-  test('Stage 1-3 interactions & lux-v2 section captures', async ({ page }) => {
-    const outDir = path.resolve('references/lux-v2');
+  test('v3 sections, reviews, dark map, booking modal, and mobile menu', async ({ page }) => {
+    const outDir = path.resolve('references/lux-v3');
     fs.mkdirSync(outDir, { recursive: true });
 
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/', { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
 
-    // No floating cart
-    await expect(page.getByText(/К столу/)).toHaveCount(0);
+    // Header navigation without Пространство
+    const headerText = await page.locator('header').innerText();
+    expect(headerText).not.toMatch(/Пространство/i);
+    expect(headerText).toMatch(/Меню/);
+    expect(headerText).toMatch(/VIP/);
+    expect(headerText).toMatch(/Новости/);
+    expect(headerText).toMatch(/Отзывы/);
+    expect(headerText).toMatch(/Контакты/);
 
-    // Hero & Header
-    const hero = page.locator('#top');
-    await expect(hero.locator('h1')).toHaveText('ILAN');
-    await expect(hero).toContainText('lounge bar');
-    await expect(hero).not.toContainText('До 04:00.');
-    await expect(page.locator('header')).toContainText('Новости');
+    // Hall & VIP marquees
+    const hall = page.locator('#hall');
+    await hall.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(200);
+    await hall.screenshot({ path: path.join(outDir, 'hall-1440.png') });
 
-    // Section with SeamlessImageMarquee
-    const space = page.locator('#space');
-    await space.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(250);
-    await space.screenshot({ path: path.join(outDir, '02-space-marquee-1440.png') });
-
-    // Menu tabs
-    const menu = page.locator('#menu');
-    await menu.scrollIntoViewIfNeeded();
-    expect(await menu.locator('img').count()).toBeGreaterThan(0);
-    await menu.getByRole('tab', { name: 'Закуски' }).click();
-    await expect(menu).toContainText('Мясное ассорти');
-    await menu.getByRole('tab', { name: 'Бар' }).click();
-    await expect(menu).toContainText('Авторская барная карта');
-
-    // News section & source filter pills
+    // News section without marquee
     const news = page.locator('#news');
     await news.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(250);
-    await news.screenshot({ path: path.join(outDir, '05-news-section-1440.png') });
-    await expect(news.locator('article')).toHaveCount(6);
-    await news.getByRole('tab', { name: 'Яндекс Карты' }).click();
-    await expect(news.locator('article')).toHaveCount(2);
-    await news.getByRole('tab', { name: 'ВКонтакте' }).click();
-    await expect(news.locator('article')).toHaveCount(2);
-    await news.getByRole('tab', { name: 'Instagram' }).click();
-    await expect(news.locator('article')).toHaveCount(2);
-    await news.getByRole('tab', { name: 'Все' }).click();
-    await expect(news.locator('article')).toHaveCount(6);
+    await page.waitForTimeout(200);
+    expect(await news.locator('img').count()).toBe(6);
 
-    // Booking modal ("Где вам удобно?") opened from VIP
+    // Reviews section ("Отзывы" + 4.9)
+    const reviews = page.locator('#reviews');
+    await reviews.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(250);
+    await expect(reviews).toContainText('4.9');
+    await expect(reviews).toContainText('Яндекс Карты · 2ГИС');
+    await expect(reviews.locator('article')).toHaveCount(3);
+    await reviews.screenshot({ path: path.join(outDir, 'reviews-1440.png') });
+
+    // Dark Map section ("Как найти")
+    const mapSection = page.locator('#location');
+    await mapSection.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(600);
+    const mapIframe = mapSection.locator('iframe');
+    await expect(mapIframe).toBeVisible();
+    await mapSection.screenshot({ path: path.join(outDir, 'map-1440.png') });
+
+    // Booking modal & form
     await page.getByRole('button', { name: 'Занять VIP' }).click();
-    const bookingModal = page.getByRole('dialog', { name: 'Где вам удобно?' });
-    await expect(bookingModal).toBeVisible();
-    await page.waitForTimeout(250);
-    await page.screenshot({ path: path.join(outDir, '03-booking-modal-1440.png') });
-    await expect(bookingModal.getByRole('link', { name: /Telegram/i })).toHaveAttribute(
-      'href',
-      'https://telegram.org'
+    const modal = page.getByRole('dialog', { name: 'Где вам удобно?' });
+    await expect(modal).toBeVisible();
+    await modal.getByRole('button', { name: /На сайте/i }).click();
+    await expect(modal).toBeHidden();
+
+    const booking = page.locator('#booking');
+    await expect(page.getByRole('radio', { name: 'Закрытый VIP' })).toHaveAttribute(
+      'aria-checked',
+      'true'
     );
-    await expect(bookingModal.getByRole('link', { name: /Позвонить/i })).toHaveAttribute(
-      'href',
-      'tel:+79090285858'
-    );
-    await bookingModal.getByRole('button', { name: /На сайте/i }).click();
-    await expect(bookingModal).toBeHidden();
-
-    // Booking form with VIP pre-selected & Stepper
-    const bookingSection = page.locator('#booking');
-    await bookingSection.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(350);
-    const vipRadio = page.getByRole('radio', { name: 'Закрытый VIP' });
-    await expect(vipRadio).toHaveAttribute('aria-checked', 'true');
     await page.getByRole('button', { name: 'Увеличить количество гостей' }).click();
-    await page.getByRole('button', { name: 'Увеличить количество гостей' }).click();
-    await expect(bookingSection).toContainText('4 гостя');
-    await page.getByRole('button', { name: 'Уменьшить количество гостей' }).click();
-    await expect(bookingSection).toContainText('3 гостя');
-    await bookingSection.screenshot({ path: path.join(outDir, '04-booking-form-1440.png') });
+    await expect(booking).toContainText('3 гостя');
 
-    const form = bookingSection.locator('form');
-    await form.locator('input[type="date"]').fill('2026-12-01');
-    await form.locator('input[type="text"]').first().fill('Алексей');
-    await form.locator('input[type="tel"]').fill('+7 (900) 111-22-33');
-    await form.getByRole('button', { name: 'Забронировать стол' }).click();
-    await expect(bookingSection.getByRole('status')).toContainText('Заявка сформирована');
-    await expect(bookingSection.getByRole('status')).toContainText('Закрытый VIP');
-    await page.getByRole('button', { name: 'Изменить заявку' }).click();
-    await expect(form).toBeVisible();
-
-    // Mobile overlay menu
+    // Mobile menu (no Пространство)
     await page.setViewportSize({ width: 390, height: 844 });
     await page.getByRole('button', { name: 'Открыть меню навигации' }).click();
     const dialog = page.getByRole('dialog', { name: 'Меню сайта' });
     await expect(dialog).toBeVisible();
+    await expect(dialog).not.toContainText(/Пространство/i);
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();
   });

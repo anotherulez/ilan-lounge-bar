@@ -16,7 +16,6 @@ export const MARQUEE_GALLERY: Record<MarqueeCategory, GalleryAsset[]> = {
     { src: '/images/marquee/hall/lounge-candles.webp', alt: 'Вечерний свет и свечи в зале ILAN' },
     { src: '/images/marquee/hall/interior-wide.webp', alt: 'Подача у барной стойки ILAN' },
     { src: '/images/marquee/hall/hero-lantern.jpg', alt: 'Мозаичный светильник в зале' },
-    { src: '/images/marquee/hall/lantern-wall.webp', alt: 'Интерьерное освещение ILAN' },
     { src: '/images/marquee/hall/ilan-sign-lamp.jpg', alt: 'Логотип ILAN и лампа Эдисона' },
   ],
   vip: [

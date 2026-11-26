@@ -1,14 +1,27 @@
 # HANDOFF.md — Точка передачи контекста другому агенту
 
 - **Дата последнего обновления:** `2026-11-26`
-- **Текущий этап:** `Этап 04 — Визуальное сравнение в браузере (Playwright vs Bakery.fig)`
-- **Последний завершённый этап:** `Этап 03 — Статическая реализация десктопной версии`
-- **Идентификатор последнего Git-коммита:** `см. git log -n 2`
+- **Текущий этап:** `Этап 09 — Проект собран и проверен (Definition of Done выполнен)`
+- **Последний завершённый этап:** `Этап 09 — Production build, документация и финальный коммит`
+- **Идентификатор последнего Git-коммита:** `см. git log -n 5`
 
-## Выполненные изменения (Этап 03)
-- Реализованы все 10 статических секций десктопа (CSS Modules) по структуре `Bakery.fig`: `Header`, `HeroSection` (с 1 кнопкой CTA и 3 правыми мини-карточками + 4-колоночной нахлёстной планкой), `CategoriesSection` (`01–04`), `StorySection` (Split 1), `FeatureHighlightSection` (Split 2), `MenuSection` (табы + 5-колоночная сетка типографических карточек), `ReviewsSection` (`#F3ECE4`), `ChronicleSection`, `BookingSection` (демо-форма) и `Footer` (`18+`).
-- Добавлен `FontPresetBar` для сравнения пресета `.fig` (`Roboto Condensed` + `Roboto`) и пресета `UI/UX Pro Max` (`Cormorant` + `Montserrat`).
-- Пройдены `npx.cmd tsc --noEmit` и `npm.cmd run build`.
+## Выполненные изменения (Этапы 07–09)
+- Установлен `motion` (`motion/react`), добавлен `<MotionConfig reducedMotion="user">` и деликатный `<Reveal>` на контентных секциях (Hero рендерится без задержки).
+- Реализована 3D-витрина меню `PerspectiveMenuStrip` (адаптирована из `21st.dev` `Perspective Gallery` без Tailwind/градиентного шума, с поддержкой клавиатуры и `prefers-reduced-motion`) и переключатель `3D-витрина / Сетка 5 в ряд`.
+- Очищены текстовые данные от AI-штампов и длинных тире в прозе по `unslop`.
+- Пройдены финальные проверки после последней правки кода: `npx.cmd tsc --noEmit`, `npm.cmd run build`, `npx.cmd playwright test` (`10 passed`).
+- Заполнен `QA_REPORT.md` по 8 разрешениям (`320..1920 px`).
 
-## Следующая конкретная задача
-Запустить локальный dev/preview сервер, снять скриншоты Playwright для обоих шрифтовых вариантов (`1440px` и `1600px`), сравнить их с `reference/bakery-png/bakery-desktop-hero.jpg` и `bakery-desktop-full.jpg`, исправить расхождения и зафиксировать в `QA_REPORT.md`.
+## Известные ограничения
+- Фото из `public/images/` допускаются только для локального демо-превью (см. `ASSETS.md`).
+- Демо-форма бронирования не отправляет данные на сервер.
+- Политика PowerShell на машине требует `npm.cmd` / `npx.cmd` вместо `npm` / `npx`.
+
+## Команды запуска и проверки
+```powershell
+npm.cmd install
+npm.cmd run dev
+npx.cmd tsc --noEmit
+npm.cmd run build
+npx.cmd playwright test
+```

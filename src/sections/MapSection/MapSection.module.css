@@ -88,6 +88,10 @@
   background-color: var(--surface);
 }
 
+.mapCanvas :global(.leaflet-tile-pane) {
+  filter: grayscale(100%) invert(93%) contrast(90%) brightness(86%);
+}
+
 .mapCanvas :global(.leaflet-control-zoom) {
   border: 1px solid var(--hairline) !important;
   border-radius: 12px !important;

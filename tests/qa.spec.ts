@@ -96,15 +96,14 @@ test.describe('ILAN Luxury Minimalist v3 Audit', () => {
     await page.waitForTimeout(200);
     expect(await news.locator('img').count()).toBe(6);
 
-    // Reviews section ("Отзывы" + real Restoclub quote + Yandex/2GIS counts)
+    // Reviews section ("Отзывы" + real guest reviews from Yandex Maps, 2GIS, Restoclub)
     const reviews = page.locator('#reviews');
     await reviews.scrollIntoViewIfNeeded();
     await page.waitForTimeout(250);
     await expect(reviews).toContainText('4.9');
+    await expect(reviews).toContainText('Алёна Королёва');
+    await expect(reviews).toContainText('Алина Ковалева');
     await expect(reviews).toContainText('Dmitrievna Kristyusha');
-    await expect(reviews).toContainText('Хуго учел все предпочтения');
-    await expect(reviews).toContainText('497 оценок');
-    await expect(reviews).toContainText('413 оценок');
     await expect(reviews.locator('article')).toHaveCount(3);
     await reviews.screenshot({ path: path.join(outDir, 'reviews-1440.png') });
 

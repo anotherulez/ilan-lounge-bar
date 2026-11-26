@@ -39,9 +39,7 @@ export function ReviewsSection() {
                 <span className={`${styles.cardScore} tabular-nums`}>{item.rating}</span>
               </div>
 
-              <p className={`${styles.text} ${item.isDirectQuote ? styles.quoteText : ''}`}>
-                {item.text}
-              </p>
+              <p className={`${styles.text} ${styles.quoteText}`}>{item.text}</p>
 
               <div className={styles.cardFooter}>
                 <span className={styles.metaLabel}>{item.meta}</span>

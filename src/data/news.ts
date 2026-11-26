@@ -15,7 +15,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     title: 'Ночная кухня до 04:00 каждый день',
     excerpt: 'Плов, борщ со сметаной, феттучини и горячие закуски готовим до закрытия дверей без сокращённого ночного меню.',
     date: '24 ноя',
-    mediaUrl: '/images/marquee/news/facade-night.jpg',
+    mediaUrl: './images/marquee/news/facade-night.jpg',
     externalUrl: 'https://yandex.ru/maps/org/ilan/107996876289/',
   },
   {
@@ -25,7 +25,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     title: 'Вечерние сеты и свет в основном зале',
     excerpt: 'Короткий видеоотчёт с пятничной смены: приглушённый свет, плотный звук и посадка за стойкой после полуночи.',
     date: '20 ноя',
-    mediaUrl: '/images/marquee/news/guest-vibe.jpg',
+    mediaUrl: './images/marquee/news/guest-vibe.jpg',
     externalUrl: 'https://vk.ru/ilanbar',
   },
   {
@@ -35,7 +35,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     title: 'Один вечер за барной стойкой на 8 Марта, 31',
     excerpt: 'Влог от команды ILAN: как готовим авторские сочетания и собираем подачу чая на свече перед открытием.',
     date: '18 ноя',
-    mediaUrl: '/images/marquee/news/bar-craft.webp',
+    mediaUrl: './images/marquee/news/bar-craft.webp',
     externalUrl: 'https://vk.ru/ilanbar',
   },
   {
@@ -45,7 +45,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     title: 'Закрытая VIP-комната для компаний и матчей',
     excerpt: 'Три экрана под трансляции, PlayStation 5, настольные игры и отдельная подача блюд прямо к дивану.',
     date: '14 ноя',
-    mediaUrl: '/images/marquee/news/hero-ilan.jpg',
+    mediaUrl: './images/marquee/news/hero-ilan.jpg',
     externalUrl: 'https://vk.ru/ilanbar',
   },
   {
@@ -55,7 +55,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     title: 'Зимний сбор пуэра и цитрусовые лимонады',
     excerpt: 'Обновили чайную карту к холодам: согревающие сборы в чайнике на свече и свежие ягодные миксы.',
     date: '10 ноя',
-    mediaUrl: '/images/marquee/news/lantern-orig.jpg',
+    mediaUrl: './images/marquee/news/lantern-orig.jpg',
     externalUrl: 'https://yandex.ru/maps/org/ilan/107996876289/menu/',
   },
   {
@@ -65,7 +65,7 @@ export const FALLBACK_NEWS: NewsItem[] = [
     title: 'Ночная прогулка до площади 1905 года',
     excerpt: 'Бэкстейдж закрытия смены и детали интерьера: пять минут пешком от метро «Геологическая» и «Площадь 1905 года».',
     date: '05 ноя',
-    mediaUrl: '/images/marquee/news/ilan-sign-dark.jpg',
+    mediaUrl: './images/marquee/news/ilan-sign-dark.jpg',
     externalUrl: 'https://yandex.ru/maps/org/ilan/107996876289/',
   },
 ];

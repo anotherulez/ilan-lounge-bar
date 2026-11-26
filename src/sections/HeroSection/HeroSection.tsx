@@ -10,7 +10,7 @@ export function HeroSection({ onOpenBookingModal }: HeroSectionProps) {
     <section id="top" className={styles.hero}>
       <div className={styles.plate} aria-hidden="true">
         <img
-          src="/images/lounge-candles.webp"
+          src="./images/lounge-candles.webp"
           alt=""
           className={styles.plateImg}
         />

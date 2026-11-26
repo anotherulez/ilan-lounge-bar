@@ -22,6 +22,7 @@ export function MapSection() {
       scrollWheelZoom: false,
       attributionControl: true,
     });
+    map.attributionControl.setPrefix(false);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,

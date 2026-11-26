@@ -70,18 +70,24 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
+  width: 100%;
+  min-width: 0;
 }
 
 .rowTwo {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
+  width: 100%;
+  min-width: 0;
 }
 
 .field {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
+  width: 100%;
 }
 
 .label {
@@ -94,6 +100,8 @@
 .segmented {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  min-width: 0;
   padding: 4px;
   background-color: var(--surface);
   border: 1px solid var(--hairline);
@@ -102,6 +110,7 @@
 }
 
 .segmentBtn {
+  min-width: 0;
   min-height: 42px;
   padding: 8px 16px;
   border-radius: var(--radius-pill);
@@ -110,6 +119,9 @@
   color: var(--muted);
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   cursor: pointer;
   transition: background-color 0.22s var(--ease-lux), color 0.22s var(--ease-lux);
 }
@@ -169,7 +181,10 @@
 }
 
 .input {
+  display: block;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   min-height: 50px;
   padding: 14px 18px;
   background-color: var(--surface);
@@ -286,17 +301,27 @@
 
 @media (max-width: 768px) {
   .section {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--page-pad);
+    padding-right: var(--page-pad);
   }
 
   .container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 36px;
   }
 
+  .infoCol {
+    min-width: 0;
+    width: 100%;
+  }
+
   .rowTwo {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .segmentBtn {
+    padding: 8px 10px;
+    font-size: 13px;
   }
 }
 

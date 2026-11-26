@@ -12,17 +12,28 @@ interface MobileMenuProps {
 export function MobileMenu({ open, onClose, onOpenBookingModal }: MobileMenuProps) {
   useEffect(() => {
     if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
   }, [open, onClose]);
 
-  if (!open) return null;
-
   return (
-    <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Меню сайта">
+    <div
+      className={styles.overlay}
+      data-open={open}
+      role="dialog"
+      aria-modal="true"
+      aria-hidden={!open}
+      aria-label="Меню сайта"
+      inert={!open || undefined}
+    >
       <div className={styles.topRow}>
         <span className={styles.brand}>{VENUE.brand}</span>
         <button
@@ -36,14 +47,21 @@ export function MobileMenu({ open, onClose, onOpenBookingModal }: MobileMenuProp
       </div>
 
       <nav className={styles.nav} aria-label="Мобильная навигация">
-        {NAV_LINKS.map((item) => (
-          <a key={item.href} href={item.href} className={styles.link} onClick={onClose}>
+        {NAV_LINKS.map((item, idx) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className={styles.link}
+            style={{ transitionDelay: open ? `${80 + idx * 45}ms` : '0ms' }}
+            onClick={onClose}
+          >
             {item.label}
           </a>
         ))}
         <button
           type="button"
           className={styles.pillCta}
+          style={{ transitionDelay: open ? `${80 + NAV_LINKS.length * 45}ms` : '0ms' }}
           onClick={() => {
             onClose();
             onOpenBookingModal();

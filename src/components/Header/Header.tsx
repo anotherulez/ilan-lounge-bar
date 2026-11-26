@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Menu } from 'lucide-react';
 import { NAV_LINKS, VENUE } from '../../data/venue';
 import styles from './Header.module.css';
 
 interface HeaderProps {
+  mobileMenuOpen: boolean;
   onOpenMobileMenu: () => void;
   onOpenBookingModal: () => void;
 }
 
-export function Header({ onOpenMobileMenu, onOpenBookingModal }: HeaderProps) {
+export function Header({
+  mobileMenuOpen,
+  onOpenMobileMenu,
+  onOpenBookingModal,
+}: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -39,11 +43,16 @@ export function Header({ onOpenMobileMenu, onOpenBookingModal }: HeaderProps) {
 
         <button
           type="button"
-          className={styles.burger}
+          className={`${styles.burger} ${mobileMenuOpen ? styles.burgerOpen : ''}`}
           onClick={onOpenMobileMenu}
-          aria-label="Открыть меню навигации"
+          aria-label={mobileMenuOpen ? 'Закрыть меню навигации' : 'Открыть меню навигации'}
+          aria-expanded={mobileMenuOpen}
         >
-          <Menu size={20} strokeWidth={1.6} aria-hidden="true" />
+          <span className={styles.burgerLines} aria-hidden="true">
+            <span className={styles.burgerLine} />
+            <span className={styles.burgerLine} />
+            <span className={styles.burgerLine} />
+          </span>
         </button>
       </div>
     </header>

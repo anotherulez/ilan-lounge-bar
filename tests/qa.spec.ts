@@ -130,11 +130,31 @@ test.describe('ILAN Luxury Minimalist v3 Audit', () => {
     await page.getByRole('button', { name: 'Увеличить количество гостей' }).click();
     await expect(booking).toContainText('3 гостя');
 
-    // Mobile menu (no Пространство)
+    // Mobile menu (animated burger + no Пространство) + mobile layout checks
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.getByRole('button', { name: 'Открыть меню навигации' }).click();
+    await page.waitForTimeout(150);
+
+    // Hero is full-width
+    const heroBox = await page.locator('#top').boundingBox();
+    expect(heroBox?.width).toBe(390);
+
+    // News filter pills stay on a single horizontal row (Instagram does not wrap)
+    const filterBoxes = await page.locator('#news [role="tab"]').evaluateAll((els) =>
+      els.map((el) => el.getBoundingClientRect().top)
+    );
+    expect(Math.max(...filterBoxes) - Math.min(...filterBoxes)).toBeLessThanOrEqual(2);
+
+    // Booking inputs stay within viewport width
+    const bookingOverflow = await page.locator('#booking input, #booking [role="radiogroup"]').evaluateAll(
+      (els) => els.some((el) => el.getBoundingClientRect().right > window.innerWidth)
+    );
+    expect(bookingOverflow).toBe(false);
+
+    const burger = page.getByRole('button', { name: 'Открыть меню навигации' });
+    await burger.click();
     const dialog = page.getByRole('dialog', { name: 'Меню сайта' });
     await expect(dialog).toBeVisible();
+    await expect(dialog).toHaveAttribute('data-open', 'true');
     await expect(dialog).not.toContainText(/Пространство/i);
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();

@@ -1,5 +1,6 @@
 .hero {
   position: relative;
+  width: 100%;
   min-height: 100dvh;
   display: flex;
   align-items: stretch;
@@ -35,6 +36,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
+  min-width: 0;
   max-width: var(--container);
   margin: 0 auto;
   padding: 130px var(--page-pad) 34px;
@@ -46,6 +48,8 @@
 .copy {
   margin-top: auto;
   margin-bottom: auto;
+  width: 100%;
+  min-width: 0;
   max-width: 620px;
 }
 
@@ -125,12 +129,20 @@
 }
 
 .bottomAnchor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.04em;
   color: var(--strip);
   font-variant-numeric: tabular-nums;
   animation: riseIn 0.85s var(--ease-lux) 0.34s both;
+}
+
+.bottomPhone {
+  white-space: nowrap;
 }
 
 @keyframes kenBurns {
@@ -178,6 +190,12 @@
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+  }
+
+  .bottomAnchor {
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    gap: 2px 6px;
   }
 }
 

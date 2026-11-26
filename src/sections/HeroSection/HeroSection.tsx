@@ -42,7 +42,9 @@ export function HeroSection({ onOpenBookingModal }: HeroSectionProps) {
         </div>
 
         <p className={styles.bottomAnchor}>
-          {VENUE.hoursFull} · {VENUE.phoneDisplay}
+          <span>{VENUE.hoursFull}</span>
+          <span className={styles.bottomSep} aria-hidden="true">·</span>
+          <span className={styles.bottomPhone}>{VENUE.phoneDisplay}</span>
         </p>
       </div>
     </section>

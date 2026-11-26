@@ -200,9 +200,29 @@
     padding-right: var(--page-pad);
   }
 
+  .headerRow {
+    min-width: 0;
+  }
+
+  .filters {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
   .filterPill {
-    min-height: 44px;
-    padding: 10px 16px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-height: 40px;
+    padding: 8px 14px;
   }
 
   .grid {

@@ -35,7 +35,8 @@ export function App() {
   return (
     <>
       <Header
-        onOpenMobileMenu={() => setMobileMenuOpen(true)}
+        mobileMenuOpen={mobileMenuOpen}
+        onOpenMobileMenu={() => setMobileMenuOpen((prev) => !prev)}
         onOpenBookingModal={() => openBookingModal('Основной зал')}
       />
       <main>

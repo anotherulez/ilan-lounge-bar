@@ -88,6 +88,56 @@
   backdrop-filter: blur(12px);
   color: var(--ink);
   cursor: pointer;
+  transition: background-color 0.25s var(--ease-lux), border-color 0.25s var(--ease-lux), transform 0.2s var(--ease-lux);
+}
+
+.burger:active {
+  transform: scale(0.94);
+}
+
+.burgerLines {
+  position: relative;
+  width: 18px;
+  height: 12px;
+  display: block;
+}
+
+.burgerLine {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  border-radius: 999px;
+  background-color: var(--ink);
+  transform-origin: center;
+  transition:
+    transform 0.28s var(--ease-lux),
+    opacity 0.2s var(--ease-lux);
+}
+
+.burgerLine:nth-child(1) {
+  top: 0;
+}
+
+.burgerLine:nth-child(2) {
+  top: 5.25px;
+}
+
+.burgerLine:nth-child(3) {
+  top: 10.5px;
+}
+
+.burgerOpen .burgerLine:nth-child(1) {
+  transform: translateY(5.25px) rotate(45deg);
+}
+
+.burgerOpen .burgerLine:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.4);
+}
+
+.burgerOpen .burgerLine:nth-child(3) {
+  transform: translateY(-5.25px) rotate(-45deg);
 }
 
 @keyframes headerFade {

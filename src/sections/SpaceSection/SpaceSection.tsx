@@ -1,7 +1,13 @@
+import { SeamlessImageMarquee } from '../../components/SeamlessImageMarquee/SeamlessImageMarquee';
+import { MARQUEE_GALLERY } from '../../data/gallery';
 import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import styles from './SpaceSection.module.css';
 
-export function SpaceSection() {
+interface SpaceSectionProps {
+  onReserveVip: () => void;
+}
+
+export function SpaceSection({ onReserveVip }: SpaceSectionProps) {
   const { ref, visible } = useRevealOnScroll<HTMLElement>();
 
   return (
@@ -12,8 +18,8 @@ export function SpaceSection() {
       data-visible={visible}
     >
       <div className={styles.container}>
-        <div className={styles.row}>
-          <div className={styles.textCol}>
+        <div className={styles.block}>
+          <div className={styles.headerBlock}>
             <span className={styles.label}>Пространство</span>
             <h2 className={styles.heading}>Основной зал</h2>
             <p className={styles.desc}>
@@ -21,33 +27,31 @@ export function SpaceSection() {
               выходным.
             </p>
           </div>
-          <div className={styles.mediaCol}>
-            <img
-              src="/images/interior-velvet.webp"
-              alt="Основной зал ILAN с велюровыми диванами"
-              className={styles.photo}
-            />
-          </div>
+          <SeamlessImageMarquee
+            items={MARQUEE_GALLERY.hall}
+            label="Галерея основного зала ILAN"
+            durationSec={42}
+          />
         </div>
 
-        <div id="vip" className={`${styles.row} ${styles.rowReversed}`}>
-          <div className={styles.textCol}>
-            <span className={styles.label}>Приватная зона</span>
-            <h2 className={styles.heading}>Закрытый VIP</h2>
-            <p className={styles.desc}>
-              Отдельная комната, три экрана, PlayStation 5 и подача блюд прямо к дивану.
-            </p>
-            <a href="#booking" className={styles.ghostLink}>
+        <div id="vip" className={styles.block}>
+          <div className={styles.headerRow}>
+            <div className={styles.headerBlock}>
+              <span className={styles.label}>Приватная зона</span>
+              <h2 className={styles.heading}>Закрытый VIP</h2>
+              <p className={styles.desc}>
+                Отдельная комната, три экрана, PlayStation 5 и подача блюд прямо к дивану.
+              </p>
+            </div>
+            <button type="button" className={styles.ghostBtn} onClick={onReserveVip}>
               Занять VIP
-            </a>
+            </button>
           </div>
-          <div className={styles.mediaCol}>
-            <img
-              src="/images/ilan-sign-lamp.jpg"
-              alt="Интерьер комнаты ILAN с тёплой лампой"
-              className={styles.photo}
-            />
-          </div>
+          <SeamlessImageMarquee
+            items={MARQUEE_GALLERY.vip}
+            label="Галерея закрытой VIP-зоны ILAN"
+            durationSec={38}
+          />
         </div>
       </div>
     </section>

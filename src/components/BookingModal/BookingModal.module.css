@@ -1,0 +1,158 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(5, 5, 5, 0.78);
+  backdrop-filter: blur(16px);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.28s var(--ease-lux) both;
+}
+
+.dialog {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 40px);
+  animation: modalLift 0.32s var(--ease-lux) both;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s var(--ease-lux), border-color 0.2s var(--ease-lux);
+}
+
+.closeBtn:hover {
+  color: var(--ink);
+  border-color: var(--hairline-strong);
+}
+
+.title {
+  font-size: clamp(24px, 2.5vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink);
+  padding-right: 36px;
+}
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.options {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.optionRow {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-soft);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease-lux), border-color 0.2s var(--ease-lux);
+}
+
+.optionRow:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--hairline-strong);
+}
+
+.iconBox {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background-color: var(--surface);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optionText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.optionTitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.optionSub {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.arrow {
+  color: var(--strip);
+  transition: transform 0.2s var(--ease-lux), color 0.2s var(--ease-lux);
+}
+
+.optionRow:hover .arrow {
+  transform: translateX(3px);
+  color: var(--ink);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalLift {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .dialog {
+    animation: none;
+  }
+
+  .optionRow:hover .arrow {
+    transform: none;
+  }
+}

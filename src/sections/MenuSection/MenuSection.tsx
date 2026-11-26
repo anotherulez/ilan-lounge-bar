@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { SeamlessImageMarquee } from '../../components/SeamlessImageMarquee/SeamlessImageMarquee';
+import { MARQUEE_GALLERY } from '../../data/gallery';
 import { MENU_CATEGORIES, type MenuCategoryId } from '../../data/menu';
 import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import styles from './MenuSection.module.css';
@@ -35,6 +37,14 @@ export function MenuSection() {
               );
             })}
           </div>
+        </div>
+
+        <div className={styles.marqueeWrap}>
+          <SeamlessImageMarquee
+            items={MARQUEE_GALLERY.menu}
+            label="Фотографии подачи и меню ILAN"
+            durationSec={44}
+          />
         </div>
 
         <div role="tabpanel" aria-label={current.label} className={styles.grid}>

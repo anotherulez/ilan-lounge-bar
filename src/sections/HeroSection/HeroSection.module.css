@@ -49,17 +49,25 @@
   max-width: 620px;
 }
 
-.headline {
-  font-size: clamp(42px, 5vw, 72px);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.025em;
-  color: var(--ink);
+.titleBlock {
   animation: riseIn 0.85s var(--ease-lux) 0.06s both;
 }
 
-.line {
-  display: block;
+.headline {
+  font-size: clamp(48px, 6vw, 84px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.tagline {
+  margin-top: 10px;
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: var(--muted);
 }
 
 .subcopy {
@@ -86,10 +94,12 @@
   min-height: 46px;
   padding: 12px 28px;
   border-radius: 999px;
+  border: 0;
   background-color: var(--pill);
   color: var(--pill-ink);
   font-size: 15px;
   font-weight: 500;
+  cursor: pointer;
   transition: transform 0.25s var(--ease-lux), filter 0.25s var(--ease-lux);
 }
 
@@ -155,7 +165,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .plateImg,
-  .headline,
+  .titleBlock,
   .subcopy,
   .actions,
   .bottomAnchor {

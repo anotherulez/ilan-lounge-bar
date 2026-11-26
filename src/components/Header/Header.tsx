@@ -5,9 +5,10 @@ import styles from './Header.module.css';
 
 interface HeaderProps {
   onOpenMobileMenu: () => void;
+  onOpenBookingModal: () => void;
 }
 
-export function Header({ onOpenMobileMenu }: HeaderProps) {
+export function Header({ onOpenMobileMenu, onOpenBookingModal }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -32,9 +33,9 @@ export function Header({ onOpenMobileMenu }: HeaderProps) {
           ))}
         </nav>
 
-        <a href="#booking" className={styles.pillBtn}>
+        <button type="button" className={styles.pillBtn} onClick={onOpenBookingModal}>
           Забронировать
-        </a>
+        </button>
 
         <button
           type="button"

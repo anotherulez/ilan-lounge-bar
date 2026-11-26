@@ -62,10 +62,12 @@
   min-height: 40px;
   padding: 9px 22px;
   border-radius: 999px;
+  border: 0;
   background-color: var(--pill);
   color: var(--pill-ink);
   font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
   transition: transform 0.25s var(--ease-lux), filter 0.25s var(--ease-lux);
 }
 

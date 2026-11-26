@@ -1,24 +1,21 @@
 # HANDOFF.md — Точка передачи контекста
 
 - **Дата последнего обновления:** `2026-11-26`
-- **Статус:** `Luxury Minimalist Rebuild (v1) завершён и проверен`
+- **Статус:** `Luxury Minimalist Refinement (v2) завершён и проверен`
 
-## Итоговая архитектура
-- **Палитра и шрифт:** Чистая тёмная сцена `#050505`, нейтральный `--surface: #0b0b0b`, типографика `#fafafa` / `#a7a6a6` / `#8b8a8a`, белые pill-кнопки `#ffffff` / `#050505`, разделители `1px solid rgba(250,250,250,0.10)`. Единственный шрифт: `Manrope` (`200..800`).
-- **Секции:**
-  - `Header` (`ILAN` + `Пространство`, `Меню`, `VIP`, `Контакты` + `Забронировать`; на `<= 768px` frosted-glass бургер и fullscreen overlay).
-  - `HeroSection` (`100dvh`, полноэкранный фон `lounge-candles.webp` с Ken Burns `1.0 → 1.04`, левая виньетка и нижний фейд в `#050505`, заголовок `ILAN / До 04:00.`, адрес, pill-кнопка + ghost `Меню`, нижние метаданные).
-  - `SpaceSection` (`#space` + `#vip`: два асимметричных редакционных ряда без карточек и рамок — `Основной зал` и `Закрытый VIP` с реальными фото `interior-velvet.webp` и `ilan-sign-lamp.jpg`).
-  - `MenuSection` (`#menu`: чистый 2-колоночный типографический список с табами `Горячее · Закуски · Чай и напитки · Бар`, без фото и без корзины).
-  - `BookingSection` (`#booking`: 2-колоночный сплит, инпуты `#0b0b0b`, белая pill-кнопка `Отправить заявку`).
-  - `Footer` (однострочный минималистичный футер с `1px` разделителем).
-- **Проверки:** `tsc --noEmit` (0 ошибок), `vite build` (`dist/index.html 0.87 kB`, CSS `13.02 kB`, JS `242.79 kB`, `1.23s`), Playwright (`7 passed`, `44.0s` по `1440`, `1280`, `768`, `390`, `320` px). Скриншоты в `references/lux-v1/`.
-
-## Команды запуска
-```powershell
-npm.cmd install
-npm.cmd run dev
-npx.cmd tsc --noEmit
-npm.cmd run build
-npx.cmd playwright test
-```
+## Что реализовано по этапам (Stage 0–4)
+- **Stage 0 (Подготовка медиа и бэкап):** создан checkpoint-коммит `f99aacb`, локальные фото ILAN разложены по категориям в `public/images/marquee/{hall,vip,menu,news}/`, подключён манифест `src/data/gallery.ts`.
+- **Stage 1 (Hero и `SeamlessImageMarquee`):**
+  - Обновлён Hero: заголовок `ILAN` + подзаголовок `lounge bar` (без `До 04:00.`), адрес, две кнопки, нижняя мета-строка.
+  - Создан CSS-компонент `SeamlessImageMarquee` (бесконечный плавный сдвиг влево с дублированием трека, паузой по ховеру, мягкими масками краёв и поддержкой `prefers-reduced-motion`). Размещён под заголовками `Основной зал`, `Закрытый VIP`, `Меню` и `Новости`.
+- **Stage 2 (Модалка и форма бронирования):**
+  - Добавлена `BookingModal` («Где вам удобно?»): `Telegram` (`https://telegram.org`), `На сайте` (скролл к `#booking`, фокус и автовыбор `Закрытый VIP` при открытии из VIP-секции), `Позвонить` (`tel:+79090285858`).
+  - Переделана форма `#booking`: скруглённые hairline-поля `16px`, segmented pill `Основной зал | Закрытый VIP`, Stepper гостей (1–15), панель подтверждения с кнопкой `Изменить заявку`.
+- **Stage 3 («Новости» и архитектура парсинга):**
+  - Добавлена секция `#news` между `Меню` и `Бронирование` (ссылка `Новости` добавлена в Header/MobileMenu) с фильтрами `Все · Яндекс Карты · ВКонтакте · Instagram`, бейджами `Видео / Влог` и локальным фоллбеком `src/data/news.ts`.
+  - Реализованы схема `src/types/news.ts` и скрипт `scripts/sync-news.mjs` (`npm run sync:news`) для синхронизации ВК API, Яндекс Карт и Instagram с записью в `src/data/news.generated.json`.
+- **Stage 4 (Финальный QA):**
+  - `npm.cmd run sync:news`: 0 ошибок.
+  - `npx.cmd tsc --noEmit`: 0 ошибок.
+  - `npm.cmd run build`: CSS `21.79 kB`, JS `258.87 kB` (`1.43s`).
+  - `npx.cmd playwright test`: `7 passed (46.8s)` на `1440`, `1280`, `768`, `390`, `320` px; скриншоты сохранены в `references/lux-v2/`.

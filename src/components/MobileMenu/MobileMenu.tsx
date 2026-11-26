@@ -6,9 +6,10 @@ import styles from './MobileMenu.module.css';
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
+  onOpenBookingModal: () => void;
 }
 
-export function MobileMenu({ open, onClose }: MobileMenuProps) {
+export function MobileMenu({ open, onClose, onOpenBookingModal }: MobileMenuProps) {
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -40,9 +41,16 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             {item.label}
           </a>
         ))}
-        <a href="#booking" className={styles.pillCta} onClick={onClose}>
+        <button
+          type="button"
+          className={styles.pillCta}
+          onClick={() => {
+            onClose();
+            onOpenBookingModal();
+          }}
+        >
           Забронировать
-        </a>
+        </button>
       </nav>
 
       <div className={styles.meta}>

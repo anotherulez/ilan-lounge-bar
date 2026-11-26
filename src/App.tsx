@@ -1,26 +1,63 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { BookingModal } from './components/BookingModal/BookingModal';
 import { Header } from './components/Header/Header';
 import { MobileMenu } from './components/MobileMenu/MobileMenu';
-import { BookingSection } from './sections/BookingSection/BookingSection';
+import { BookingSection, type BookingZone } from './sections/BookingSection/BookingSection';
 import { Footer } from './sections/Footer/Footer';
 import { HeroSection } from './sections/HeroSection/HeroSection';
 import { MenuSection } from './sections/MenuSection/MenuSection';
+import { NewsSection } from './sections/NewsSection/NewsSection';
 import { SpaceSection } from './sections/SpaceSection/SpaceSection';
 
 export function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [pendingZone, setPendingZone] = useState<BookingZone>('Основной зал');
+  const [selectedZone, setSelectedZone] = useState<BookingZone>('Основной зал');
+  const bookingNameRef = useRef<HTMLInputElement>(null);
+
+  function openBookingModal(preferredZone: BookingZone = 'Основной зал') {
+    setPendingZone(preferredZone);
+    setBookingModalOpen(true);
+  }
+
+  function handleChooseOnSite() {
+    setSelectedZone(pendingZone);
+    setBookingModalOpen(false);
+    document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+    window.setTimeout(() => {
+      bookingNameRef.current?.focus({ preventScroll: true });
+    }, 360);
+  }
 
   return (
     <>
-      <Header onOpenMobileMenu={() => setMobileMenuOpen(true)} />
+      <Header
+        onOpenMobileMenu={() => setMobileMenuOpen(true)}
+        onOpenBookingModal={() => openBookingModal('Основной зал')}
+      />
       <main>
-        <HeroSection />
-        <SpaceSection />
+        <HeroSection onOpenBookingModal={() => openBookingModal('Основной зал')} />
+        <SpaceSection onReserveVip={() => openBookingModal('Закрытый VIP')} />
         <MenuSection />
-        <BookingSection />
+        <NewsSection />
+        <BookingSection
+          selectedZone={selectedZone}
+          onZoneChange={setSelectedZone}
+          nameInputRef={bookingNameRef}
+        />
       </main>
       <Footer />
-      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+      <BookingModal
+        open={bookingModalOpen}
+        onClose={() => setBookingModalOpen(false)}
+        onChooseOnSite={handleChooseOnSite}
+      />
+      <MobileMenu
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        onOpenBookingModal={() => openBookingModal('Основной зал')}
+      />
     </>
   );
 }

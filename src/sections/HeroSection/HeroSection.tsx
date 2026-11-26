@@ -1,7 +1,11 @@
 import { VENUE } from '../../data/venue';
 import styles from './HeroSection.module.css';
 
-export function HeroSection() {
+interface HeroSectionProps {
+  onOpenBookingModal: () => void;
+}
+
+export function HeroSection({ onOpenBookingModal }: HeroSectionProps) {
   return (
     <section id="top" className={styles.hero}>
       <div className={styles.plate} aria-hidden="true">
@@ -14,19 +18,23 @@ export function HeroSection() {
 
       <div className={styles.contentWrap}>
         <div className={styles.copy}>
-          <h1 className={styles.headline}>
-            <span className={styles.line}>ILAN</span>
-            <span className={styles.line}>До 04:00.</span>
-          </h1>
+          <div className={styles.titleBlock}>
+            <h1 className={styles.headline}>{VENUE.brand}</h1>
+            <p className={styles.tagline}>lounge bar</p>
+          </div>
 
           <p className={styles.subcopy}>
             {VENUE.city}, {VENUE.address}
           </p>
 
           <div className={styles.actions}>
-            <a href="#booking" className={styles.primaryPill}>
+            <button
+              type="button"
+              className={styles.primaryPill}
+              onClick={onOpenBookingModal}
+            >
               Забронировать
-            </a>
+            </button>
             <a href="#menu" className={styles.ghostLink}>
               Меню
             </a>

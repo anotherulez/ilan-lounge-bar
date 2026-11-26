@@ -52,8 +52,12 @@
   border-bottom-color: var(--ink);
 }
 
+.marqueeWrap {
+  margin-top: 28px;
+}
+
 .grid {
-  margin-top: 40px;
+  margin-top: 32px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0 56px;

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { NAV_LEFT, NAV_RIGHT, VENUE } from '../../data/venue';
+import { NAV_LINKS, VENUE } from '../../data/venue';
 import styles from './MobileMenu.module.css';
 
 interface MobileMenuProps {
@@ -11,16 +11,14 @@ interface MobileMenuProps {
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   useEffect(() => {
     if (!open) return;
-    function onKeyDown(e: KeyboardEvent) {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
-    }
+    };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open, onClose]);
 
   if (!open) return null;
-
-  const links = [...NAV_LEFT, ...NAV_RIGHT];
 
   return (
     <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Меню сайта">
@@ -32,21 +30,24 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           onClick={onClose}
           aria-label="Закрыть меню"
         >
-          <X size={24} aria-hidden="true" />
+          <X size={20} strokeWidth={1.6} aria-hidden="true" />
         </button>
       </div>
 
       <nav className={styles.nav} aria-label="Мобильная навигация">
-        {links.map((item) => (
+        {NAV_LINKS.map((item) => (
           <a key={item.href} href={item.href} className={styles.link} onClick={onClose}>
             {item.label}
           </a>
         ))}
+        <a href="#booking" className={styles.pillCta} onClick={onClose}>
+          Забронировать
+        </a>
       </nav>
 
       <div className={styles.meta}>
-        <p>{VENUE.address}</p>
-        <p>{VENUE.hours}</p>
+        <span>{VENUE.addressFull}</span>
+        <span>{VENUE.hoursFull}</span>
         <a href={VENUE.phoneHref} className={styles.phone}>
           {VENUE.phoneDisplay}
         </a>

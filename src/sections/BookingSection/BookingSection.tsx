@@ -1,26 +1,25 @@
 import { useState, type FormEvent } from 'react';
-import { SectionKicker } from '../../components/SectionKicker/SectionKicker';
-import { useCart } from '../../context/CartContext';
 import { VENUE } from '../../data/venue';
+import { useRevealOnScroll } from '../../hooks/useRevealOnScroll';
 import styles from './BookingSection.module.css';
 
 interface FormState {
   zone: string;
+  guests: string;
   date: string;
   time: string;
-  guests: string;
   name: string;
   phone: string;
   comment: string;
 }
 
 export function BookingSection() {
-  const { totalCount, bookingSummary, confirmedTotal, setDrawerOpen } = useCart();
+  const { ref, visible } = useRevealOnScroll<HTMLElement>();
   const [form, setForm] = useState<FormState>({
     zone: 'Основной зал',
+    guests: '2',
     date: '',
     time: '20:00',
-    guests: '4',
     name: '',
     phone: '',
     comment: '',
@@ -33,49 +32,46 @@ export function BookingSection() {
   }
 
   return (
-    <section id="booking" className={styles.band}>
+    <section
+      id="booking"
+      ref={ref}
+      className={`${styles.section} reveal-section`}
+      data-visible={visible}
+    >
       <div className={styles.container}>
         <div className={styles.infoCol}>
-          <SectionKicker index="06" label="РЕЗЕРВ" />
-          <h2 className={styles.heading}>ЗАБРАТЬ СТОЛ</h2>
-          <p className={styles.sub}>
-            Выберите время и количество гостей, перезвоним сами. Если заезжаете через полчаса,
-            звоните напрямую{' '}
+          <h2 className={styles.heading}>Забронировать стол</h2>
+          <div className={styles.metaList}>
             <a href={VENUE.phoneHref} className={styles.phoneLink}>
               {VENUE.phoneDisplay}
             </a>
-            .
-          </p>
-          <p className={styles.addressNote}>
-            {VENUE.city}, {VENUE.address} · {VENUE.hours}
-          </p>
+            <p className={styles.metaItem}>{VENUE.addressFull}</p>
+            <p className={styles.metaItem}>{VENUE.hours}</p>
+          </div>
+          <div className={styles.mapLinks}>
+            <a
+              href={VENUE.links.yandexMaps}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.mapLink}
+            >
+              Яндекс Карты
+            </a>
+            <a
+              href={VENUE.links.twoGis}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.mapLink}
+            >
+              2ГИС
+            </a>
+          </div>
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
-          {totalCount > 0 && (
-            <div className={styles.cartSummary}>
-              <div className={styles.cartSummaryHead}>
-                <span className={styles.cartSummaryLabel}>К столу ({totalCount})</span>
-                <button
-                  type="button"
-                  className={styles.cartEditBtn}
-                  onClick={() => setDrawerOpen(true)}
-                >
-                  Изменить
-                </button>
-              </div>
-              <p className={styles.cartSummaryItems}>{bookingSummary}</p>
-              {confirmedTotal > 0 && (
-                <p className={`${styles.cartSummaryTotal} tabular-nums`}>
-                  Позиции с ценой: {confirmedTotal} ₽
-                </p>
-              )}
-            </div>
-          )}
-
           <div className={styles.rowTwo}>
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Куда садимся</span>
+              <span className={styles.label}>Зал / VIP</span>
               <select
                 className={styles.input}
                 value={form.zone}
@@ -86,12 +82,11 @@ export function BookingSection() {
               >
                 <option value="Основной зал">Основной зал</option>
                 <option value="VIP-комната">VIP-комната</option>
-                <option value="У барной стойки">У барной стойки</option>
               </select>
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Сколько человек</span>
+              <span className={styles.label}>Гости</span>
               <input
                 type="number"
                 min={1}
@@ -109,7 +104,7 @@ export function BookingSection() {
 
           <div className={styles.rowTwo}>
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Дата</span>
+              <span className={styles.label}>Дата</span>
               <input
                 type="date"
                 className={styles.input}
@@ -123,7 +118,7 @@ export function BookingSection() {
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Во сколько</span>
+              <span className={styles.label}>Время</span>
               <input
                 type="time"
                 className={styles.input}
@@ -139,10 +134,10 @@ export function BookingSection() {
 
           <div className={styles.rowTwo}>
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Как вас зовут</span>
+              <span className={styles.label}>Имя</span>
               <input
                 type="text"
-                placeholder="Имя"
+                placeholder="Ваше имя"
                 className={styles.input}
                 value={form.name}
                 onChange={(e) => {
@@ -154,7 +149,7 @@ export function BookingSection() {
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Телефон</span>
+              <span className={styles.label}>Телефон</span>
               <input
                 type="tel"
                 placeholder="+7 (900) 000-00-00"
@@ -170,10 +165,10 @@ export function BookingSection() {
           </div>
 
           <label className={styles.field}>
-            <span className={styles.fieldLabel}>Комментарий (если нужно)</span>
+            <span className={styles.label}>Комментарий</span>
             <input
               type="text"
-              placeholder="Диван подальше от колонок, FIFA или настолки"
+              placeholder="Пожелания к посадке"
               className={styles.input}
               value={form.comment}
               onChange={(e) => {
@@ -183,20 +178,14 @@ export function BookingSection() {
             />
           </label>
 
-          <button type="submit" className={styles.submitBtn}>
-            Забронировать стол
+          <button type="submit" className={styles.submitPill}>
+            Отправить заявку
           </button>
 
           {submitted && (
-            <p className={styles.confirmBox} role="status">
+            <p className={styles.statusMsg} role="status">
               Заявка сформирована: {form.zone}, {form.date || 'выбранная дата'} в {form.time}, гостей:{' '}
-              {form.guests}
-              {bookingSummary ? `. Предзаказ к столу: ${bookingSummary}` : ''}
-              {form.comment ? `. Комментарий: ${form.comment}` : ''}. Демо-режим: форма не подключена к серверу, для быстрой брони звоните{' '}
-              <a href={VENUE.phoneHref} className={styles.confirmLink}>
-                {VENUE.phoneDisplay}
-              </a>
-              .
+              {form.guests}. Для срочной брони позвоните {VENUE.phoneDisplay}.
             </p>
           )}
         </form>

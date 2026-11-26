@@ -1,99 +1,46 @@
 .footer {
-  background-color: var(--color-bg-primary);
-  border-top: 1px solid var(--color-border-graphite);
-  padding: clamp(56px, 5.5vw, 84px) var(--page-pad) 92px;
+  padding: var(--space-section) var(--page-pad) 48px;
 }
 
 .container {
-  max-width: var(--container-standard);
+  max-width: var(--container);
   margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
 }
 
-.topGrid {
-  display: grid;
-  grid-template-columns: minmax(240px, 1.3fr) repeat(3, minmax(0, 1fr));
-  gap: 36px;
-}
-
-.brandCol {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.brandAddress {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  color: rgba(247, 242, 236, 0.86);
-}
-
-.socialRow {
-  margin-top: 6px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-.socialLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  min-height: 44px;
-  font-size: 14px;
-  color: var(--color-accent-brass);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.colTitle {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--color-text-light);
-}
-
-.list {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 16px;
-  line-height: 1.7;
-  color: rgba(247, 242, 236, 0.82);
-}
-
-.list a:hover {
-  color: var(--color-accent-brass);
-}
-
-.bottomBar {
-  margin-top: 56px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(247, 242, 236, 0.22);
+.line {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px 24px;
+  gap: 8px 14px;
   font-size: 14px;
-  color: rgba(247, 242, 236, 0.72);
+  color: var(--strip);
 }
 
-@media (max-width: 960px) {
-  .topGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.brand {
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.14em;
 }
 
-@media (max-width: 560px) {
-  .topGrid {
-    grid-template-columns: 1fr;
-  }
+.sep {
+  opacity: 0.45;
+}
 
-  .bottomBar {
-    padding-bottom: 52px;
+.link {
+  color: var(--muted);
+  transition: color 0.2s var(--ease-lux);
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 36px;
   }
 }

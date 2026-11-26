@@ -1,142 +1,125 @@
-.header {
+.topbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 40;
-  padding: 10px var(--page-pad) 0;
-  transition: padding 0.2s ease, background-color 0.2s ease;
+  z-index: 50;
+  padding: 22px var(--page-pad);
+  transition: background-color 0.35s var(--ease-lux), border-color 0.35s var(--ease-lux);
+  border-bottom: 1px solid transparent;
+  animation: headerFade 0.8s var(--ease-lux) both;
 }
 
 .scrolled {
-  background-color: var(--color-bg-primary);
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--color-border-graphite);
+  background-color: rgba(5, 5, 5, 0.86);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--hairline);
 }
 
-.topMeta {
-  max-width: var(--container-outer);
-  margin: 0 auto 8px;
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-accent-brass);
-}
-
-.sep {
-  opacity: 0.5;
-}
-
-.phone {
-  color: var(--color-text-light);
-}
-
-.phone:hover {
-  color: var(--color-accent-brass);
-}
-
-.scrolled .topMeta {
-  display: none;
-}
-
-.frame {
-  max-width: var(--container-outer);
-  margin: 0 auto;
-  min-height: 68px;
-  border-top: 1px solid rgba(245, 242, 235, 0.36);
-  border-bottom: 1px solid rgba(245, 242, 235, 0.36);
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
   gap: 24px;
-  padding: 8px 0;
 }
 
-.scrolled .frame {
-  min-height: 54px;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
+.wordmark {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  transition: opacity 0.2s var(--ease-lux);
 }
 
-.navGroup {
+.wordmark:hover {
+  opacity: 0.75;
+}
+
+.nav {
   display: flex;
   align-items: center;
-  gap: clamp(20px, 3vw, 48px);
-}
-
-.navRight {
-  justify-content: flex-end;
+  gap: 28px;
 }
 
 .link {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1;
-  text-transform: uppercase;
-  color: var(--color-text-light);
-  white-space: nowrap;
-  padding: 8px 0;
-  transition: color 0.18s ease;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--nav);
+  transition: opacity 0.2s var(--ease-lux), color 0.2s var(--ease-lux);
 }
 
 .link:hover {
-  color: var(--color-accent-brass);
+  opacity: 0.75;
+  color: var(--ink);
 }
 
-.logoLink {
+.pillBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2px 12px;
+  min-height: 40px;
+  padding: 9px 22px;
+  border-radius: 999px;
+  background-color: var(--pill);
+  color: var(--pill-ink);
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 0.25s var(--ease-lux), filter 0.25s var(--ease-lux);
 }
 
-.mobileToggle {
+.pillBtn:hover {
+  transform: scale(1.02);
+  filter: brightness(0.95);
+}
+
+.burger {
   display: none;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-strong);
-  color: var(--color-text-light);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  color: var(--ink);
+  cursor: pointer;
 }
 
-@media (max-width: 900px) {
-  .topMeta {
-    font-size: 11px;
-    justify-content: center;
-    gap: 6px;
+@keyframes headerFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 16px 20px;
   }
 
-  .sep,
-  .phone {
+  .nav,
+  .pillBtn {
     display: none;
   }
 
-  .frame {
-    grid-template-columns: 1fr auto;
-    min-height: 58px;
-  }
-
-  .navGroup {
-    display: none;
-  }
-
-  .logoLink {
-    justify-self: start;
-    padding-left: 0;
-  }
-
-  .mobileToggle {
+  .burger {
     display: inline-flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar {
+    animation: none;
+  }
+
+  .pillBtn:hover {
+    transform: none;
   }
 }

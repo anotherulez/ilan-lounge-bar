@@ -1,63 +1,48 @@
 import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
-import { NAV_LEFT, NAV_RIGHT, VENUE } from '../../data/venue';
-import { BrandMark } from '../BrandMark/BrandMark';
+import { NAV_LINKS, VENUE } from '../../data/venue';
 import styles from './Header.module.css';
 
 interface HeaderProps {
-  onOpenMobileMenu?: () => void;
+  onOpenMobileMenu: () => void;
 }
 
 export function Header({ onOpenMobileMenu }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 36);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.topMeta}>
-        <span>{VENUE.address}</span>
-        <span className={styles.sep} aria-hidden="true">·</span>
-        <span className="tabular-nums">{VENUE.hoursFull}</span>
-        <span className={styles.sep} aria-hidden="true">·</span>
-        <a href={VENUE.phoneHref} className={styles.phone}>
-          {VENUE.phoneDisplay}
+    <header className={`${styles.topbar} ${scrolled ? styles.scrolled : ''}`}>
+      <div className={styles.inner}>
+        <a href="#top" className={styles.wordmark} aria-label="ILAN — наверх">
+          {VENUE.brand}
         </a>
-      </div>
 
-      <div className={styles.frame}>
-        <nav className={styles.navGroup} aria-label="Навигация слева">
-          {NAV_LEFT.map((item) => (
+        <nav className={styles.nav} aria-label="Основная навигация">
+          {NAV_LINKS.map((item) => (
             <a key={item.href} href={item.href} className={styles.link}>
               {item.label}
             </a>
           ))}
         </nav>
 
-        <a href="#top" className={styles.logoLink} aria-label="ILAN Lounge Bar — наверх">
-          <BrandMark size="header" />
+        <a href="#booking" className={styles.pillBtn}>
+          Забронировать
         </a>
-
-        <nav className={`${styles.navGroup} ${styles.navRight}`} aria-label="Навигация справа">
-          {NAV_RIGHT.map((item) => (
-            <a key={item.href} href={item.href} className={styles.link}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
 
         <button
           type="button"
-          className={styles.mobileToggle}
+          className={styles.burger}
           onClick={onOpenMobileMenu}
           aria-label="Открыть меню навигации"
         >
-          <Menu size={22} aria-hidden="true" />
+          <Menu size={20} strokeWidth={1.6} aria-hidden="true" />
         </button>
       </div>
     </header>

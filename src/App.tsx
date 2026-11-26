@@ -1,53 +1,26 @@
 import { useState } from 'react';
-import { MotionConfig } from 'motion/react';
 import { Header } from './components/Header/Header';
-import { ImmersiveFullscreen } from './components/ImmersiveFullscreen/ImmersiveFullscreen';
-import { KineticTypography } from './components/KineticTypography/KineticTypography';
 import { MobileMenu } from './components/MobileMenu/MobileMenu';
-import { OrderCart } from './components/OrderCart/OrderCart';
-import { ScrollProgress } from './components/ScrollProgress/ScrollProgress';
-import { CartProvider } from './context/CartContext';
 import { BookingSection } from './sections/BookingSection/BookingSection';
-import { ChronicleSection } from './sections/ChronicleSection/ChronicleSection';
-import { FeatureHighlightSection } from './sections/FeatureHighlightSection/FeatureHighlightSection';
 import { Footer } from './sections/Footer/Footer';
-import { GallerySection } from './sections/GallerySection/GallerySection';
 import { HeroSection } from './sections/HeroSection/HeroSection';
 import { MenuSection } from './sections/MenuSection/MenuSection';
-import { StorySection } from './sections/StorySection/StorySection';
+import { SpaceSection } from './sections/SpaceSection/SpaceSection';
 
 export function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  function handleApplyCartToBooking() {
-    document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
-  }
-
   return (
-    <MotionConfig reducedMotion="user">
-      <CartProvider>
-        <ScrollProgress />
-        <Header onOpenMobileMenu={() => setMobileMenuOpen(true)} />
-        <main>
-          <HeroSection />
-          <KineticTypography />
-          <StorySection />
-          <ImmersiveFullscreen
-            src="/images/lounge-candles.webp"
-            alt="Вечерний зал ILAN при свечах"
-            chapter="ГЛАВА — АТМОСФЕРА ЗАЛА"
-            caption="Ул. 8 Марта, 31 · Вечерний свет и столы до четырёх утра"
-          />
-          <GallerySection />
-          <FeatureHighlightSection />
-          <MenuSection />
-          <ChronicleSection />
-          <BookingSection />
-        </main>
-        <Footer />
-        <OrderCart onApplyToBooking={handleApplyCartToBooking} />
-        <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-      </CartProvider>
-    </MotionConfig>
+    <>
+      <Header onOpenMobileMenu={() => setMobileMenuOpen(true)} />
+      <main>
+        <HeroSection />
+        <SpaceSection />
+        <MenuSection />
+        <BookingSection />
+      </main>
+      <Footer />
+      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+    </>
   );
 }

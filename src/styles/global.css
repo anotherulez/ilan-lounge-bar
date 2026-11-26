@@ -11,51 +11,26 @@ html {
   color-scheme: dark;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
 body {
   margin: 0;
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-light);
-  font-family: var(--font-body);
-  font-variant-numeric: lining-nums tabular-nums;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
   font-size: 16px;
   line-height: 1.6;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
   overflow-x: clip;
-  caret-color: var(--color-accent-brass);
 }
 
 ::selection {
-  background-color: var(--color-accent-brass);
-  color: var(--color-text-dark);
-}
-
-::-webkit-scrollbar {
-  width: 9px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #2b2b34;
-  border: 2px solid var(--color-bg-primary);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-brass);
+  background: var(--pill);
+  color: var(--pill-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent-brass);
+  outline: 1px solid var(--ink);
   outline-offset: 3px;
 }
 
@@ -78,37 +53,45 @@ textarea {
   color: inherit;
 }
 
-button {
-  cursor: pointer;
-}
-
 h1,
 h2,
 h3,
 h4,
 p,
 ul,
-ol,
+li,
 figure {
   margin: 0;
+  padding: 0;
 }
 
-ul,
-ol {
-  padding: 0;
+ul {
   list-style: none;
 }
 
-section[id] {
-  scroll-margin-top: 96px;
+section[id],
+footer[id] {
+  scroll-margin-top: 84px;
 }
 
-.tabular-nums {
-  font-variant-numeric: lining-nums tabular-nums;
+.reveal-section {
+  opacity: 1;
+  transform: translateY(14px);
+  transition: transform 0.8s var(--ease-lux);
 }
 
-.serif-italic {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 700;
+.reveal-section[data-visible='true'] {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

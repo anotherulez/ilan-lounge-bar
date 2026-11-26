@@ -1,48 +1,20 @@
-/* Pure Obsidian Black + Neutral Charcoal + Warm Bronze-Brass palette */
+/* Ultra-Minimalist Dark Luxury Tokens — ILAN Lounge Bar */
 
 :root {
-  --color-bg-primary: #050505;
-  --color-bg-elevated: #0c0c0c;
-  --color-bg-card: #121212;
-  --color-bg-contrast: #191919;
+  --bg: #050505;
+  --surface: #0b0b0b;
+  --ink: #fafafa;
+  --muted: #a7a6a6;
+  --nav: #b6b5b5;
+  --strip: #8b8a8a;
+  --hairline: rgba(250, 250, 250, 0.1);
+  --pill: #ffffff;
+  --pill-ink: #050505;
 
-  --color-accent-brass: #c99a54;
-  --color-accent-amber: #dbad68;
-  --color-accent-bronze: #85663a;
+  --container: 1240px;
+  --page-pad: clamp(20px, 5vw, 75px);
+  --space-section: clamp(96px, 12vh, 160px);
 
-  --color-surface-light: #f2eee6;
-
-  --color-text-light: #f5f2eb;
-  --color-text-muted: #a8a399;
-  --color-text-dark: #0d0d0d;
-
-  --color-border-subtle: rgba(201, 154, 84, 0.24);
-  --color-border-strong: rgba(245, 242, 235, 0.28);
-  --color-border-graphite: rgba(255, 255, 255, 0.1);
-
-  /* 3-tier layout containers */
-  --container-standard: 1160px;
-  --container-wide: 1520px;
-  --container-outer: 1520px;
-  --container-inner: 1160px;
-  --page-pad: clamp(18px, 4.2vw, 64px);
-
-  /* Typography */
-  --font-display: 'Montserrat', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Cormorant', Georgia, serif;
-  --font-body: 'Montserrat', system-ui, -apple-system, sans-serif;
-
-  /* Differentiated vertical rhythm */
-  --gap-tight: clamp(48px, 5vw, 84px);
-  --gap-editorial: clamp(72px, 7.5vw, 120px);
-  --section-gap: clamp(64px, 6.5vw, 108px);
-
-  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-micro: 180ms;
-  --dur-ui: 360ms;
-  --dur-reveal: 750ms;
-
-  --radius-sharp: 0px;
-  --radius-soft: 4px;
-  --radius-round: 9999px;
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
 }

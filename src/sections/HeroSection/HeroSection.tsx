@@ -1,44 +1,41 @@
-import { Magnet } from '../../components/Magnet/Magnet';
+import { VENUE } from '../../data/venue';
 import styles from './HeroSection.module.css';
 
 export function HeroSection() {
   return (
-    <section id="top" className={styles.heroCanvas}>
-      <div className={styles.bgStage}>
+    <section id="top" className={styles.hero}>
+      <div className={styles.plate} aria-hidden="true">
         <img
-          src="/images/hero-lantern.jpg"
-          alt="Мозаичный светильник в баре ILAN"
-          className={styles.bgImage}
+          src="/images/lounge-candles.webp"
+          alt=""
+          className={styles.plateImg}
         />
       </div>
-      <div className={styles.scrim} aria-hidden="true" />
 
-      <div className={styles.centerStage}>
-        <h1 className={styles.title}>
-          <span className={`${styles.maskLine} ${styles.lineTop}`}>УЖИН ПОСЛЕ ПОЛУНОЧИ</span>
-          <span className={`${styles.maskLine} ${styles.lineBottom}`}>
-            ILAN <span className={styles.dotSep} aria-hidden="true">/</span>{' '}
-            <span className={`${styles.accentLine} tabular-nums`}>ДО 04:00</span>
-          </span>
-        </h1>
+      <div className={styles.contentWrap}>
+        <div className={styles.copy}>
+          <h1 className={styles.headline}>
+            <span className={styles.line}>ILAN</span>
+            <span className={styles.line}>До 04:00.</span>
+          </h1>
 
-        <p className={styles.lead}>
-          Подаём горячий плов и бургеры ночью, завариваем чай на свече и держим закрытый VIP на
-          8 Марта, 31.
-        </p>
+          <p className={styles.subcopy}>
+            {VENUE.city}, {VENUE.address}
+          </p>
 
-        <div className={styles.actions}>
-          <Magnet>
-            <a href="#booking" className={styles.ctaPrimary}>
-              Забронировать стол
+          <div className={styles.actions}>
+            <a href="#booking" className={styles.primaryPill}>
+              Забронировать
             </a>
-          </Magnet>
-          <Magnet>
-            <a href="#menu" className={styles.ctaSecondary}>
+            <a href="#menu" className={styles.ghostLink}>
               Меню
             </a>
-          </Magnet>
+          </div>
         </div>
+
+        <p className={styles.bottomAnchor}>
+          {VENUE.hoursFull} · {VENUE.phoneDisplay}
+        </p>
       </div>
     </section>
   );
